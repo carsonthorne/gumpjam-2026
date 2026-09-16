@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://cvxln66jtlkdc"]
+
+[ext_resource type="Script" uid="uid://dxtu1610kaksb" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="PackedScene" uid="uid://dhddplnkpdqjl" path="res://scenes/character_model.tscn" id="2_d2wvv"]
+[ext_resource type="Script" uid="uid://cnim4jug51ht7" path="res://scripts/camera_spring_arm.gd" id="2_g2els"]
+[ext_resource type="Script" uid="uid://jysp2jfgrx56" path="res://scripts/camera_follow.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://ch16tcdy8uxum" path="res://StateMachine/PlayerStateMachine/player_state_machine.gd" id="4_y4r1p"]
+[ext_resource type="Script" uid="uid://bhdm5bilaxa5j" path="res://StateMachine/PlayerStateMachine/States/idle.gd" id="5_d2wvv"]
+[ext_resource type="Script" uid="uid://cojse0182ar86" path="res://StateMachine/PlayerStateMachine/States/walk.gd" id="6_3v2ag"]
+[ext_resource type="Script" uid="uid://dnx8hh10o4qax" path="res://StateMachine/PlayerStateMachine/States/run.gd" id="7_jej6c"]
+[ext_resource type="Script" uid="uid://b2qprr30xlcn4" path="res://StateMachine/PlayerStateMachine/States/push_start.gd" id="8_f1ej7"]
+[ext_resource type="Script" uid="uid://b4g2a8agnt3hl" path="res://StateMachine/PlayerStateMachine/States/pushing.gd" id="9_oprun"]
+[ext_resource type="Script" uid="uid://bm5ec7ru4n6vd" path="res://StateMachine/PlayerStateMachine/States/push_end.gd" id="10_a8ls1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2mjm0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqe12"]
+albedo_color = Color(0.93333334, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hqe12"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hqe12"]
+height = 1.2592773
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qhqgy"]
+
+[node name="Player" type="CharacterBody3D" unique_id=160821695 node_paths=PackedStringArray("camera") groups=["player"]]
+script = ExtResource("1_3vyb7")
+camera = NodePath("SpringArmPivot/Camera3D")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=1663565421]
+
+[node name="Body" type="MeshInstance3D" parent="Pivot" unique_id=855834489]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0528638, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_2mjm0")
+
+[node name="Nose" type="MeshInstance3D" parent="Pivot/Body" unique_id=2123146612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2647674, 0.5389559)
+material_override = SubResource("StandardMaterial3D_hqe12")
+mesh = SubResource("SphereMesh_hqe12")
+
+[node name="CharacterModel" parent="Pivot" unique_id=1320379113 instance=ExtResource("2_d2wvv")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=784814810]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6825025, 0)
+shape = SubResource("CapsuleShape3D_hqe12")
+
+[node name="SpringArmPivot" type="Node3D" parent="." unique_id=1263533875]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4105902, 0)
+script = ExtResource("2_g2els")
+min_vertical_angle = -1.2217304763960306
+max_vertical_angle = 0.4293509959906051
+
+[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" unique_id=1242466281]
+shape = SubResource("SphereShape3D_qhqgy")
+spring_length = 6.0
+
+[node name="SpringPosition" type="Node3D" parent="SpringArmPivot/SpringArm3D" unique_id=537663041]
+
+[node name="Camera3D" type="Camera3D" parent="SpringArmPivot" unique_id=597457733 node_paths=PackedStringArray("spring_arm")]
+script = ExtResource("3_qhqgy")
+spring_arm = NodePath("../SpringArm3D/SpringPosition")
+lerp_power = 6.0
+
+[node name="StateMachine" type="Node" parent="." unique_id=116887412 node_paths=PackedStringArray("character_model", "start_state")]
+script = ExtResource("4_y4r1p")
+character_model = NodePath("../Pivot/CharacterModel")
+start_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=111256956 node_paths=PackedStringArray("camera")]
+script = ExtResource("5_d2wvv")
+camera = NodePath("../../SpringArmPivot/Camera3D")
+
+[node name="Walk" type="Node" parent="StateMachine" unique_id=1894039949 node_paths=PackedStringArray("camera")]
+script = ExtResource("6_3v2ag")
+camera = NodePath("../../SpringArmPivot/Camera3D")
+
+[node name="Run" type="Node" parent="StateMachine" unique_id=775724778 node_paths=PackedStringArray("camera")]
+script = ExtResource("7_jej6c")
+camera = NodePath("../../SpringArmPivot/Camera3D")
+
+[node name="Push_start" type="Node" parent="StateMachine" unique_id=1654826503 node_paths=PackedStringArray("camera")]
+script = ExtResource("8_f1ej7")
+camera = NodePath("../../SpringArmPivot/Camera3D")
+
+[node name="Pushing" type="Node" parent="StateMachine" unique_id=125230840 node_paths=PackedStringArray("camera")]
+script = ExtResource("9_oprun")
+camera = NodePath("../../SpringArmPivot/Camera3D")
+
+[node name="Push_end" type="Node" parent="StateMachine" unique_id=818840710 node_paths=PackedStringArray("camera")]
+script = ExtResource("10_a8ls1")
+camera = NodePath("../../SpringArmPivot/Camera3D")

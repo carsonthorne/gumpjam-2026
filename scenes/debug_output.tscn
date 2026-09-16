@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bnce0ja61mw6i"]
+
+[ext_resource type="Script" uid="uid://b6nls8drrboyk" path="res://scripts/debug_output.gd" id="1_ptn1x"]
+
+[node name="DebugOutput" type="CanvasLayer" unique_id=1404036416]
+script = ExtResource("1_ptn1x")
+
+[node name="ConsoleBox" type="Control" parent="." unique_id=1841101050]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 520.0
+offset_bottom = 240.0
+
+[node name="PanelContainer" type="PanelContainer" parent="ConsoleBox" unique_id=1485958018]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ConsoleBox/PanelContainer" unique_id=1048206962]
+layout_mode = 2
+
+[node name="OutputText" type="RichTextLabel" parent="ConsoleBox/PanelContainer/MarginContainer" unique_id=243356683]
+layout_mode = 2
+
+[node name="ResizeHandle" type="Control" parent="ConsoleBox" unique_id=2086084835]
+layout_mode = 1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -18.0
+grow_horizontal = 0
+grow_vertical = 0

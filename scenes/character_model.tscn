@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://dhddplnkpdqjl"]
+
+[ext_resource type="Script" uid="uid://dyplv2wrfcrea" path="res://scripts/character_model.gd" id="1_d5uc0"]
+[ext_resource type="PackedScene" uid="uid://dahuku44gqhle" path="res://characters/rat-albert-animated.glb" id="2_dnbsg"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x2nl6"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d5uc0"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_l8pwm"]
+xfade_time = 1.0
+input_0/name = "idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "walk"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "run"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dnbsg"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ydih"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hqe12"]
+graph_offset = Vector2(-419.56546, 44.05593)
+nodes/output/position = Vector2(560, 110)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_x2nl6")
+nodes/Animation/position = Vector2(148.4567, 735.98303)
+nodes/movement/node = SubResource("AnimationNodeTransition_l8pwm")
+nodes/movement/position = Vector2(340, 150)
+"nodes/idle 2/node" = SubResource("AnimationNodeAnimation_d5uc0")
+"nodes/idle 2/position" = Vector2(80, 50)
+nodes/walk/node = SubResource("AnimationNodeAnimation_0ydih")
+nodes/walk/position = Vector2(80, 230)
+nodes/run/node = SubResource("AnimationNodeAnimation_dnbsg")
+nodes/run/position = Vector2(80, 410)
+node_connections = [&"output", 0, &"movement", &"movement", 0, &"idle 2", &"movement", 1, &"walk", &"movement", 2, &"run"]
+
+[node name="CharacterModel" type="Node3D" unique_id=1320379113 node_paths=PackedStringArray("animation_tree")]
+script = ExtResource("1_d5uc0")
+animation_tree = NodePath("AnimationTree")
+
+[node name="rat-albert-animated" parent="." unique_id=1965004517 instance=ExtResource("2_dnbsg")]
+
+[node name="Skeleton3D" parent="rat-albert-animated/Armature" parent_id_path=PackedInt32Array(1965004517, 1260283882) index="0" unique_id=351686149]
+bones/0/position = Vector3(-0.8345447, -9.466727, -30.81364)
+bones/0/rotation = Quaternion(-0.71499467, 0.00077806914, -0.0050086095, 0.69911146)
+bones/1/rotation = Quaternion(0.038748316, 0.044391062, 0.9935231, -0.09715929)
+bones/2/rotation = Quaternion(-0.306852, -0.06678595, -0.08864256, 0.94526404)
+bones/3/rotation = Quaternion(0.7702479, -0.08722277, -0.0071964567, 0.6317109)
+bones/4/rotation = Quaternion(0.15375407, 0.0011745957, 0.013219827, 0.98802006)
+bones/6/rotation = Quaternion(-0.11534725, 0.04079759, 0.98654896, 0.10840532)
+bones/7/rotation = Quaternion(-0.2802087, 0.027595975, 0.092647195, 0.9550592)
+bones/8/rotation = Quaternion(0.74680334, 0.11700246, -0.0061726477, 0.65464276)
+bones/9/rotation = Quaternion(0.15181616, -0.0016670709, -0.010907225, 0.98834723)
+bones/11/rotation = Quaternion(-0.032640547, -0.0011838096, 0.0011211825, 0.9994659)
+bones/12/rotation = Quaternion(0.0012269573, -0.020967508, 0.0012750159, 0.9997786)
+bones/13/rotation = Quaternion(0.0011274796, -0.02093471, 0.0014529492, 0.9997792)
+bones/14/rotation = Quaternion(-0.4750498, -0.5127843, 0.55872995, -0.44631925)
+bones/15/position = Vector3(-2.1235206e-07, 7.2400646, 1.8285515e-05)
+bones/15/rotation = Quaternion(0.40923676, 0.059618354, 0.08201934, 0.90677667)
+bones/16/position = Vector3(-1.868757e-07, 13.645823, 4.241266e-06)
+bones/16/rotation = Quaternion(0.07215167, -0.12682305, 0.38051835, 0.91319)
+bones/17/position = Vector3(-1.0319288e-05, 14.341142, -2.9412167e-06)
+bones/17/rotation = Quaternion(0.05315643, 0.122996986, -0.10404737, 0.9855051)
+bones/18/position = Vector3(4.429467e-06, 4.9450455, 2.375713e-06)
+bones/18/rotation = Quaternion(0.19749075, -0.011783595, -0.040476613, 0.97939795)
+bones/19/position = Vector3(2.6225957e-06, 1.6772738, -2.801472e-06)
+bones/19/rotation = Quaternion(0.25239393, -0.06040835, -0.054172724, 0.9642166)
+bones/20/position = Vector3(0.64332557, 2.1965544, 0.5477822)
+bones/20/rotation = Quaternion(0.13515486, -0.017466122, -0.023919087, 0.99038184)
+bones/21/position = Vector3(0.24416685, 1.2535133, 0.46452928)
+bones/22/rotation = Quaternion(0.009291312, 0.0124820275, -0.022609739, 0.9996233)
+bones/23/rotation = Quaternion(0.058149204, -0.011024376, 0.016156157, 0.99811625)
+bones/25/rotation = Quaternion(0.50475883, -0.49755925, 0.5113682, 0.48595864)
+bones/26/position = Vector3(3.324368e-07, 7.240069, -4.184654e-06)
+bones/26/rotation = Quaternion(0.42491162, -0.032059267, -0.14233963, 0.8933991)
+bones/27/rotation = Quaternion(0.067519374, 0.108594455, -0.36501402, 0.92217857)
+bones/28/position = Vector3(6.473147e-06, 14.364357, -6.3735297e-06)
+bones/28/rotation = Quaternion(-0.042759478, -0.0470524, 0.14966169, 0.986691)
+bones/29/position = Vector3(-2.1552523e-06, 4.21253, 1.8466053e-06)
+bones/29/rotation = Quaternion(0.048044723, -0.016892087, 0.0056835655, 0.9986862)
+bones/30/position = Vector3(2.384361e-07, 1.8982939, 8.9405876e-07)
+bones/30/rotation = Quaternion(0.2984317, 0.103501506, 0.06694265, 0.94643795)
+bones/31/position = Vector3(-0.9635389, 2.440987, 0.52131754)
+bones/31/rotation = Quaternion(0.08005966, 0.012372285, 0.012414682, 0.996636)
+bones/32/position = Vector3(-0.29900408, 1.335328, 0.59745055)
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=881266461]
+root_node = NodePath("../rat-albert-animated")
+tree_root = SubResource("AnimationNodeBlendTree_hqe12")
+anim_player = NodePath("../rat-albert-animated/AnimationPlayer")
+parameters/movement/current_state = "idle"
+parameters/movement/transition_request = ""
+parameters/movement/current_index = 0
+
+[editable path="rat-albert-animated"]
