@@ -3,11 +3,20 @@
 [ext_resource type="PackedScene" uid="uid://cvxln66jtlkdc" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://bnce0ja61mw6i" path="res://scenes/debug_output.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://c0w7gyd12sqfn" path="res://scenes/push_block.tscn" id="3_sugp2"]
+[ext_resource type="Shader" uid="uid://bgg37r1wgn3o8" path="res://shaders/checkered_ground.gdshader" id="4_checker"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hqe12"]
 size = Vector3(60, 2, 60)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_checker"]
+render_priority = 0
+shader = ExtResource("4_checker")
+shader_parameter/light_tile = Color(0.78, 0.78, 0.7, 1)
+shader_parameter/dark_tile = Color(0.42, 0.43, 0.38, 1)
+shader_parameter/tile_size = 1.0
+
 [sub_resource type="BoxMesh" id="BoxMesh_hqe12"]
+material = SubResource("ShaderMaterial_checker")
 size = Vector3(60, 2, 60)
 
 [node name="Main" type="Node" unique_id=834489795]
@@ -30,5 +39,4 @@ transform = Transform3D(1, 0, 0, 0, -0.006638438, 0.999978, 0, -0.999978, -0.006
 [node name="DebugOutput" parent="." unique_id=1404036416 instance=ExtResource("2_0wfyh")]
 
 [node name="push_block" parent="." unique_id=127028562 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
-push_impulse = null
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)

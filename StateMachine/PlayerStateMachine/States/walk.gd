@@ -1,6 +1,8 @@
 extends Motion
 
 func _enter() -> void:
+	if owner.has_node("Pivot/CharacterModel"):
+		owner.get_node("Pivot/CharacterModel").set_movement_time_scale(1.0)
 	animation_state_changed.emit("walk")
 
 func _state_input(event: InputEvent) -> void:

@@ -3,13 +3,11 @@
 [ext_resource type="Script" uid="uid://dyplv2wrfcrea" path="res://scripts/character_model.gd" id="1_d5uc0"]
 [ext_resource type="PackedScene" uid="uid://dahuku44gqhle" path="res://characters/rat-albert-animated.glb" id="2_dnbsg"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x2nl6"]
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d5uc0"]
 animation = &"idle"
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_l8pwm"]
-xfade_time = 1.0
+xfade_time = 0.12
 input_0/name = "idle"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
@@ -22,6 +20,35 @@ input_2/name = "run"
 input_2/auto_advance = false
 input_2/break_loop_at_end = false
 input_2/reset = true
+input_3/name = "push_start"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
+input_4/name = "pushing"
+input_4/auto_advance = false
+input_4/break_loop_at_end = false
+input_4/reset = true
+input_5/name = "push_end"
+input_5/auto_advance = false
+input_5/break_loop_at_end = false
+input_5/reset = true
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_movement"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_push_end"]
+animation = &"push_end"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_push_start"]
+animation = &"push_end"
+play_mode = 1
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 0.25
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pushing"]
+animation = &"pushing"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dnbsg"]
 animation = &"run"
@@ -30,19 +57,25 @@ animation = &"run"
 animation = &"walk"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hqe12"]
-graph_offset = Vector2(-419.56546, 44.05593)
-nodes/output/position = Vector2(560, 110)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_x2nl6")
-nodes/Animation/position = Vector2(148.4567, 735.98303)
+graph_offset = Vector2(-68.20489, 143.89629)
+nodes/output/position = Vector2(700, 60)
+nodes/push_end/node = SubResource("AnimationNodeAnimation_push_end")
+nodes/push_end/position = Vector2(80, 950)
 nodes/movement/node = SubResource("AnimationNodeTransition_l8pwm")
 nodes/movement/position = Vector2(340, 150)
+nodes/movement_time_scale/node = SubResource("AnimationNodeTimeScale_movement")
+nodes/movement_time_scale/position = Vector2(480, 150)
 "nodes/idle 2/node" = SubResource("AnimationNodeAnimation_d5uc0")
 "nodes/idle 2/position" = Vector2(80, 50)
 nodes/walk/node = SubResource("AnimationNodeAnimation_0ydih")
 nodes/walk/position = Vector2(80, 230)
 nodes/run/node = SubResource("AnimationNodeAnimation_dnbsg")
 nodes/run/position = Vector2(80, 410)
-node_connections = [&"output", 0, &"movement", &"movement", 0, &"idle 2", &"movement", 1, &"walk", &"movement", 2, &"run"]
+nodes/push_start/node = SubResource("AnimationNodeAnimation_push_start")
+nodes/push_start/position = Vector2(80, 590)
+nodes/pushing/node = SubResource("AnimationNodeAnimation_pushing")
+nodes/pushing/position = Vector2(80, 770)
+node_connections = [&"output", 0, &"movement_time_scale", &"movement", 0, &"idle 2", &"movement", 1, &"walk", &"movement", 2, &"run", &"movement", 3, &"push_start", &"movement", 4, &"pushing", &"movement", 5, &"push_end", &"movement_time_scale", 0, &"movement"]
 
 [node name="CharacterModel" type="Node3D" unique_id=1320379113 node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("1_d5uc0")
@@ -50,48 +83,48 @@ animation_tree = NodePath("AnimationTree")
 
 [node name="rat-albert-animated" parent="." unique_id=1965004517 instance=ExtResource("2_dnbsg")]
 
-[node name="Skeleton3D" parent="rat-albert-animated/Armature" parent_id_path=PackedInt32Array(1965004517, 1260283882) index="0" unique_id=351686149]
-bones/0/position = Vector3(-0.8345447, -9.466727, -30.81364)
-bones/0/rotation = Quaternion(-0.71499467, 0.00077806914, -0.0050086095, 0.69911146)
-bones/1/rotation = Quaternion(0.038748316, 0.044391062, 0.9935231, -0.09715929)
-bones/2/rotation = Quaternion(-0.306852, -0.06678595, -0.08864256, 0.94526404)
-bones/3/rotation = Quaternion(0.7702479, -0.08722277, -0.0071964567, 0.6317109)
-bones/4/rotation = Quaternion(0.15375407, 0.0011745957, 0.013219827, 0.98802006)
-bones/6/rotation = Quaternion(-0.11534725, 0.04079759, 0.98654896, 0.10840532)
-bones/7/rotation = Quaternion(-0.2802087, 0.027595975, 0.092647195, 0.9550592)
-bones/8/rotation = Quaternion(0.74680334, 0.11700246, -0.0061726477, 0.65464276)
-bones/9/rotation = Quaternion(0.15181616, -0.0016670709, -0.010907225, 0.98834723)
-bones/11/rotation = Quaternion(-0.032640547, -0.0011838096, 0.0011211825, 0.9994659)
-bones/12/rotation = Quaternion(0.0012269573, -0.020967508, 0.0012750159, 0.9997786)
-bones/13/rotation = Quaternion(0.0011274796, -0.02093471, 0.0014529492, 0.9997792)
-bones/14/rotation = Quaternion(-0.4750498, -0.5127843, 0.55872995, -0.44631925)
+[node name="Skeleton3D" parent="rat-albert-animated/Armature" parent_id_path=PackedInt32Array(1965004517, 2036253450) index="0" unique_id=668236381]
+bones/0/position = Vector3(-0.28871176, -9.795522, -30.091003)
+bones/0/rotation = Quaternion(-0.72632444, -0.013080988, -0.010165072, 0.68715227)
+bones/1/rotation = Quaternion(0.021968674, 0.06656431, 0.9923807, -0.10132686)
+bones/2/rotation = Quaternion(-0.42278418, -0.07232892, -0.074394904, 0.9002708)
+bones/3/rotation = Quaternion(0.8206778, -0.1021793, -0.018636711, 0.561872)
+bones/4/rotation = Quaternion(0.14953868, 0.0017521015, 0.013493851, 0.98866224)
+bones/6/rotation = Quaternion(-0.118152216, 0.054497603, 0.98577076, 0.106424935)
+bones/7/rotation = Quaternion(-0.3540492, 0.024384035, 0.07916957, 0.9315508)
+bones/8/rotation = Quaternion(0.77359444, 0.117337376, 0.01754757, 0.62247556)
+bones/9/rotation = Quaternion(0.15202823, -0.0016377079, -0.010892312, 0.98831487)
+bones/11/rotation = Quaternion(-0.025680153, 0.0008500116, -0.0030753522, 0.99966514)
+bones/12/rotation = Quaternion(0.012874429, -0.017883655, -0.003281046, 0.99975187)
+bones/13/rotation = Quaternion(0.012848643, -0.018074999, -0.0027359107, 0.99975044)
+bones/14/rotation = Quaternion(-0.5324952, -0.46586558, 0.53718054, -0.45918968)
 bones/15/position = Vector3(-2.1235206e-07, 7.2400646, 1.8285515e-05)
-bones/15/rotation = Quaternion(0.40923676, 0.059618354, 0.08201934, 0.90677667)
+bones/15/rotation = Quaternion(0.4100805, 0.07423099, 0.08543654, 0.9049997)
 bones/16/position = Vector3(-1.868757e-07, 13.645823, 4.241266e-06)
-bones/16/rotation = Quaternion(0.07215167, -0.12682305, 0.38051835, 0.91319)
+bones/16/rotation = Quaternion(0.06981467, -0.11796329, 0.36696413, 0.9200804)
 bones/17/position = Vector3(-1.0319288e-05, 14.341142, -2.9412167e-06)
-bones/17/rotation = Quaternion(0.05315643, 0.122996986, -0.10404737, 0.9855051)
+bones/17/rotation = Quaternion(0.045369394, 0.09213859, -0.10969314, 0.9886454)
 bones/18/position = Vector3(4.429467e-06, 4.9450455, 2.375713e-06)
-bones/18/rotation = Quaternion(0.19749075, -0.011783595, -0.040476613, 0.97939795)
+bones/18/rotation = Quaternion(0.16629471, -0.011703327, -0.0337937, 0.9854274)
 bones/19/position = Vector3(2.6225957e-06, 1.6772738, -2.801472e-06)
-bones/19/rotation = Quaternion(0.25239393, -0.06040835, -0.054172724, 0.9642166)
+bones/19/rotation = Quaternion(0.29353237, -0.0702542, -0.06300253, 0.9512802)
 bones/20/position = Vector3(0.64332557, 2.1965544, 0.5477822)
-bones/20/rotation = Quaternion(0.13515486, -0.017466122, -0.023919087, 0.99038184)
+bones/20/rotation = Quaternion(0.14943326, -0.019311462, -0.026445994, 0.9882294)
 bones/21/position = Vector3(0.24416685, 1.2535133, 0.46452928)
-bones/22/rotation = Quaternion(0.009291312, 0.0124820275, -0.022609739, 0.9996233)
-bones/23/rotation = Quaternion(0.058149204, -0.011024376, 0.016156157, 0.99811625)
-bones/25/rotation = Quaternion(0.50475883, -0.49755925, 0.5113682, 0.48595864)
+bones/22/rotation = Quaternion(0.057537843, 0.0062757093, -0.0044404734, 0.9983137)
+bones/23/rotation = Quaternion(0.053421166, -0.013672459, 0.031739317, 0.9979739)
+bones/25/rotation = Quaternion(0.5962638, -0.4217521, 0.48232678, 0.4836896)
 bones/26/position = Vector3(3.324368e-07, 7.240069, -4.184654e-06)
-bones/26/rotation = Quaternion(0.42491162, -0.032059267, -0.14233963, 0.8933991)
-bones/27/rotation = Quaternion(0.067519374, 0.108594455, -0.36501402, 0.92217857)
+bones/26/rotation = Quaternion(0.37779602, -0.06308768, -0.12439077, 0.91532356)
+bones/27/rotation = Quaternion(0.07167771, 0.12414493, -0.38877344, 0.9101129)
 bones/28/position = Vector3(6.473147e-06, 14.364357, -6.3735297e-06)
-bones/28/rotation = Quaternion(-0.042759478, -0.0470524, 0.14966169, 0.986691)
+bones/28/rotation = Quaternion(-0.039675422, -0.016434582, 0.15656641, 0.98673344)
 bones/29/position = Vector3(-2.1552523e-06, 4.21253, 1.8466053e-06)
-bones/29/rotation = Quaternion(0.048044723, -0.016892087, 0.0056835655, 0.9986862)
+bones/29/rotation = Quaternion(0.027071232, -0.019411245, 0.00812723, 0.99941206)
 bones/30/position = Vector3(2.384361e-07, 1.8982939, 8.9405876e-07)
-bones/30/rotation = Quaternion(0.2984317, 0.103501506, 0.06694265, 0.94643795)
+bones/30/rotation = Quaternion(0.34991974, 0.12135821, 0.07849203, 0.92556334)
 bones/31/position = Vector3(-0.9635389, 2.440987, 0.52131754)
-bones/31/rotation = Quaternion(0.08005966, 0.012372285, 0.012414682, 0.996636)
+bones/31/rotation = Quaternion(0.09078246, 0.014029398, 0.014077443, 0.99567246)
 bones/32/position = Vector3(-0.29900408, 1.335328, 0.59745055)
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=881266461]
@@ -101,5 +134,6 @@ anim_player = NodePath("../rat-albert-animated/AnimationPlayer")
 parameters/movement/current_state = "idle"
 parameters/movement/transition_request = ""
 parameters/movement/current_index = 0
+parameters/movement_time_scale/scale = 1.0
 
 [editable path="rat-albert-animated"]

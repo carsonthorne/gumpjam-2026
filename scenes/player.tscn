@@ -22,6 +22,7 @@ radius = 0.1
 height = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hqe12"]
+radius = 0.20507813
 height = 1.2592773
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qhqgy"]
@@ -56,7 +57,7 @@ max_vertical_angle = 0.4293509959906051
 
 [node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" unique_id=1242466281]
 shape = SubResource("SphereShape3D_qhqgy")
-spring_length = 6.0
+spring_length = 3.0
 
 [node name="SpringPosition" type="Node3D" parent="SpringArmPivot/SpringArm3D" unique_id=537663041]
 
