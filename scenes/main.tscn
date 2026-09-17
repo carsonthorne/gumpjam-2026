@@ -13,7 +13,7 @@ render_priority = 0
 shader = ExtResource("4_checker")
 shader_parameter/light_tile = Color(0.78, 0.78, 0.7, 1)
 shader_parameter/dark_tile = Color(0.42, 0.43, 0.38, 1)
-shader_parameter/tile_size = 1.0
+shader_parameter/tile_size = 0.75
 
 [sub_resource type="BoxMesh" id="BoxMesh_hqe12"]
 material = SubResource("ShaderMaterial_checker")

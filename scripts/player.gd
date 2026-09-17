@@ -45,6 +45,15 @@ func is_push_ready_active() -> bool:
 func is_push_animation_active() -> bool:
 	return push_follow_direction.length_squared() > 0.0
 
+func is_push_animation_within_end_transition(lead_time: float) -> bool:
+	if push_follow_direction.length_squared() == 0.0:
+		return false
+
+	if lead_time <= 0.0:
+		return false
+
+	return _get_push_follow_time_left() <= lead_time
+
 func set_push_ready(active: bool, direction := Vector3.ZERO, brace_position := Vector3.ZERO, has_brace_position := false) -> void:
 	direction.y = 0.0
 	if active and direction.length_squared() > 0.0:
@@ -97,7 +106,7 @@ func is_colliding_with_body(body: Node) -> bool:
 
 	return false
 
-func play_push_animation(direction := Vector3.ZERO, contact_delay := 0.0, push_speed := 0.0, push_distance := 0.0) -> void:
+func play_push_animation(direction := Vector3.ZERO, contact_delay := 0.0, push_speed := 0.0, push_distance := 0.0, movement_delay := 0.0) -> void:
 	_apply_brace_visual_offset_to_root()
 	is_push_ready = false
 	push_ready_direction = Vector3.ZERO
@@ -107,7 +116,7 @@ func play_push_animation(direction := Vector3.ZERO, contact_delay := 0.0, push_s
 	brace_release_backstep_direction = Vector3.ZERO
 	brace_release_backstep_distance_left = 0.0
 	push_started.emit()
-	start_push_follow(direction, contact_delay, push_speed, push_distance)
+	start_push_follow(direction, contact_delay + movement_delay, push_speed, push_distance)
 
 func start_push_follow(direction: Vector3, contact_delay: float, push_speed: float, push_distance: float) -> void:
 	direction.y = 0.0
@@ -126,6 +135,19 @@ func start_push_follow(direction: Vector3, contact_delay: float, push_speed: flo
 
 	if push_follow_contact_time_left == 0.0:
 		push_follow_distance_left = push_follow_distance
+
+func _get_push_follow_time_left() -> float:
+	if push_follow_direction.length_squared() == 0.0:
+		return 0.0
+
+	var time_left := push_follow_contact_time_left
+	if push_follow_speed > 0.0:
+		var remaining_distance := push_follow_distance_left
+		if push_follow_contact_time_left > 0.0 and remaining_distance == 0.0:
+			remaining_distance = push_follow_distance
+		time_left += remaining_distance / push_follow_speed
+
+	return time_left
 
 func sync_push_follow_position(brace_position: Vector3) -> void:
 	brace_position.y = global_position.y

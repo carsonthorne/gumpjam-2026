@@ -4,6 +4,7 @@ extends Motion
 @export var pushing_trim_offset := 0.15
 @export var pushing_animation_delay := 0.0
 @export var pushing_loop_animation := true
+@export var brace_transition_lead_time := 0.12
 
 var elapsed := 0.0
 var has_started_pushing_animation := false
@@ -26,6 +27,10 @@ func _update(delta: float) -> void:
 		_start_pushing_animation()
 
 	if elapsed < minimum_push_duration:
+		return
+
+	if owner.has_method("is_push_animation_within_end_transition") and owner.is_push_animation_within_end_transition(brace_transition_lead_time):
+		finished.emit("Push_start")
 		return
 
 	if owner.has_method("is_push_animation_active") and owner.is_push_animation_active():

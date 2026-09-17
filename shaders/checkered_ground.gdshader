@@ -2,7 +2,7 @@ shader_type spatial;
 
 uniform vec4 light_tile : source_color = vec4(0.78, 0.78, 0.70, 1.0);
 uniform vec4 dark_tile : source_color = vec4(0.42, 0.43, 0.38, 1.0);
-uniform float tile_size = 1.0;
+uniform float tile_size = 0.75;
 
 varying vec3 world_position;
 
