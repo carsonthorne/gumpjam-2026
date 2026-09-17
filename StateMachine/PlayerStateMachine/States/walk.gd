@@ -15,3 +15,5 @@ func _update(delta: float) -> void:
 	
 	if direction == Vector3.ZERO:
 		finished.emit("Idle")
+	elif Input.is_action_pressed("run"):
+		finished.emit("Run")

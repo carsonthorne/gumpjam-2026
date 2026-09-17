@@ -272,22 +272,22 @@ func _update_brace_release_backstep(delta: float) -> void:
 
 func _counter_brace_camera_motion(motion: Vector3) -> void:
 	motion.y = 0.0
-	if motion.length_squared() == 0.0 or not has_node("SpringArmPivot"):
+	if motion.length_squared() == 0.0 or not has_node("CameraPivot"):
 		return
 
-	var spring_arm_pivot: Node3D = $SpringArmPivot
-	spring_arm_pivot.position.x -= motion.x
-	spring_arm_pivot.position.z -= motion.z
+	var camera_pivot: Node3D = $CameraPivot
+	camera_pivot.position.x -= motion.x
+	camera_pivot.position.z -= motion.z
 
 func _update_brace_camera_offset(delta: float) -> void:
-	if not has_node("SpringArmPivot"):
+	if not has_node("CameraPivot"):
 		return
 
-	var spring_arm_pivot: Node3D = $SpringArmPivot
-	var current_offset := Vector3(spring_arm_pivot.position.x, 0.0, spring_arm_pivot.position.z)
+	var camera_pivot: Node3D = $CameraPivot
+	var current_offset := Vector3(camera_pivot.position.x, 0.0, camera_pivot.position.z)
 	var next_offset := current_offset.move_toward(Vector3.ZERO, brace_camera_return_speed * delta)
-	spring_arm_pivot.position.x = next_offset.x
-	spring_arm_pivot.position.z = next_offset.z
+	camera_pivot.position.x = next_offset.x
+	camera_pivot.position.z = next_offset.z
 
 func _update_brace_visual_offset(delta: float) -> void:
 	var target_offset := Vector3.ZERO
