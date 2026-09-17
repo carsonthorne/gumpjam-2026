@@ -6,8 +6,9 @@ class_name Motion
 signal velocity_updated(vel: Vector3)
 signal animation_state_changed(state: String)
 
-const SPEED: float = 1.0
-const RUN_SPEED: float = 1.75
+const SPEED: float = 0.6
+const RUN_SPEED: float = 0.9
+const MOVEMENT_SPEED_SCALE: float = 3.0
 const JUMP_VELOCITY: float = 4.5
 const GRAVITY: float = 9.8
 const ACCELERATION: float = 12

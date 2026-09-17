@@ -13,7 +13,7 @@ render_priority = 0
 shader = ExtResource("4_checker")
 shader_parameter/light_tile = Color(0.78, 0.78, 0.7, 1)
 shader_parameter/dark_tile = Color(0.42, 0.43, 0.38, 1)
-shader_parameter/tile_size = 0.75
+shader_parameter/tile_size = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_hqe12"]
 material = SubResource("ShaderMaterial_checker")
@@ -39,4 +39,10 @@ transform = Transform3D(1, 0, 0, 0, -0.006638438, 0.999978, 0, -0.999978, -0.006
 [node name="DebugOutput" parent="." unique_id=1404036416 instance=ExtResource("2_0wfyh")]
 
 [node name="push_block" parent="." unique_id=127028562 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="push_block2" parent="." unique_id=2041149291 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+
+[node name="push_block3" parent="." unique_id=876371745 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5)

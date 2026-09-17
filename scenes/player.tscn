@@ -26,6 +26,7 @@ radius = 0.20507813
 height = 1.2592773
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qhqgy"]
+radius = 0.6
 
 [node name="Player" type="CharacterBody3D" unique_id=160821695 node_paths=PackedStringArray("camera") groups=["player"]]
 script = ExtResource("1_3vyb7")
@@ -50,14 +51,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6825025, 0)
 shape = SubResource("CapsuleShape3D_hqe12")
 
 [node name="SpringArmPivot" type="Node3D" parent="." unique_id=1263533875]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4105902, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8954823, 0)
 script = ExtResource("2_g2els")
-min_vertical_angle = -1.2217304763960306
-max_vertical_angle = 0.4293509959906051
+min_vertical_angle = -0.5235987755982988
+max_vertical_angle = -0.5235987755982988
 
 [node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" unique_id=1242466281]
 shape = SubResource("SphereShape3D_qhqgy")
 spring_length = 3.0
+margin = 0.1
 
 [node name="SpringPosition" type="Node3D" parent="SpringArmPivot/SpringArm3D" unique_id=537663041]
 

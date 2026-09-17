@@ -2,9 +2,9 @@ extends AnimatableBody3D
 
 @export var push_speed := 1.5
 @export var push_contact_delay := 0.0
-@export var push_distance := 0.75
-@export var brace_distance_from_block_center := 0.88
-@export var brace_face_alignment_half_width := 0.2625
+@export var push_distance := 1.0
+@export var brace_distance_from_block_center := 1.0
+@export var brace_face_alignment_half_width := 0.35
 @export var player_push_movement_delay := 0.12
 
 @onready var front_zone: Area3D = $PushZones/FrontZone
@@ -81,7 +81,7 @@ func _on_right_zone_body_entered(body: Node3D) -> void:
 func _on_zone_body_exited(body: Node3D, zone: Area3D) -> void:
 	if body == player:
 		active_player_zones.erase(zone)
-		Log.print("player exited %s, active zones: %d" % [zone.name, active_player_zones.size()])
+		#Log.print("player exited %s, active zones: %d" % [zone.name, active_player_zones.size()])
 
 		if not active_player_zones.is_empty():
 			_refresh_push_direction_from_active_zones()
@@ -91,7 +91,7 @@ func _on_zone_body_exited(body: Node3D, zone: Area3D) -> void:
 			player.interact_pressed.disconnect(_on_player_interact_pressed)
 
 		if player.has_method("set_push_ready"):
-			player.set_push_ready(false)
+			player.set_push_ready(false, Vector3.ZERO, Vector3.ZERO, false, self)
 
 		player = null
 		push_direction = Vector3.ZERO
@@ -106,7 +106,7 @@ func _register_player(body: Node3D, zone: Area3D, direction: Vector3) -> void:
 	player = body
 	active_player_zones[zone] = direction.normalized()
 	_refresh_push_direction_from_active_zones()
-	Log.print("player entered %s, active zones: %d" % [zone.name, active_player_zones.size()])
+	#Log.print("player entered %s, active zones: %d" % [zone.name, active_player_zones.size()])
 
 	if not player.interact_pressed.is_connected(_on_player_interact_pressed):
 		player.interact_pressed.connect(_on_player_interact_pressed)
@@ -143,16 +143,19 @@ func _update_player_push_ready() -> void:
 
 	var can_brace := _can_player_brace_block()
 	if player.has_method("set_push_ready"):
-		player.set_push_ready(can_brace, push_direction, _get_player_brace_position(), true)
+		player.set_push_ready(can_brace, push_direction, _get_player_brace_position(), true, self)
 
 func _can_player_brace_block() -> bool:
 	return _is_player_ready_for_new_push() and _is_player_pushing_toward_block() and _is_player_aligned_with_push_face() and (_is_player_colliding_with_block() or _is_player_already_bracing_block())
 
 func _can_player_push_block() -> bool:
-	return _is_player_ready_for_new_push() and _is_player_already_bracing_block() and _is_player_pushing_toward_block() and _is_player_aligned_with_push_face()
+	return _is_player_ready_for_new_push() and _is_player_already_bracing_block() and _is_player_pushing_toward_block() and _is_player_aligned_with_push_face() and not _is_push_path_blocked(push_direction)
 
 func _is_player_ready_for_new_push() -> bool:
-	return player != null and (not player.has_method("is_push_animation_active") or not player.is_push_animation_active())
+	return player != null and _can_player_use_this_block() and (not player.has_method("is_push_animation_active") or not player.is_push_animation_active())
+
+func _can_player_use_this_block() -> bool:
+	return player == null or not player.has_method("can_accept_push_ready_source") or player.can_accept_push_ready_source(self)
 
 func _is_player_pushing_toward_block() -> bool:
 	return player != null and player.has_method("is_moving_toward_direction") and player.is_moving_toward_direction(push_direction)
@@ -161,7 +164,7 @@ func _is_player_colliding_with_block() -> bool:
 	return player != null and player.has_method("is_colliding_with_body") and player.is_colliding_with_body(self)
 
 func _is_player_already_bracing_block() -> bool:
-	return player != null and player.has_method("is_push_ready_active") and player.is_push_ready_active()
+	return player != null and player.has_method("is_push_ready_active") and player.is_push_ready_active(self)
 
 func _is_player_aligned_with_push_face() -> bool:
 	if player == null or push_direction.length_squared() == 0.0:
@@ -236,6 +239,19 @@ func _snap_to_push_axis(direction: Vector3) -> Vector3:
 		return Vector3(signf(direction.x), 0.0, 0.0)
 	return Vector3(0.0, 0.0, signf(direction.z))
 
+func _is_push_path_blocked(direction: Vector3) -> bool:
+	direction = _snap_to_push_axis(direction)
+	if direction.length_squared() == 0.0:
+		return true
+
+	var parameters := PhysicsTestMotionParameters3D.new()
+	parameters.from = global_transform
+	parameters.motion = direction * push_distance
+	parameters.margin = 0.001
+	if player is CollisionObject3D:
+		parameters.exclude_bodies = [player.get_rid()]
+	return PhysicsServer3D.body_test_motion(get_rid(), parameters)
+
 func push(direction: Vector3) -> void:
 	direction.y = 0
 
@@ -253,7 +269,7 @@ func push(direction: Vector3) -> void:
 	player_push_moved_distance = 0.0
 
 	if player != null and player.has_method("play_push_animation"):
-		player.play_push_animation(active_push_direction, push_contact_delay, push_speed, push_distance, player_push_movement_delay)
+		player.play_push_animation(active_push_direction, push_contact_delay, push_speed, push_distance, player_push_movement_delay, self)
 		push_brace_distance_from_block_center = _get_player_distance_from_block_center()
 		_sync_player_push_position_for_moved_distance(player_push_moved_distance)
 

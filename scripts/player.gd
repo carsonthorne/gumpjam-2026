@@ -7,6 +7,7 @@ extends CharacterBody3D
 @export var max_speed := 6.0
 @export var acceleration := 12.0
 @export var turn_speed := 12.0
+@export var movement_turn_speed := 6.0
 @export var brace_align_speed := 3.0
 @export var brace_align_smoothing := 5.0
 @export var brace_camera_return_speed := 4.0
@@ -26,6 +27,7 @@ signal push_ready_ended
 signal push_started
 
 var is_push_ready := false
+var push_ready_source: Node = null
 var push_ready_direction := Vector3.ZERO
 var push_ready_position := Vector3.ZERO
 var has_push_ready_position := false
@@ -38,12 +40,20 @@ var push_follow_contact_time_left := 0.0
 var push_follow_distance_left := 0.0
 var push_follow_speed := 0.0
 var push_follow_distance := 0.0
+var push_follow_source: Node = null
 
-func is_push_ready_active() -> bool:
-	return is_push_ready
+func is_push_ready_active(source: Node = null) -> bool:
+	_clear_invalid_push_sources()
+	if source == null:
+		return is_push_ready
+	return is_push_ready and push_ready_source == source
 
 func is_push_animation_active() -> bool:
 	return push_follow_direction.length_squared() > 0.0
+
+func can_accept_push_ready_source(source: Node) -> bool:
+	_clear_invalid_push_sources()
+	return push_ready_source == null or push_ready_source == source
 
 func is_push_animation_within_end_transition(lead_time: float) -> bool:
 	if push_follow_direction.length_squared() == 0.0:
@@ -54,7 +64,16 @@ func is_push_animation_within_end_transition(lead_time: float) -> bool:
 
 	return _get_push_follow_time_left() <= lead_time
 
-func set_push_ready(active: bool, direction := Vector3.ZERO, brace_position := Vector3.ZERO, has_brace_position := false) -> void:
+func set_push_ready(active: bool, direction := Vector3.ZERO, brace_position := Vector3.ZERO, has_brace_position := false, source: Node = null) -> void:
+	_clear_invalid_push_sources()
+	if active:
+		if source != null and not can_accept_push_ready_source(source):
+			return
+		if source != null:
+			push_ready_source = source
+	elif source != null and push_ready_source != null and push_ready_source != source:
+		return
+
 	direction.y = 0.0
 	if active and direction.length_squared() > 0.0:
 		push_ready_direction = direction.normalized()
@@ -79,6 +98,7 @@ func set_push_ready(active: bool, direction := Vector3.ZERO, brace_position := V
 		push_ready_started.emit()
 	else:
 		_start_brace_release_backstep()
+		push_ready_source = null
 		push_ready_direction = Vector3.ZERO
 		has_push_ready_position = false
 		push_ready_align_delay_left = 0.0
@@ -106,9 +126,10 @@ func is_colliding_with_body(body: Node) -> bool:
 
 	return false
 
-func play_push_animation(direction := Vector3.ZERO, contact_delay := 0.0, push_speed := 0.0, push_distance := 0.0, movement_delay := 0.0) -> void:
+func play_push_animation(direction := Vector3.ZERO, contact_delay := 0.0, push_speed := 0.0, push_distance := 0.0, movement_delay := 0.0, source: Node = null) -> void:
 	_apply_brace_visual_offset_to_root()
 	is_push_ready = false
+	push_ready_source = null
 	push_ready_direction = Vector3.ZERO
 	has_push_ready_position = false
 	push_ready_align_delay_left = 0.0
@@ -116,18 +137,20 @@ func play_push_animation(direction := Vector3.ZERO, contact_delay := 0.0, push_s
 	brace_release_backstep_direction = Vector3.ZERO
 	brace_release_backstep_distance_left = 0.0
 	push_started.emit()
-	start_push_follow(direction, contact_delay + movement_delay, push_speed, push_distance)
+	start_push_follow(direction, contact_delay + movement_delay, push_speed, push_distance, source)
 
-func start_push_follow(direction: Vector3, contact_delay: float, push_speed: float, push_distance: float) -> void:
+func start_push_follow(direction: Vector3, contact_delay: float, push_speed: float, push_distance: float, source: Node = null) -> void:
 	direction.y = 0.0
 
 	if direction.length_squared() == 0.0 or push_speed <= 0.0 or push_distance <= 0.0:
 		push_follow_direction = Vector3.ZERO
+		push_follow_source = null
 		push_follow_contact_time_left = 0.0
 		push_follow_distance_left = 0.0
 		return
 
 	push_follow_direction = direction.normalized()
+	push_follow_source = source
 	push_follow_contact_time_left = contact_delay
 	push_follow_distance_left = 0.0
 	push_follow_speed = push_speed
@@ -164,6 +187,12 @@ func get_horizontal_distance_to_position(position: Vector3) -> float:
 func set_velocity_from_motion(vel: Vector3) -> void:
 	velocity = vel
 
+func _clear_invalid_push_sources() -> void:
+	if push_ready_source != null and not is_instance_valid(push_ready_source):
+		push_ready_source = null
+	if push_follow_source != null and not is_instance_valid(push_follow_source):
+		push_follow_source = null
+
 func _physics_process(delta: float) -> void:
 	if is_push_ready:
 		velocity = Vector3.ZERO
@@ -173,7 +202,7 @@ func _physics_process(delta: float) -> void:
 	elif push_follow_direction.length_squared() > 0.0:
 		_rotate_pivot_toward_direction(push_follow_direction, delta)
 	elif velocity.length_squared() >= 0.1:
-		_rotate_pivot_toward_direction(Vector3(velocity.x, 0.0, velocity.z), delta)
+		_rotate_pivot_toward_direction(Vector3(velocity.x, 0.0, velocity.z), delta, movement_turn_speed)
 		
 	move_and_slide()
 
@@ -292,7 +321,7 @@ func _apply_brace_visual_offset_to_root() -> void:
 	$Pivot.position.x = 0.0
 	$Pivot.position.z = 0.0
 
-func _rotate_pivot_toward_direction(direction: Vector3, delta: float) -> void:
+func _rotate_pivot_toward_direction(direction: Vector3, delta: float, rotation_speed := turn_speed) -> void:
 	direction.y = 0.0
 	if direction.length_squared() == 0.0:
 		return
@@ -300,7 +329,7 @@ func _rotate_pivot_toward_direction(direction: Vector3, delta: float) -> void:
 	var look_position := global_position + direction.normalized()
 	var target_transform := global_transform.looking_at(look_position, Vector3.UP, true)
 	var target_yaw := target_transform.basis.get_euler().y
-	$Pivot.rotation.y = rotate_toward($Pivot.rotation.y, target_yaw, turn_speed * delta)
+	$Pivot.rotation.y = rotate_toward($Pivot.rotation.y, target_yaw, rotation_speed * delta)
 
 func _update_push_follow(delta: float) -> void:
 	if push_follow_contact_time_left > 0.0:
@@ -317,9 +346,11 @@ func _update_push_follow(delta: float) -> void:
 
 	if push_follow_distance_left == 0.0:
 		var completed_push_direction := push_follow_direction
+		var completed_push_source := push_follow_source
 		push_follow_direction = Vector3.ZERO
+		push_follow_source = null
 		if is_moving_toward_direction(completed_push_direction):
-			set_push_ready(true, completed_push_direction, global_position, true)
+			set_push_ready(true, completed_push_direction, global_position, true, completed_push_source)
 		else:
 			_start_release_backstep(completed_push_direction)
 			brace_visual_release_hold_left = brace_visual_release_hold_time
