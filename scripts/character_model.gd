@@ -96,9 +96,6 @@ func set_pushing_playback(trim_offset: float, should_loop: bool) -> void:
 	pushing_node.start_offset = maxf(trim_offset, 0.0)
 	pushing_node.loop_mode = 1 if should_loop else 0
 
-func set_pushing_trim_offset(value: float) -> void:
-	set_pushing_playback(value, false)
-
 func set_push_end_trim_offset(value: float) -> void:
 	var push_end_node: AnimationNodeAnimation = animation_tree.tree_root.get_node("push_end") as AnimationNodeAnimation
 	if push_end_node == null:

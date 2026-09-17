@@ -4,7 +4,7 @@ extends Motion
 @export var pushing_trim_offset := 0.15
 @export var pushing_animation_delay := 0.0
 @export var pushing_loop_animation := true
-@export var brace_transition_lead_time := 0.12
+@export var brace_transition_lead_time := 0.14
 
 var elapsed := 0.0
 var has_started_pushing_animation := false

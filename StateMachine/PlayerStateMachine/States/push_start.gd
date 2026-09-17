@@ -20,6 +20,13 @@ func _update(delta: float) -> void:
 	velocity = Vector3.ZERO
 	velocity_updated.emit(velocity)
 
+	if owner.has_method("is_push_animation_active") and owner.is_push_animation_active():
+		return
+
+	if owner.has_method("is_push_ready_active") and not owner.is_push_ready_active():
+		finished.emit("Push_end")
+		return
+
 	if is_holding_pose:
 		return
 

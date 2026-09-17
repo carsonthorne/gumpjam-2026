@@ -5,12 +5,7 @@ extends AnimatableBody3D
 @export var push_distance := 0.75
 @export var brace_distance_from_block_center := 0.88
 @export var brace_face_alignment_half_width := 0.2625
-@export var player_push_clearance_distance := 0.0
 @export var player_push_movement_delay := 0.12
-@export var player_push_end_clearance_distance := 0.0
-@export var player_push_end_clearance_start_distance := 0.15
-@export var post_push_brace_clearance_distance := 0.035
-@export var post_push_brace_clearance_duration := 0.0
 
 @onready var front_zone: Area3D = $PushZones/FrontZone
 @onready var back_zone: Area3D = $PushZones/BackZone
@@ -29,7 +24,6 @@ var push_brace_distance_from_block_center := 0.0
 var player_push_delay_left := 0.0
 var player_push_distance_left := 0.0
 var player_push_moved_distance := 0.0
-var post_push_brace_clearance_time_left := 0.0
 var is_push_in_progress := false
 
 func _ready() -> void:
@@ -47,7 +41,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	_update_player_push_ready()
-	_update_post_push_brace_clearance(delta)
 
 	if push_contact_time_left > 0.0:
 		push_contact_time_left = maxf(push_contact_time_left - delta, 0.0)
@@ -72,7 +65,6 @@ func _physics_process(delta: float) -> void:
 	if push_distance_left == 0.0 and player_push_distance_left == 0.0:
 		active_push_direction = Vector3.ZERO
 		is_push_in_progress = false
-		post_push_brace_clearance_time_left = post_push_brace_clearance_duration
 
 func _on_front_zone_body_entered(body: Node3D) -> void:
 	_register_player(body, front_zone, -global_transform.basis.z)
@@ -142,7 +134,7 @@ func _refresh_push_direction_from_active_zones() -> void:
 	push_direction = best_direction
 
 func _on_player_interact_pressed() -> void:
-	if _can_player_brace_block():
+	if _can_player_push_block():
 		push(push_direction)
 
 func _update_player_push_ready() -> void:
@@ -154,7 +146,13 @@ func _update_player_push_ready() -> void:
 		player.set_push_ready(can_brace, push_direction, _get_player_brace_position(), true)
 
 func _can_player_brace_block() -> bool:
-	return _is_player_pushing_toward_block() and _is_player_aligned_with_push_face() and (_is_player_colliding_with_block() or _is_player_already_bracing_block())
+	return _is_player_ready_for_new_push() and _is_player_pushing_toward_block() and _is_player_aligned_with_push_face() and (_is_player_colliding_with_block() or _is_player_already_bracing_block())
+
+func _can_player_push_block() -> bool:
+	return _is_player_ready_for_new_push() and _is_player_already_bracing_block() and _is_player_pushing_toward_block() and _is_player_aligned_with_push_face()
+
+func _is_player_ready_for_new_push() -> bool:
+	return player != null and (not player.has_method("is_push_animation_active") or not player.is_push_animation_active())
 
 func _is_player_pushing_toward_block() -> bool:
 	return player != null and player.has_method("is_moving_toward_direction") and player.is_moving_toward_direction(push_direction)
@@ -186,7 +184,6 @@ func _get_player_brace_position() -> Vector3:
 	return _get_player_brace_position_for_direction(push_direction)
 
 func _get_player_brace_position_for_direction(direction: Vector3, distance_from_block_center := brace_distance_from_block_center) -> Vector3:
-	distance_from_block_center += _get_post_push_brace_clearance()
 	var brace_position: Vector3 = global_position - direction.normalized() * distance_from_block_center
 	if player != null:
 		brace_position.y = player.global_position.y
@@ -225,29 +222,7 @@ func _sync_player_push_position_for_moved_distance(moved_distance: float) -> voi
 
 	if player.has_method("sync_push_follow_position"):
 		var delayed_block_position := push_start_position + active_push_direction * moved_distance
-		var follow_distance := push_brace_distance_from_block_center + player_push_clearance_distance + _get_player_push_end_clearance(moved_distance)
-		player.sync_push_follow_position(_get_player_brace_position_at_block_position(delayed_block_position, active_push_direction, follow_distance))
-
-func _get_player_push_end_clearance(moved_distance: float) -> float:
-	if player_push_end_clearance_distance <= 0.0 or player_push_end_clearance_start_distance <= 0.0:
-		return 0.0
-
-	var remaining_distance := maxf(push_distance - moved_distance, 0.0)
-	var clearance_weight := 1.0 - clampf(remaining_distance / player_push_end_clearance_start_distance, 0.0, 1.0)
-	return player_push_end_clearance_distance * clearance_weight
-
-func _update_post_push_brace_clearance(delta: float) -> void:
-	if post_push_brace_clearance_time_left <= 0.0:
-		return
-
-	post_push_brace_clearance_time_left = maxf(post_push_brace_clearance_time_left - delta, 0.0)
-
-func _get_post_push_brace_clearance() -> float:
-	if post_push_brace_clearance_distance <= 0.0 or post_push_brace_clearance_duration <= 0.0 or post_push_brace_clearance_time_left <= 0.0:
-		return 0.0
-
-	var clearance_weight := post_push_brace_clearance_time_left / post_push_brace_clearance_duration
-	return post_push_brace_clearance_distance * clearance_weight
+		player.sync_push_follow_position(_get_player_brace_position_at_block_position(delayed_block_position, active_push_direction, push_brace_distance_from_block_center))
 
 func _get_player_brace_position_at_block_position(block_position: Vector3, direction: Vector3, distance_from_block_center: float) -> Vector3:
 	var brace_position: Vector3 = block_position - direction.normalized() * distance_from_block_center
@@ -264,7 +239,7 @@ func _snap_to_push_axis(direction: Vector3) -> Vector3:
 func push(direction: Vector3) -> void:
 	direction.y = 0
 
-	if is_push_in_progress or direction.length_squared() == 0 or not _can_player_brace_block():
+	if is_push_in_progress or direction.length_squared() == 0 or not _can_player_push_block():
 		return
 
 	is_push_in_progress = true
