@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/target_tile.gd" id="1_target"]
+[ext_resource type="Shader" path="res://shaders/target_beam.gdshader" id="2_beam_shader"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_marker"]
+albedo_color = Color(1, 0.05, 0.03, 1)
+roughness = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_beam"]
+render_priority = 0
+shader = ExtResource("2_beam_shader")
+shader_parameter/beam_color = Color(1, 0.05, 0.03, 1)
+shader_parameter/bottom_alpha = 0.42
+shader_parameter/top_alpha = 0.0
+shader_parameter/beam_height = 3.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_marker"]
+material = SubResource("StandardMaterial3D_marker")
+top_radius = 0.34
+bottom_radius = 0.34
+height = 0.02
+radial_segments = 64
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_beam"]
+material = SubResource("ShaderMaterial_beam")
+top_radius = 0.34
+bottom_radius = 0.34
+height = 3.0
+radial_segments = 48
+rings = 8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_detector"]
+size = Vector3(0.9, 1.2, 0.9)
+
+[node name="TargetTile" type="Area3D" node_paths=PackedStringArray("beam") groups=["target_tile"]]
+script = ExtResource("1_target")
+beam = NodePath("Beam")
+
+[node name="Marker" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011, 0)
+mesh = SubResource("CylinderMesh_marker")
+
+[node name="Beam" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("CylinderMesh_beam")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("BoxShape3D_detector")
