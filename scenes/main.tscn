@@ -5,7 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://c0w7gyd12sqfn" path="res://scenes/push_block.tscn" id="3_sugp2"]
 [ext_resource type="Shader" uid="uid://bgg37r1wgn3o8" path="res://shaders/checkered_ground.gdshader" id="4_checker"]
 [ext_resource type="PackedScene" path="res://scenes/target_tile.tscn" id="5_target"]
-[ext_resource type="Script" path="res://scripts/level_goal.gd" id="6_goal"]
+[ext_resource type="Script" uid="uid://b7tbnujc4t6ba" path="res://scripts/level_goal.gd" id="6_goal"]
+[ext_resource type="PackedScene" path="res://scenes/chain_link_fence.tscn" id="7_o6xl0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hqe12"]
 size = Vector3(60, 2, 60)
@@ -39,8 +40,9 @@ transform = Transform3D(1, 0, 0, 0, -0.006638438, 0.999978, 0, -0.999978, -0.006
 [node name="Player" parent="." unique_id=160821695 instance=ExtResource("1_o5qli")]
 
 [node name="DebugOutput" parent="." unique_id=1404036416 instance=ExtResource("2_0wfyh")]
+visible = false
 
-[node name="LevelGoal" type="Node" parent="."]
+[node name="LevelGoal" type="Node" parent="." unique_id=1739967491]
 script = ExtResource("6_goal")
 
 [node name="push_block" parent="." unique_id=127028562 instance=ExtResource("3_sugp2")]
@@ -57,3 +59,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 
 [node name="TargetTile2" parent="." unique_id=908842601 instance=ExtResource("5_target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+
+[node name="ChainLinkFence" parent="." unique_id=119993336 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="ChainLinkFence2" parent="." unique_id=1241458537 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)

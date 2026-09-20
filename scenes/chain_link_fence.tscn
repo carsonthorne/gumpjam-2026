@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Shader" path="res://shaders/chain_link_fence.gdshader" id="1_fence_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_chain_link"]
+render_priority = 0
+shader = ExtResource("1_fence_shader")
+shader_parameter/wire_color = Color(0.72, 0.78, 0.78, 0.72)
+shader_parameter/panel_width = 4.0
+shader_parameter/panel_height = 2.65
+shader_parameter/horizontal_spacing = 0.15
+shader_parameter/horizontal_wire_width = 0.008
+shader_parameter/vertical_wire_width = 0.01
+shader_parameter/edge_softness = 0.006
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_metal"]
+albedo_color = Color(0.72, 0.78, 0.78, 1)
+metallic = 0.25
+roughness = 0.28
+
+[sub_resource type="BoxMesh" id="BoxMesh_chain_link"]
+material = SubResource("ShaderMaterial_chain_link")
+size = Vector3(4, 2.65, 0.025)
+
+[sub_resource type="BoxMesh" id="BoxMesh_post"]
+material = SubResource("StandardMaterial3D_metal")
+size = Vector3(0.06, 3, 0.06)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rail"]
+material = SubResource("StandardMaterial3D_metal")
+size = Vector3(4.06, 0.06, 0.06)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
+size = Vector3(4.12, 3, 0.18)
+
+[node name="ChainLinkFence" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_collision")
+
+[node name="ChainLinkMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("BoxMesh_chain_link")
+
+[node name="LeftPost" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03, 1.5, 0)
+mesh = SubResource("BoxMesh_post")
+
+[node name="RightPost" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.03, 1.5, 0)
+mesh = SubResource("BoxMesh_post")
+
+[node name="TopRail" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.92, 0)
+mesh = SubResource("BoxMesh_rail")
+
+[node name="BottomRail" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+mesh = SubResource("BoxMesh_rail")
