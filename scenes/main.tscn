@@ -34,8 +34,33 @@ shape = SubResource("BoxShape3D_hqe12")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1393398341]
 mesh = SubResource("BoxMesh_hqe12")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1168480315]
-transform = Transform3D(1, 0, 0, 0, -0.006638438, 0.999978, 0, -0.999978, -0.0066384384, 0, 17.949734, 0)
+[node name="LabLightNW" type="OmniLight3D" parent="." unique_id=1168480315]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 8, -14)
+light_energy = 6.0
+light_specular = 0.25
+shadow_enabled = true
+omni_range = 28.0
+
+[node name="LabLightNE" type="OmniLight3D" parent="." unique_id=990042861]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 8, -14)
+light_energy = 6.0
+light_specular = 0.25
+shadow_enabled = true
+omni_range = 28.0
+
+[node name="LabLightSW" type="OmniLight3D" parent="." unique_id=904946511]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 8, 14)
+light_energy = 6.0
+light_specular = 0.25
+shadow_enabled = true
+omni_range = 28.0
+
+[node name="LabLightSE" type="OmniLight3D" parent="." unique_id=1849800189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 8, 14)
+light_energy = 6.0
+light_specular = 0.25
+shadow_enabled = true
+omni_range = 28.0
 
 [node name="Player" parent="." unique_id=160821695 instance=ExtResource("1_o5qli")]
 
@@ -50,9 +75,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
 [node name="push_block2" parent="." unique_id=2041149291 instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+block_letter = "B"
+block_color = Color(0.04, 0.16, 0.55, 1)
 
 [node name="push_block3" parent="." unique_id=876371745 instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5)
+block_letter = "C"
+block_color = Color(0.05, 0.55, 0.22, 1)
 
 [node name="TargetTile" parent="." unique_id=1967462119 instance=ExtResource("5_target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)

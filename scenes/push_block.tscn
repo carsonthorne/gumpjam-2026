@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c0w7gyd12sqfn"]
 
 [ext_resource type="Script" uid="uid://m18qipmafx56" path="res://scripts/push_block.gd" id="1_pvpmv"]
+[ext_resource type="Script" path="res://scripts/push_block_skin.gd" id="1_skin"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pvpmv"]
 albedo_color = Color(0.5780224, 0.19415864, 0.28957427, 1)
@@ -26,6 +27,7 @@ size = Vector3(0.5089111333333333, 1, 1)
 size = Vector3(1, 1, 0.515625)
 
 [node name="push_block" type="Node3D" unique_id=127028562]
+script = ExtResource("1_skin")
 
 [node name="RigidBody3D" type="AnimatableBody3D" parent="." unique_id=261748774 groups=["push_block"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

@@ -1,5 +1,8 @@
 extends AnimatableBody3D
 
+@export var block_letter := "A"
+@export var block_color := Color(0.78, 0.06, 0.04, 1.0)
+@export_range(0.0, 0.35, 0.005) var block_border_thickness := 0.09
 @export var push_speed := 1.5
 @export var push_contact_delay := 0.0
 @export var push_distance := 1.0
@@ -25,8 +28,22 @@ var player_push_delay_left := 0.0
 var player_push_distance_left := 0.0
 var player_push_moved_distance := 0.0
 var is_push_in_progress := false
+var wood_material: Material
+
+func set_block_skin(
+	letter: String,
+	color: Color,
+	border_thickness := block_border_thickness
+) -> void:
+	block_letter = letter
+	block_color = color
+	block_border_thickness = border_thickness
+	if is_inside_tree():
+		_setup_block_visuals()
 
 func _ready() -> void:
+	_setup_block_visuals()
+
 	front_zone.body_entered.connect(_on_front_zone_body_entered)
 	front_zone.body_exited.connect(_on_zone_body_exited.bind(front_zone))
 
@@ -38,6 +55,128 @@ func _ready() -> void:
 
 	right_zone.body_entered.connect(_on_right_zone_body_entered)
 	right_zone.body_exited.connect(_on_zone_body_exited.bind(right_zone))
+
+func _setup_block_visuals() -> void:
+	wood_material = _create_wood_material()
+
+	if has_node("MeshInstance3D"):
+		var body_mesh: MeshInstance3D = $MeshInstance3D
+		body_mesh.mesh = _create_block_visual_mesh()
+		body_mesh.material_override = wood_material
+
+	if has_node("BlockVisuals"):
+		$BlockVisuals.free()
+
+	var visuals := Node3D.new()
+	visuals.name = "BlockVisuals"
+	add_child(visuals)
+
+	_add_block_face(visuals, Vector3.FORWARD, Vector3.UP)
+	_add_block_face(visuals, Vector3.BACK, Vector3.UP)
+	_add_block_face(visuals, Vector3.LEFT, Vector3.UP)
+	_add_block_face(visuals, Vector3.RIGHT, Vector3.UP)
+	_add_block_face(visuals, Vector3.UP, Vector3.BACK)
+
+func _create_wood_material() -> Material:
+	var shader := load("res://shaders/toy_block_wood.gdshader") as Shader
+	if shader != null:
+		var material := ShaderMaterial.new()
+		material.shader = shader
+		material.set_shader_parameter("border_color", block_color)
+		material.set_shader_parameter("border_thickness", block_border_thickness)
+		return material
+
+	var fallback := StandardMaterial3D.new()
+	fallback.albedo_color = Color(0.82, 0.62, 0.38, 1.0)
+	fallback.roughness = 0.82
+	return fallback
+
+func _create_block_visual_mesh() -> ArrayMesh:
+	var vertices := PackedVector3Array()
+	var normals := PackedVector3Array()
+	var uvs := PackedVector2Array()
+	var indices := PackedInt32Array()
+
+	_append_mesh_face(vertices, normals, uvs, indices, Vector3.FORWARD, Vector3.UP)
+	_append_mesh_face(vertices, normals, uvs, indices, Vector3.BACK, Vector3.UP)
+	_append_mesh_face(vertices, normals, uvs, indices, Vector3.LEFT, Vector3.UP)
+	_append_mesh_face(vertices, normals, uvs, indices, Vector3.RIGHT, Vector3.UP)
+	_append_mesh_face(vertices, normals, uvs, indices, Vector3.UP, Vector3.BACK)
+	_append_mesh_face(vertices, normals, uvs, indices, Vector3.DOWN, Vector3.FORWARD)
+
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = vertices
+	arrays[Mesh.ARRAY_NORMAL] = normals
+	arrays[Mesh.ARRAY_TEX_UV] = uvs
+	arrays[Mesh.ARRAY_INDEX] = indices
+
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	return mesh
+
+func _append_mesh_face(
+	vertices: PackedVector3Array,
+	normals: PackedVector3Array,
+	uvs: PackedVector2Array,
+	indices: PackedInt32Array,
+	normal: Vector3,
+	up: Vector3
+) -> void:
+	var z_axis := normal.normalized()
+	var y_axis := up.normalized()
+	var x_axis := y_axis.cross(z_axis).normalized()
+	y_axis = z_axis.cross(x_axis).normalized()
+	var center := z_axis * 0.5
+	var base_index := vertices.size()
+
+	vertices.append(center + (-x_axis - y_axis) * 0.5)
+	vertices.append(center + (x_axis - y_axis) * 0.5)
+	vertices.append(center + (x_axis + y_axis) * 0.5)
+	vertices.append(center + (-x_axis + y_axis) * 0.5)
+
+	for i in range(4):
+		normals.append(z_axis)
+
+	uvs.append(Vector2(0.0, 1.0))
+	uvs.append(Vector2(1.0, 1.0))
+	uvs.append(Vector2(1.0, 0.0))
+	uvs.append(Vector2(0.0, 0.0))
+
+	indices.append_array([
+		base_index,
+		base_index + 2,
+		base_index + 1,
+		base_index,
+		base_index + 3,
+		base_index + 2,
+	])
+
+func _add_block_face(parent: Node3D, normal: Vector3, up: Vector3) -> void:
+	var face := Node3D.new()
+	parent.add_child(face)
+
+	var z_axis := normal.normalized()
+	var y_axis := up.normalized()
+	var x_axis := y_axis.cross(z_axis).normalized()
+	y_axis = z_axis.cross(x_axis).normalized()
+	face.transform = Transform3D(Basis(x_axis, y_axis, z_axis), z_axis * 0.503)
+
+	_add_letter(face)
+
+func _add_letter(parent: Node3D) -> void:
+	var label := Label3D.new()
+	label.name = "Letter"
+	label.text = block_letter.substr(0, 1).to_upper()
+	label.pixel_size = 0.006
+	label.font_size = 128
+	label.modulate = block_color
+	label.outline_size = 10
+	label.outline_modulate = Color(0.18, 0.08, 0.03, 1.0)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.position = Vector3(0.0, -0.01, 0.004)
+	parent.add_child(label)
 
 func _physics_process(delta: float) -> void:
 	_update_player_push_ready()
