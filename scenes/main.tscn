@@ -36,31 +36,31 @@ mesh = SubResource("BoxMesh_hqe12")
 
 [node name="LabLightNW" type="OmniLight3D" parent="." unique_id=1168480315]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 8, -14)
-light_energy = 6.0
+light_energy = 8.0
 light_specular = 0.25
 shadow_enabled = true
-omni_range = 28.0
+omni_range = 40.0
 
 [node name="LabLightNE" type="OmniLight3D" parent="." unique_id=990042861]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 8, -14)
-light_energy = 6.0
+light_energy = 8.0
 light_specular = 0.25
 shadow_enabled = true
-omni_range = 28.0
+omni_range = 40.0
 
 [node name="LabLightSW" type="OmniLight3D" parent="." unique_id=904946511]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 8, 14)
-light_energy = 6.0
+light_energy = 8.0
 light_specular = 0.25
 shadow_enabled = true
-omni_range = 28.0
+omni_range = 40.0
 
 [node name="LabLightSE" type="OmniLight3D" parent="." unique_id=1849800189]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 8, 14)
-light_energy = 6.0
+light_energy = 8.0
 light_specular = 0.25
 shadow_enabled = true
-omni_range = 28.0
+omni_range = 40.0
 
 [node name="Player" parent="." unique_id=160821695 instance=ExtResource("1_o5qli")]
 
