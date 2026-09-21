@@ -1,0 +1,716 @@
+; Collection: LOMA (60-level mirror edition, 2010-05-18)
+; Curator: Aymeric du Peloux
+; Source: https://www.sourcecode.se/sokoban/levels.php?act=dnl_level&file=Loma.slc&as_text=0
+; Redistribution permitted by curator; see SOURCES.md.
+
+; Source level: LOMA01-01
+; Author: Aymeric du Peloux
+  ####
+  #  ###
+  #    #
+###$.# ##
+#  $.#  #
+# #$. # #
+#@  #   #
+#########
+
+; Source level: LOMA01-02
+; Author: François Marques
+  ####
+  #  #
+###$.###
+#  $.  #
+#@ $.# #
+###    #
+   #  #
+   ####
+
+; Source level: LOMA01-03
+; Author: David W Skinner
+  #####
+ ##   ##
+### #  #
+###$.# #
+#  $.#@#
+# #$.# #
+# #    #
+#  # ###
+##   ##
+ #####
+
+; Source level: LOMA01-04
+; Author: Sven Egevad
+   ##########
+#### $.     #
+#    $. #@  #
+#   #$.######
+##### ##
+  #    #
+  #    #
+  #  ###
+  ####
+
+; Source level: LOMA01-05
+; Author: Victor Kindermans
+  ####
+ ##  ##
+ #    ###
+##$.#   #
+#@$.    #
+##$.#  ##
+#  ## ##
+#     #
+####  #
+   ####
+
+; Source level: LOMA01-06
+; Author: Michael Steins
+ #####
+##   #
+#    #
+#    ####
+### ##@ #
+ ## ##  #
+ #  ##$.#
+ #    $.#
+ ##  #$.#
+  ####  #
+     #  #
+     ####
+
+; Source level: LOMA02-01
+; Author: François Marques
+    ####
+    #  #
+#####@ ##
+#   #$. #
+#    .$ #
+## # $.##
+ #   ###
+ #####
+
+; Source level: LOMA02-02
+; Author: Aymeric du Peloux
+ #########
+##   ##  #
+#  #$.   #
+# #@.$#  #
+#   $.  ##
+#########
+
+; Source level: LOMA02-03
+; Author: Sven Egevad
+    ####
+  ###  #
+  #    #
+  #    #
+  ## ###
+#### $.##
+#    .$@#
+#   #$.##
+##### ##
+  #    #
+  #    #
+  #  ###
+  ####
+
+; Source level: LOMA02-04
+; Author: Victor Kindermans
+  ######
+  #    ##
+ ##$.#  #
+ # .$@  #
+## $.# ##
+#  ### #
+#      #
+#####  #
+    ####
+
+; Source level: LOMA02-05
+; Author: Michael Steins
+   #########
+####@$.#   #
+#   #.$    #
+#    $.#####
+########
+
+; Source level: LOMA02-06
+; Author: David W Skinner
+#####
+#   ####
+# #$.  #
+#  .$#@#
+###$.  #
+  #  ###
+  #  #
+  ####
+
+; Source level: LOMA03-01
+; Author: François Marques
+  #####
+###.  #
+#  *  #
+# #*###
+#  $ #
+#  @ #
+#  ###
+####
+
+; Source level: LOMA03-02
+; Author: Aymeric du Peloux
+ #######
+##  .  #
+#  #*# #
+#   *  #
+#  #$ ##
+##  @##
+ #####
+
+; Source level: LOMA03-03
+; Author: Sven Egevad
+     ######
+   ###.#  #
+   #@ *   #
+######*## #
+#     $   ##
+#   #  #   #
+########   #
+       #####
+
+; Source level: LOMA03-04
+; Author: Victor Kindermans
+   ####
+ ###  #
+## .  ##
+#  *   #
+# #*#@ #
+#  $  ##
+####  #
+   ####
+
+; Source level: LOMA03-05
+; Author: Michael Steins
+#######
+#   #.##
+#    *@#
+#####* #
+  #  $ #
+  #   ##
+  #####
+
+; Source level: LOMA03-06
+; Author: David W Skinner
+  ####
+ ##  #
+ # . #
+ # * #
+## *###
+#  $ #
+#  @ #
+#  ###
+####
+
+; Source level: LOMA04-01
+; Author: Aymeric du Peloux
+#####
+#   ###
+# #.  ##
+#  $   #
+###*## #
+#  $ # ##
+#  .    #
+## @#   #
+ ########
+
+; Source level: LOMA04-02
+; Author: David W Skinner
+###### #
+#   ## #
+#  . #
+#  $ ###
+## * @ #
+###$ # #
+  #.#  #
+# #   ##
+# ######
+
+; Source level: LOMA04-03
+; Author: François Marques
+ #####
+##   #
+#    #
+# #.###
+#  $  #
+###*# #
+ # $@ #
+ # .  #
+ ###  #
+   ####
+
+; Source level: LOMA04-04
+; Author: Sven Egevad
+  ###
+###.#####
+#@ $    #
+# #*#   #
+#  $  ###
+###.###
+ #    #
+ #    #
+ #  ###
+ ####
+
+; Source level: LOMA04-05
+; Author: Victor Kindermans
+ #######
+ # .   #
+ # $   #
+###*#@##
+#  $  #
+#  .###
+#####
+
+; Source level: LOMA04-06
+; Author: Michael Steins
+ ###
+ #.#####
+##$#   #
+#@*    #
+##$#####
+ #.#
+ ###
+
+; Source level: LOMA05-01
+; Author: David W Skinner
+ ####
+ #  #
+ #  #
+ #  ####
+###$$  #
+#  $.  #
+# #..###
+# @# #
+##   #
+######
+
+; Source level: LOMA05-02
+; Author: François Marques
+    #####
+#####   #
+#  ## # #
+#  @$$  #
+#  #$.###
+##  ..  #
+  ###   #
+    #####
+
+; Source level: LOMA05-03
+; Author: Aymeric du Peloux
+  #####
+  #   #
+  # # #
+###   #
+#  $$ #
+# #$.###
+# #..  #
+#  #@  #
+##  ## #
+ ##    #
+  ######
+
+; Source level: LOMA05-04
+; Author: Sven Egevad
+    ####
+  ###  #
+  #    #
+  #    #
+ ###@###
+## $$#
+#  $.#
+# #..#
+# ## #
+#    ####
+##      #
+ #  #   #
+ ########
+
+; Source level: LOMA05-05
+; Author: Victor Kindermans
+########
+#   #  #
+#   #  #
+##  $$ #
+ # #$.###
+ # #.. @#
+ # ###  #
+ #      #
+ ########
+
+; Source level: LOMA05-06
+; Author: Michael Steins
+ ####
+ #  #
+ #  #####
+ #  ##  ##
+###$$    #
+# @$.##  #
+#  ..## ##
+#######  #
+ #       #
+ #   #  ##
+ ########
+
+; Source level: LOMA06-01
+; Author: François Marques
+   ###
+###  #
+#  $ ##
+#@.*. #
+## $  #
+  ##  #
+   #  #
+   ####
+
+; Source level: LOMA06-02
+; Author: Aymeric du Peloux
+    ####
+    #  #
+#####  ##
+#   #$  #
+#   .*. #
+## ##$###
+#   #@#
+#     #
+####  #
+   ####
+
+; Source level: LOMA06-03
+; Author: Sven Egevad
+#####
+#   #####
+# #$#   #
+# .*.   #
+# #$#   #
+#  @#   #
+#########
+
+; Source level: LOMA06-04
+; Author: Victor Kindermans
+   ####
+#### @#
+#  $  #
+# .*. #
+#  $  #
+## ####
+#  #
+#  #
+#  #
+####
+
+; Source level: LOMA06-05
+; Author: Michael Steins
+   ####
+   #  #
+   #  #
+   #  #
+####$###
+#  .*.@#
+#  #$###
+#  #  #
+##    #
+ #  ###
+ ####
+
+; Source level: LOMA06-06
+; Author: David W Skinner
+  #####
+  ##  #
+###   #
+#  $  #
+# .*.##
+## $ #
+###@ #
+  ####
+
+; Source level: LOMA07-01
+; Author: François Marques
+  #####
+###   #
+#   # ##
+#   $  #
+###$*. #
+  # .###
+  # @#
+  ####
+
+; Source level: LOMA07-02
+; Author: Aymeric du Peloux
+########
+#   #  #
+#      #
+## ### ##
+ # $@#  #
+ #$*.   #
+ # .#####
+ #  #
+ #  #
+ ####
+
+; Source level: LOMA07-03
+; Author: Sven Egevad
+####
+#  ####
+#     #
+#     #
+### ####
+ #@$#  #
+ #$*.  #
+## .#  #
+#  ## ##
+#     #
+####  #
+   ####
+
+; Source level: LOMA07-04
+; Author: Victor Kindermans
+#####
+#   #######
+# # ##    #
+#     $   #
+#####$*.###
+    #@. #
+    #####
+
+; Source level: LOMA07-05
+; Author: Michael Steins
+  ####
+  #  #
+  #  #
+  #  #
+### $##
+#  $*.#
+#  @.#
+#####
+
+; Source level: LOMA07-06
+; Author: David W Skinner
+#####
+#   ##
+#  $ ##
+##$*. ##
+ # .@  #
+ #  #  #
+#####  #
+##  ####
+
+; Source level: LOMA08-01
+; Author: François Marques
+   ####
+   #  #
+####  #
+#   * #
+#  . $###
+####* @ #
+   #    #
+   ######
+
+; Source level: LOMA08-02
+; Author: Aymeric du Peloux
+  ####
+  #  #
+  #  #
+ ##* ###
+##. $  #
+#  * # #
+# # @# #
+#  ##  #
+##    ##
+ ######
+
+; Source level: LOMA08-03
+; Author: Sven Egevad
+#########
+#   #   ####
+#   @*  #  ###
+####.#$#     #
+  #  *     # #
+  #  #####   #
+  #  #   #####
+  ####
+
+; Source level: LOMA08-04
+; Author: Victor Kindermans
+    ####
+ ####  #
+ #     #
+ #  ## ##
+ ## # * #
+  # #.@$#
+### ##* ####
+#          #
+#   ####   #
+#####  #####
+
+; Source level: LOMA08-05
+; Author: Michael Steins
+ ####
+ #  #####
+ #  #   #
+ #  *   #
+###.#$###
+#   *@ #
+#   #  #
+#####  #
+    ####
+
+; Source level: LOMA08-06
+; Author: David W Skinner
+  #####
+ ##   #
+###   #
+#  * ##
+# .@$##
+#  * ##
+##  ##
+#####
+
+; Source level: LOMA09-01
+; Author: François Marques
+  #####
+  #   #
+ #    #
+##$*@##
+# *.#
+#    #
+###  #
+  #  #
+  ####
+
+; Source level: LOMA09-02
+; Author: Aymeric du Peloux
+ #####
+ #   ####
+## # #@ #
+#    #$*#
+# #   *.##
+#   ##   #
+#####  # #
+    # #  #
+    #   ##
+    #####
+
+; Source level: LOMA09-03
+; Author: Sven Egevad
+   ####
+  ##  #
+  #   #
+ ##$* #
+ # *.##
+## #  #
+#     #
+#    ##
+#  @##
+#####
+
+; Source level: LOMA09-04
+; Author: Victor Kindermans
+####
+#  ####
+#     #
+# @#  #
+#    ##
+###$*##
+ # *. #
+ #    #
+ ###  #
+   ####
+
+; Source level: LOMA09-05
+; Author: Michael Steins
+     ####
+######  #
+#   ##  #
+#       #
+#####$*##
+#    *.#
+#   #@ #
+########
+
+; Source level: LOMA09-06
+; Author: David W Skinner
+  ####
+  #  #
+###  ###
+## $*  #
+#  *. @#
+#   ####
+#  ##
+#####
+
+; Source level: LOMA10-01
+; Author: David W Skinner
+#### ###
+#@ ### #
+# $$ ###
+# $ .  #
+## ..  #
+ #######
+
+; Source level: LOMA10-02
+; Author: François Marques
+######
+# @  #
+#  $$##
+###$ .#
+  # ..#
+  ##  #
+   #  #
+   ####
+
+; Source level: LOMA10-03
+; Author: Aymeric du Peloux
+ ########
+##  #   ##
+#   $$#  #
+#  #$@.# #
+## # ..  #
+#    #  ##
+#   ##  #
+#########
+
+; Source level: LOMA10-04
+; Author: Sven Egevad
+  ####
+  #  #
+  #  #
+###  #
+# $$##
+# $ .#
+# #..#
+# @  #
+#### #
+  #  #
+  #  #
+  #  #
+  ####
+
+; Source level: LOMA10-05
+; Author: Victor Kindermans
+  ######
+  #    #
+  #    #
+  #  ###
+####$$@#
+#   $ .#
+#   #..#
+########
+
+; Source level: LOMA10-06
+; Author: Michael Steins
+    ######
+    #    ##
+##### ##  #
+#   #$$ # #
+#    $@.  #
+######.. ##
+     #####

@@ -1,0 +1,16 @@
+; Collection: Wikipedia example
+; Source: https://www.mathsisfun.com/games/a/sokoban/js/maps.js (map 1)
+; Upstream comment credits http://en.wikipedia.org/wiki/Sokoban
+; Title: Wikipedia example
+; Local adaptation: padded exterior wall border.
+##########
+##########
+####   ###
+##.@$  ###
+#### $.###
+##.##$ ###
+## # . ###
+##$ *$$.##
+##   .  ##
+##########
+##########

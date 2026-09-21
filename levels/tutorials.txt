@@ -1,0 +1,14 @@
+; Collection: Gumpjam starter puzzles
+; Author: Gumpjam project
+; Title: First push
+#####
+#@$.#
+#####
+
+; Title: Two deliveries
+#######
+#     #
+# .$@ #
+# .$  #
+#     #
+#######
