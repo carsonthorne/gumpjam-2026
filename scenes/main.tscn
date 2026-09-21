@@ -7,6 +7,57 @@
 [ext_resource type="PackedScene" path="res://scenes/target_tile.tscn" id="5_target"]
 [ext_resource type="Script" uid="uid://b7tbnujc4t6ba" path="res://scripts/level_goal.gd" id="6_goal"]
 [ext_resource type="PackedScene" path="res://scenes/chain_link_fence.tscn" id="7_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://bmjyapwu6rns5" path="res://assets/backdrops/lab_wall_north.png" id="8_north"]
+[ext_resource type="Texture2D" uid="uid://cvxvqmhhadw0d" path="res://assets/backdrops/lab_wall_bench.png" id="9_bench"]
+[ext_resource type="Texture2D" uid="uid://c8iebyx6n5as2" path="res://assets/backdrops/lab_wall_rat_cages.png" id="10_rat_cages"]
+[ext_resource type="Texture2D" uid="uid://dod6itsmrlppv" path="res://assets/backdrops/lab_wall_door.png" id="11_door"]
+
+[sub_resource type="Environment" id="Environment_lab"]
+background_mode = 1
+background_color = Color(0.15, 0.17, 0.18, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.6, 0.68, 0.74, 1)
+ambient_light_energy = 0.18
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lab_north"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("8_north")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_lab_north"]
+material = SubResource("StandardMaterial3D_lab_north")
+size = Vector2(52, 29.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lab_bench"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("9_bench")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_lab_bench"]
+material = SubResource("StandardMaterial3D_lab_bench")
+size = Vector2(52, 29.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lab_rat_cages"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("10_rat_cages")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_lab_rat_cages"]
+material = SubResource("StandardMaterial3D_lab_rat_cages")
+size = Vector2(52, 29.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lab_door"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("11_door")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_lab_door"]
+material = SubResource("StandardMaterial3D_lab_door")
+size = Vector2(52, 29.25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hqe12"]
 size = Vector3(60, 2, 60)
@@ -23,6 +74,27 @@ material = SubResource("ShaderMaterial_checker")
 size = Vector3(60, 2, 60)
 
 [node name="Main" type="Node" unique_id=834489795]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2125649121]
+environment = SubResource("Environment_lab")
+
+[node name="LabBackdrop" type="Node3D" parent="." unique_id=1409009789]
+
+[node name="NorthLabWall" type="MeshInstance3D" parent="LabBackdrop" unique_id=1485208912]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, -26)
+mesh = SubResource("QuadMesh_lab_north")
+
+[node name="EastBenchWall" type="MeshInstance3D" parent="LabBackdrop" unique_id=1460012059]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 26, 7.5, 0)
+mesh = SubResource("QuadMesh_lab_bench")
+
+[node name="SouthRatCageWall" type="MeshInstance3D" parent="LabBackdrop" unique_id=562605996]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 7.5, 26)
+mesh = SubResource("QuadMesh_lab_rat_cages")
+
+[node name="WestDoorWall" type="MeshInstance3D" parent="LabBackdrop" unique_id=877216840]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -26, 7.5, 0)
+mesh = SubResource("QuadMesh_lab_door")
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=171184494]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

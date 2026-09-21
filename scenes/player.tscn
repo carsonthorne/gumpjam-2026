@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dxtu1610kaksb" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="PackedScene" uid="uid://dhddplnkpdqjl" path="res://scenes/character_model.tscn" id="2_d2wvv"]
-[ext_resource type="Script" path="res://scripts/camera_orbit.gd" id="2_g2els"]
+[ext_resource type="Script" uid="uid://db6ygdc2gtww3" path="res://scripts/camera_orbit.gd" id="2_g2els"]
 [ext_resource type="Script" uid="uid://jysp2jfgrx56" path="res://scripts/camera_follow.gd" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://ch16tcdy8uxum" path="res://StateMachine/PlayerStateMachine/player_state_machine.gd" id="4_y4r1p"]
 [ext_resource type="Script" uid="uid://bhdm5bilaxa5j" path="res://StateMachine/PlayerStateMachine/States/idle.gd" id="5_d2wvv"]
@@ -48,7 +48,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6825025, 0)
 shape = SubResource("CapsuleShape3D_hqe12")
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=1263533875]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8954823, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 script = ExtResource("2_g2els")
 min_vertical_angle = -0.5235987755982988
 max_vertical_angle = -0.5235987755982988
