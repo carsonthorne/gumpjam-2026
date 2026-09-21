@@ -31,14 +31,14 @@ func _physics_process(_delta: float) -> void:
 		if is_centered and not active_blocks.has(block):
 			active_blocks[block] = true
 			_update_beam_visibility()
-			if should_log_events:
-				Log.print("%s entered %s" % [block.name, name])
+			#if should_log_events:
+				#Log.print("%s entered %s" % [block.name, name])
 			block_entered_target.emit(block)
 		elif not is_centered and active_blocks.has(block):
 			active_blocks.erase(block)
 			_update_beam_visibility()
-			if should_log_events:
-				Log.print("%s exited %s" % [block.name, name])
+			#if should_log_events:
+				#Log.print("%s exited %s" % [block.name, name])
 			block_exited_target.emit(block)
 
 func _on_body_entered(body: Node3D) -> void:

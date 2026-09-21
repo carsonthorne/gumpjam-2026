@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://6jr6jba0fvjh"]
+
+[ext_resource type="Script" uid="uid://c1cf3y1mp0e4l" path="res://scripts/immovable_block.gd" id="1_3wr2l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wr2l"]
+albedo_color = Color(0.36, 0.39, 0.38, 1)
+metallic = 0.65
+roughness = 0.58
+
+[sub_resource type="BoxMesh" id="BoxMesh_3wr2l"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_3wr2l")
+size = Vector3(1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3wr2l"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_front"]
+size = Vector3(0.5087890666666667, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_side"]
+size = Vector3(1, 1, 0.50146484)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_back"]
+size = Vector3(0.5089111333333333, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_left"]
+size = Vector3(1, 1, 0.515625)
+
+[node name="immovable_block" type="Node3D"]
+
+[node name="RigidBody3D" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_3wr2l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_3wr2l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_3wr2l")
+
+[node name="PushZones" type="Node3D" parent="RigidBody3D"]
+
+[node name="FrontZone" type="Area3D" parent="RigidBody3D/PushZones"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/PushZones/FrontZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+shape = SubResource("BoxShape3D_front")
+
+[node name="RightZone" type="Area3D" parent="RigidBody3D/PushZones"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/PushZones/RightZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_side")
+
+[node name="BackZone" type="Area3D" parent="RigidBody3D/PushZones"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/PushZones/BackZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+shape = SubResource("BoxShape3D_back")
+
+[node name="LeftZone" type="Area3D" parent="RigidBody3D/PushZones"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/PushZones/LeftZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+shape = SubResource("BoxShape3D_left")
