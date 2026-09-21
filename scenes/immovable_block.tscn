@@ -10,57 +10,56 @@ roughness = 0.58
 [sub_resource type="BoxMesh" id="BoxMesh_3wr2l"]
 lightmap_size_hint = Vector2i(14, 21)
 material = SubResource("StandardMaterial3D_3wr2l")
-size = Vector3(1, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3wr2l"]
-size = Vector3(1, 1, 1)
+size = Vector3(0.9, 0.9, 0.9)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_front"]
-size = Vector3(0.5087890666666667, 1, 1)
+size = Vector3(0.50878906, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_side"]
 size = Vector3(1, 1, 0.50146484)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_back"]
-size = Vector3(0.5089111333333333, 1, 1)
+size = Vector3(0.50891113, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_left"]
 size = Vector3(1, 1, 0.515625)
 
-[node name="immovable_block" type="Node3D"]
+[node name="immovable_block" type="Node3D" unique_id=883825830]
 
-[node name="RigidBody3D" type="AnimatableBody3D" parent="."]
+[node name="RigidBody3D" type="AnimatableBody3D" parent="." unique_id=1556095187]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_3wr2l")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1353886306]
 mesh = SubResource("BoxMesh_3wr2l")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=268695817]
 shape = SubResource("BoxShape3D_3wr2l")
 
-[node name="PushZones" type="Node3D" parent="RigidBody3D"]
+[node name="PushZones" type="Node3D" parent="RigidBody3D" unique_id=241758933]
 
-[node name="FrontZone" type="Area3D" parent="RigidBody3D/PushZones"]
+[node name="FrontZone" type="Area3D" parent="RigidBody3D/PushZones" unique_id=1906977022]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/PushZones/FrontZone"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/PushZones/FrontZone" unique_id=1090146485]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 shape = SubResource("BoxShape3D_front")
 
-[node name="RightZone" type="Area3D" parent="RigidBody3D/PushZones"]
+[node name="RightZone" type="Area3D" parent="RigidBody3D/PushZones" unique_id=1857490005]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/PushZones/RightZone"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/PushZones/RightZone" unique_id=345688388]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 shape = SubResource("BoxShape3D_side")
 
-[node name="BackZone" type="Area3D" parent="RigidBody3D/PushZones"]
+[node name="BackZone" type="Area3D" parent="RigidBody3D/PushZones" unique_id=1867797504]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/PushZones/BackZone"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/PushZones/BackZone" unique_id=413179287]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 shape = SubResource("BoxShape3D_back")
 
-[node name="LeftZone" type="Area3D" parent="RigidBody3D/PushZones"]
+[node name="LeftZone" type="Area3D" parent="RigidBody3D/PushZones" unique_id=1272353429]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/PushZones/LeftZone"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/PushZones/LeftZone" unique_id=166695936]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 shape = SubResource("BoxShape3D_left")

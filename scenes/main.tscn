@@ -110,6 +110,7 @@ mesh = SubResource("BoxMesh_hqe12")
 [node name="Player" parent="." unique_id=160821695 instance=ExtResource("1_o5qli")]
 
 [node name="DebugOutput" parent="." unique_id=1404036416 instance=ExtResource("2_0wfyh")]
+visible = false
 
 [node name="LevelGoal" type="Node" parent="." unique_id=1739967491]
 script = ExtResource("6_goal")
