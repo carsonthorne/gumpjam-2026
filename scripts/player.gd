@@ -41,6 +41,14 @@ var push_follow_distance_left := 0.0
 var push_follow_speed := 0.0
 var push_follow_distance := 0.0
 var push_follow_source: Node = null
+var is_run_toggled := false
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("run") and not event.is_echo():
+		is_run_toggled = not is_run_toggled
+
+func wants_to_run() -> bool:
+	return is_run_toggled
 
 func is_push_ready_active(source: Node = null) -> bool:
 	_clear_invalid_push_sources()

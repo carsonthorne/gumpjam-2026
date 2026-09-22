@@ -16,7 +16,7 @@ func _update(delta: float) -> void:
 	calculate_velocity(SPEED, direction, delta)
 	
 	if direction != Vector3.ZERO:
-		if Input.is_action_pressed("run"):
+		if owner.wants_to_run():
 			finished.emit("Run")
 		else:
 			finished.emit("Walk")

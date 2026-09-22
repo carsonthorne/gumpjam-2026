@@ -4,12 +4,19 @@ var target_tiles: Array[Node] = []
 var is_level_completed := false
 
 func _ready() -> void:
+	refresh_targets()
+
+func refresh_targets() -> void:
 	target_tiles = get_tree().get_nodes_in_group("target_tile")
 	for target_tile in target_tiles:
 		if target_tile.has_signal("block_entered_target"):
-			target_tile.block_entered_target.connect(_on_target_tile_changed.unbind(1))
+			var entered := _on_target_tile_changed.unbind(1)
+			if not target_tile.block_entered_target.is_connected(entered):
+				target_tile.block_entered_target.connect(entered)
 		if target_tile.has_signal("block_exited_target"):
-			target_tile.block_exited_target.connect(_on_target_tile_changed.unbind(1))
+			var exited := _on_target_tile_changed.unbind(1)
+			if not target_tile.block_exited_target.is_connected(exited):
+				target_tile.block_exited_target.connect(exited)
 
 	_check_level_completed()
 
