@@ -48,7 +48,7 @@ func _input(event: InputEvent) -> void:
 		is_run_toggled = not is_run_toggled
 
 func wants_to_run() -> bool:
-	return is_run_toggled
+	return is_run_toggled or Input.is_action_pressed("run_hold")
 
 func is_push_ready_active(source: Node = null) -> bool:
 	_clear_invalid_push_sources()

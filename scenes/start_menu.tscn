@@ -1,0 +1,112 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/start_menu.gd" id="1_start_menu"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_start_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.1, 0.11, 1)
+
+[node name="Shell" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 44
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 44
+
+[node name="Content" type="VBoxContainer" parent="Shell"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TitleLabel" type="Label" parent="Shell/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Gumpjam 2026"
+horizontal_alignment = 1
+
+[node name="DetailLabel" type="Label" parent="Shell/Content"]
+layout_mode = 2
+text = "Start a puzzle or review the controls."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MainPanel" type="VBoxContainer" parent="Shell/Content"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+
+[node name="LevelSelectButton" type="Button" parent="Shell/Content/MainPanel"]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+text = "Level Select"
+
+[node name="InstructionsButton" type="Button" parent="Shell/Content/MainPanel"]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+text = "Instructions"
+
+[node name="LevelSelectPanel" type="VBoxContainer" parent="Shell/Content"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="TopBar" type="HBoxContainer" parent="Shell/Content/LevelSelectPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BackButton" type="Button" parent="Shell/Content/LevelSelectPanel/TopBar"]
+layout_mode = 2
+text = "Back"
+
+[node name="CollectionSelect" type="OptionButton" parent="Shell/Content/LevelSelectPanel/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LevelScroll" type="ScrollContainer" parent="Shell/Content/LevelSelectPanel"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LevelGrid" type="GridContainer" parent="Shell/Content/LevelSelectPanel/LevelScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 8
+
+[node name="GoButton" type="Button" parent="Shell/Content/LevelSelectPanel"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+disabled = true
+text = "Go"
+
+[node name="InstructionsPanel" type="VBoxContainer" parent="Shell/Content"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BackButton" type="Button" parent="Shell/Content/InstructionsPanel"]
+layout_mode = 2
+text = "Back"
+
+[node name="InstructionsText" type="Label" parent="Shell/Content/InstructionsPanel"]
+layout_mode = 2
+text = "Move with WASD. Rotate the camera with the left and right arrow keys. Press Tab to toggle running. Press E or Space to interact and push blocks. Push every block onto a red target to clear the level."
+autowrap_mode = 2

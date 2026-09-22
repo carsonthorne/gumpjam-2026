@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dod6itsmrlppv" path="res://assets/backdrops/lab_wall_door.png" id="11_door"]
 [ext_resource type="Script" uid="uid://damt8jh4jgd66" path="res://addons/sokoban_layout/level_layout.gd" id="11_muem4"]
 [ext_resource type="Script" uid="uid://1c4kvhg13fwq" path="res://scripts/dev_level_menu.gd" id="12_dev_menu"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="13_main"]
 
 [sub_resource type="Environment" id="Environment_lab"]
 background_mode = 1
@@ -77,6 +78,7 @@ material = SubResource("ShaderMaterial_checker")
 size = Vector3(60, 2, 60)
 
 [node name="Main" type="Node" unique_id=834489795]
+script = ExtResource("13_main")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2125649121]
 environment = SubResource("Environment_lab")
