@@ -1,8 +1,9 @@
 # Puzzle collection sources
 
-Downloaded 2026-09-21. These nine files add 741 puzzle entries (744 including the
-existing example and tutorials). Collections can overlap: Microban III includes
-some of Skinner's LOMA contributions. This is not a count of unique puzzles.
+Downloaded 2026-09-21 and updated 2026-09-22. These ten files add 801 puzzle
+entries (803 including the tutorials). Collections can overlap: Microban III
+includes some of Skinner's LOMA contributions. This is not a count of unique
+puzzles.
 
 ## David W. Skinner: Microban I–IV and Sasquatch I–IV
 
@@ -41,6 +42,16 @@ not the later 137-level edition described on the curator's site.
 The curator explicitly permits free publication without requesting permission.
 The XML level IDs, authors, and board rows were retained in the text conversion.
 
+## Math Is Fun Sokoban
+
+The 60-map JavaScript collection from Math Is Fun's Sokoban game was converted
+from numeric tile arrays to the plugin's text format. The first source map is
+commented as coming from the Wikipedia Sokoban page.
+
+- [Playable game](https://www.mathsisfun.com/games/sokoban.html)
+- [Source map data](https://www.mathsisfun.com/games/a/sokoban/js/maps.js)
+- [Local collection: 60 puzzles](wikipedia.txt)
+
 ## Conversion and compatibility
 
 Boards retain their original orientation, spacing, and tile contents. Line endings
@@ -61,7 +72,7 @@ original puzzles; omission does not mean the original puzzle is invalid.
 - **sasquatch_iii.txt:** 36 (disconnected crate/target area).
 - **sasquatch_iv.txt:** 25 (disconnected crate/target area).
 
-All 744 local puzzle entries were checked using `map_reader.gd` in Godot 4.7.2:
-valid symbols, one player, matching crate/target counts, enclosure, connected
-crate/target area, and size at most 40×40. This checks import compatibility, not
-solvability or a full manual playthrough of every puzzle.
+The Math Is Fun conversion was checked for import compatibility: valid symbols,
+one player, matching crate/target counts, enclosure, connected crate/target area,
+and size at most 40×40. This checks structure, not solvability or a full manual
+playthrough of every puzzle.

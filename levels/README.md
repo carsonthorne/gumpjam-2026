@@ -10,8 +10,9 @@ there once.
 4. Save the scene. The generated walls, crates, targets, and cage are normal scene
    instances. Ctrl/Cmd-Z restores the previous layout and player position.
 
-`wikipedia.txt` contains the requested first map. `tutorials.txt` contains two small
-project-authored practice maps, useful for trying the level selector.
+`wikipedia.txt` contains the 60 classic maps from Math Is Fun's Sokoban game.
+`tutorials.txt` contains two small project-authored practice maps, useful for
+trying the level selector.
 
 ## Included puzzle corpus
 
@@ -28,10 +29,12 @@ Choose one of these files in **LevelLayout → Collection**, then set **Level Nu
 | Sasquatch III | `sasquatch_iii.txt` | 49 |
 | Sasquatch IV | `sasquatch_iv.txt` | 49 |
 | LOMA (2010 mirror edition) | `loma.txt` | 60 |
+| Math Is Fun Sokoban | `wikipedia.txt` | 60 |
 
 Start with Microban I for small introductory puzzles; Sasquatch provides more
-variety and larger boards. These add **741 puzzle entries**, with some overlap
-between collections. See [sources, credits, and omitted puzzles](SOURCES.md).
+variety and larger boards. These add **801 puzzle entries** beyond the two
+project-authored tutorials, with some overlap between collections. See
+[sources, credits, and omitted puzzles](SOURCES.md).
 
 
 Build replaces only `LevelLayout/Generated` and repositions the Player Path node.
@@ -65,9 +68,10 @@ boards up to 40×40, and an origin within one unit of world X/Z zero. This keeps
 automatically sized cage inside the backdrop and ground. Crate skins are applied
 by the existing runtime scripts; the editor retains their original preview mesh.
 
-The Wikipedia example was transcribed from map 1 at
-https://www.mathsisfun.com/games/a/sokoban/js/maps.js, whose comment identifies the
-Wikipedia Sokoban page as its source. No broader collection license is asserted.
+The Math Is Fun collection was transcribed from
+https://www.mathsisfun.com/games/a/sokoban/js/maps.js. Its first map's upstream
+comment identifies the Wikipedia Sokoban page as its source. No broader
+collection license is asserted.
 
 ## Checks
 
