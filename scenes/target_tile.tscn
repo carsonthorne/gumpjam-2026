@@ -13,7 +13,7 @@ shader = ExtResource("2_beam_shader")
 shader_parameter/beam_color = Color(1, 0.05, 0.03, 1)
 shader_parameter/bottom_alpha = 0.42
 shader_parameter/top_alpha = 0.0
-shader_parameter/beam_height = 3.0
+shader_parameter/beam_height = 1.5
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_marker"]
 material = SubResource("StandardMaterial3D_marker")
@@ -27,7 +27,7 @@ rings = 1
 material = SubResource("ShaderMaterial_beam")
 top_radius = 0.34
 bottom_radius = 0.34
-height = 3.0
+height = 1.5
 radial_segments = 48
 rings = 8
 
@@ -43,7 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011, 0)
 mesh = SubResource("CylinderMesh_marker")
 
 [node name="Beam" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 mesh = SubResource("CylinderMesh_beam")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

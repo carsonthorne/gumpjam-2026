@@ -33,7 +33,7 @@ static func build(map: Dictionary) -> Node3D:
 	var center := cell_position(Vector2i.ZERO, map) + Vector3((map.width - 1) / 2.0, 0, (map.height - 1) / 2.0)
 	var half_x := ceilf((map.width + 2) / 4.0) * 2.0
 	var half_z := ceilf((map.height + 2) / 4.0) * 2.0
-	for height in [0.0, 3.0]:
+	for height in [0.0, 3.0, 6.0]:
 		for side in [-1, 1]:
 			for segment in int(half_x / 2):
 				_instance(FENCE, cage, "Fence", center + Vector3(-half_x + 2 + segment * 4, height, side * half_z))

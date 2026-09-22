@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c8iebyx6n5as2" path="res://assets/backdrops/lab_wall_rat_cages.png" id="10_rat_cages"]
 [ext_resource type="Texture2D" uid="uid://dod6itsmrlppv" path="res://assets/backdrops/lab_wall_door.png" id="11_door"]
 [ext_resource type="Script" uid="uid://damt8jh4jgd66" path="res://addons/sokoban_layout/level_layout.gd" id="11_muem4"]
-[ext_resource type="Script" path="res://scripts/dev_level_menu.gd" id="12_dev_menu"]
+[ext_resource type="Script" uid="uid://1c4kvhg13fwq" path="res://scripts/dev_level_menu.gd" id="12_dev_menu"]
 
 [sub_resource type="Environment" id="Environment_lab"]
 background_mode = 1
@@ -110,7 +110,7 @@ shape = SubResource("BoxShape3D_hqe12")
 mesh = SubResource("BoxMesh_hqe12")
 
 [node name="Player" parent="." unique_id=160821695 instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
 
 [node name="DebugOutput" parent="." unique_id=1404036416 instance=ExtResource("2_0wfyh")]
 
@@ -149,1350 +149,436 @@ omni_range = 40.0
 
 [node name="LevelLayout" type="Node3D" parent="." unique_id=1984710508]
 script = ExtResource("11_muem4")
-level_number = 60
 
-[node name="Generated" type="Node3D" parent="LevelLayout" unique_id=2107707389]
+[node name="Generated" type="Node3D" parent="LevelLayout" unique_id=1888083482]
 
-[node name="Walls" type="Node3D" parent="LevelLayout/Generated" unique_id=1401169937]
+[node name="Walls" type="Node3D" parent="LevelLayout/Generated" unique_id=1678111605]
 
 [node name="Wall_0_0" parent="LevelLayout/Generated/Walls" unique_id=883825830 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -11)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
 
-[node name="Wall_1_0" parent="LevelLayout/Generated/Walls" unique_id=958234783 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -11)
+[node name="Wall_1_0" parent="LevelLayout/Generated/Walls" unique_id=1542027200 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5)
 
-[node name="Wall_2_0" parent="LevelLayout/Generated/Walls" unique_id=846474548 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -11)
+[node name="Wall_2_0" parent="LevelLayout/Generated/Walls" unique_id=177309224 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -5)
 
-[node name="Wall_3_0" parent="LevelLayout/Generated/Walls" unique_id=1136096225 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -11)
+[node name="Wall_3_0" parent="LevelLayout/Generated/Walls" unique_id=1095764552 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -5)
 
-[node name="Wall_4_0" parent="LevelLayout/Generated/Walls" unique_id=932039897 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -11)
+[node name="Wall_4_0" parent="LevelLayout/Generated/Walls" unique_id=1887865084 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5)
 
-[node name="Wall_5_0" parent="LevelLayout/Generated/Walls" unique_id=1127741735 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -11)
-
-[node name="Wall_6_0" parent="LevelLayout/Generated/Walls" unique_id=1331588878 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -11)
-
-[node name="Wall_7_0" parent="LevelLayout/Generated/Walls" unique_id=835937820 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -11)
-
-[node name="Wall_8_0" parent="LevelLayout/Generated/Walls" unique_id=1504145832 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -11)
-
-[node name="Wall_9_0" parent="LevelLayout/Generated/Walls" unique_id=669747884 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -11)
-
-[node name="Wall_10_0" parent="LevelLayout/Generated/Walls" unique_id=606475361 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -11)
-
-[node name="Wall_11_0" parent="LevelLayout/Generated/Walls" unique_id=1409081317 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -11)
-
-[node name="Wall_12_0" parent="LevelLayout/Generated/Walls" unique_id=757859039 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -11)
-
-[node name="Wall_13_0" parent="LevelLayout/Generated/Walls" unique_id=1478489533 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -11)
-
-[node name="Wall_14_0" parent="LevelLayout/Generated/Walls" unique_id=1092272794 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -11)
-
-[node name="Wall_15_0" parent="LevelLayout/Generated/Walls" unique_id=1954809101 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
-
-[node name="Wall_16_0" parent="LevelLayout/Generated/Walls" unique_id=1012796774 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -11)
-
-[node name="Wall_17_0" parent="LevelLayout/Generated/Walls" unique_id=75652217 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -11)
-
-[node name="Wall_18_0" parent="LevelLayout/Generated/Walls" unique_id=1553625432 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -11)
-
-[node name="Wall_19_0" parent="LevelLayout/Generated/Walls" unique_id=622448777 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -11)
-
-[node name="Wall_20_0" parent="LevelLayout/Generated/Walls" unique_id=878830146 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -11)
-
-[node name="Wall_21_0" parent="LevelLayout/Generated/Walls" unique_id=499184347 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -11)
-
-[node name="Wall_22_0" parent="LevelLayout/Generated/Walls" unique_id=2067407567 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -11)
-
-[node name="Wall_23_0" parent="LevelLayout/Generated/Walls" unique_id=302415978 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -11)
-
-[node name="Wall_24_0" parent="LevelLayout/Generated/Walls" unique_id=350978259 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -11)
-
-[node name="Wall_25_0" parent="LevelLayout/Generated/Walls" unique_id=981844573 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -11)
-
-[node name="Wall_26_0" parent="LevelLayout/Generated/Walls" unique_id=1724836041 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -11)
-
-[node name="Wall_27_0" parent="LevelLayout/Generated/Walls" unique_id=1494807212 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -11)
-
-[node name="Wall_28_0" parent="LevelLayout/Generated/Walls" unique_id=1728198573 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -11)
-
-[node name="Wall_29_0" parent="LevelLayout/Generated/Walls" unique_id=641639988 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -11)
-
-[node name="Wall_30_0" parent="LevelLayout/Generated/Walls" unique_id=1175985470 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -11)
-
-[node name="Wall_0_1" parent="LevelLayout/Generated/Walls" unique_id=617267587 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -10)
-
-[node name="Wall_10_1" parent="LevelLayout/Generated/Walls" unique_id=508502315 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -10)
-
-[node name="Wall_11_1" parent="LevelLayout/Generated/Walls" unique_id=276858727 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -10)
-
-[node name="Wall_12_1" parent="LevelLayout/Generated/Walls" unique_id=840926558 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -10)
-
-[node name="Wall_13_1" parent="LevelLayout/Generated/Walls" unique_id=379243791 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -10)
-
-[node name="Wall_30_1" parent="LevelLayout/Generated/Walls" unique_id=1924176039 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -10)
-
-[node name="Wall_0_2" parent="LevelLayout/Generated/Walls" unique_id=776265400 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -9)
-
-[node name="Wall_10_2" parent="LevelLayout/Generated/Walls" unique_id=1613176948 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -9)
-
-[node name="Wall_13_2" parent="LevelLayout/Generated/Walls" unique_id=1469565474 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -9)
-
-[node name="Wall_30_2" parent="LevelLayout/Generated/Walls" unique_id=798062157 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -9)
-
-[node name="Wall_0_3" parent="LevelLayout/Generated/Walls" unique_id=703359784 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -8)
-
-[node name="Wall_10_3" parent="LevelLayout/Generated/Walls" unique_id=1470809157 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -8)
-
-[node name="Wall_13_3" parent="LevelLayout/Generated/Walls" unique_id=2111203266 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -8)
-
-[node name="Wall_14_3" parent="LevelLayout/Generated/Walls" unique_id=494497324 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -8)
-
-[node name="Wall_15_3" parent="LevelLayout/Generated/Walls" unique_id=1821244019 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
-
-[node name="Wall_16_3" parent="LevelLayout/Generated/Walls" unique_id=836562094 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -8)
-
-[node name="Wall_17_3" parent="LevelLayout/Generated/Walls" unique_id=1303284853 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
-
-[node name="Wall_18_3" parent="LevelLayout/Generated/Walls" unique_id=2091289184 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -8)
-
-[node name="Wall_19_3" parent="LevelLayout/Generated/Walls" unique_id=627163257 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
-
-[node name="Wall_20_3" parent="LevelLayout/Generated/Walls" unique_id=1754640699 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -8)
-
-[node name="Wall_30_3" parent="LevelLayout/Generated/Walls" unique_id=843150567 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -8)
-
-[node name="Wall_0_4" parent="LevelLayout/Generated/Walls" unique_id=1000632666 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -7)
-
-[node name="Wall_4_4" parent="LevelLayout/Generated/Walls" unique_id=2058970357 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -7)
-
-[node name="Wall_5_4" parent="LevelLayout/Generated/Walls" unique_id=1408374969 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -7)
-
-[node name="Wall_6_4" parent="LevelLayout/Generated/Walls" unique_id=117768321 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -7)
-
-[node name="Wall_7_4" parent="LevelLayout/Generated/Walls" unique_id=225374328 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -7)
-
-[node name="Wall_8_4" parent="LevelLayout/Generated/Walls" unique_id=1879017512 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -7)
-
-[node name="Wall_9_4" parent="LevelLayout/Generated/Walls" unique_id=1283619772 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -7)
-
-[node name="Wall_10_4" parent="LevelLayout/Generated/Walls" unique_id=83808002 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -7)
-
-[node name="Wall_13_4" parent="LevelLayout/Generated/Walls" unique_id=1283295204 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -7)
-
-[node name="Wall_20_4" parent="LevelLayout/Generated/Walls" unique_id=1098955850 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -7)
-
-[node name="Wall_30_4" parent="LevelLayout/Generated/Walls" unique_id=494035541 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -7)
-
-[node name="Wall_0_5" parent="LevelLayout/Generated/Walls" unique_id=1764705331 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -6)
-
-[node name="Wall_4_5" parent="LevelLayout/Generated/Walls" unique_id=136669461 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -6)
-
-[node name="Wall_8_5" parent="LevelLayout/Generated/Walls" unique_id=1425595889 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -6)
-
-[node name="Wall_10_5" parent="LevelLayout/Generated/Walls" unique_id=278676239 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -6)
-
-[node name="Wall_12_5" parent="LevelLayout/Generated/Walls" unique_id=56429330 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -6)
-
-[node name="Wall_14_5" parent="LevelLayout/Generated/Walls" unique_id=109824165 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -6)
-
-[node name="Wall_16_5" parent="LevelLayout/Generated/Walls" unique_id=1914307232 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -6)
-
-[node name="Wall_20_5" parent="LevelLayout/Generated/Walls" unique_id=715517485 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -6)
-
-[node name="Wall_21_5" parent="LevelLayout/Generated/Walls" unique_id=1154932302 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
-
-[node name="Wall_30_5" parent="LevelLayout/Generated/Walls" unique_id=1529808390 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -6)
-
-[node name="Wall_0_6" parent="LevelLayout/Generated/Walls" unique_id=1945877286 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -5)
-
-[node name="Wall_4_6" parent="LevelLayout/Generated/Walls" unique_id=491052254 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -5)
-
-[node name="Wall_15_6" parent="LevelLayout/Generated/Walls" unique_id=281340712 instance=ExtResource("5_eb6dy")]
+[node name="Wall_5_0" parent="LevelLayout/Generated/Walls" unique_id=484886338 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 
-[node name="Wall_16_6" parent="LevelLayout/Generated/Walls" unique_id=201254560 instance=ExtResource("5_eb6dy")]
+[node name="Wall_6_0" parent="LevelLayout/Generated/Walls" unique_id=666086550 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5)
 
-[node name="Wall_21_6" parent="LevelLayout/Generated/Walls" unique_id=180216438 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -5)
+[node name="Wall_7_0" parent="LevelLayout/Generated/Walls" unique_id=1160781 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5)
 
-[node name="Wall_30_6" parent="LevelLayout/Generated/Walls" unique_id=1101731978 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -5)
+[node name="Wall_8_0" parent="LevelLayout/Generated/Walls" unique_id=790911702 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -5)
 
-[node name="Wall_0_7" parent="LevelLayout/Generated/Walls" unique_id=1570129494 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -4)
+[node name="Wall_9_0" parent="LevelLayout/Generated/Walls" unique_id=446369396 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5)
 
-[node name="Wall_3_7" parent="LevelLayout/Generated/Walls" unique_id=1719173835 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -4)
-
-[node name="Wall_4_7" parent="LevelLayout/Generated/Walls" unique_id=869807491 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -4)
-
-[node name="Wall_5_7" parent="LevelLayout/Generated/Walls" unique_id=527873871 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -4)
-
-[node name="Wall_8_7" parent="LevelLayout/Generated/Walls" unique_id=187837870 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -4)
-
-[node name="Wall_10_7" parent="LevelLayout/Generated/Walls" unique_id=1038691134 instance=ExtResource("5_eb6dy")]
+[node name="Wall_0_1" parent="LevelLayout/Generated/Walls" unique_id=9758365 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4)
 
-[node name="Wall_13_7" parent="LevelLayout/Generated/Walls" unique_id=110773422 instance=ExtResource("5_eb6dy")]
+[node name="Wall_1_1" parent="LevelLayout/Generated/Walls" unique_id=1088575261 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+
+[node name="Wall_2_1" parent="LevelLayout/Generated/Walls" unique_id=1719520774 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -4)
+
+[node name="Wall_3_1" parent="LevelLayout/Generated/Walls" unique_id=672492532 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
 
-[node name="Wall_15_7" parent="LevelLayout/Generated/Walls" unique_id=1710491822 instance=ExtResource("5_eb6dy")]
+[node name="Wall_4_1" parent="LevelLayout/Generated/Walls" unique_id=788120531 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4)
+
+[node name="Wall_5_1" parent="LevelLayout/Generated/Walls" unique_id=96575572 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
-[node name="Wall_21_7" parent="LevelLayout/Generated/Walls" unique_id=1237527708 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
+[node name="Wall_6_1" parent="LevelLayout/Generated/Walls" unique_id=880641461 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
 
-[node name="Wall_22_7" parent="LevelLayout/Generated/Walls" unique_id=1300796888 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -4)
+[node name="Wall_7_1" parent="LevelLayout/Generated/Walls" unique_id=570597316 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
 
-[node name="Wall_23_7" parent="LevelLayout/Generated/Walls" unique_id=976284304 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4)
+[node name="Wall_8_1" parent="LevelLayout/Generated/Walls" unique_id=1464727712 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4)
 
-[node name="Wall_24_7" parent="LevelLayout/Generated/Walls" unique_id=1113388793 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -4)
+[node name="Wall_9_1" parent="LevelLayout/Generated/Walls" unique_id=255435017 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
 
-[node name="Wall_25_7" parent="LevelLayout/Generated/Walls" unique_id=1223654295 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -4)
+[node name="Wall_0_2" parent="LevelLayout/Generated/Walls" unique_id=174228219 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -3)
 
-[node name="Wall_26_7" parent="LevelLayout/Generated/Walls" unique_id=1737058459 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -4)
+[node name="Wall_1_2" parent="LevelLayout/Generated/Walls" unique_id=1550388130 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -3)
 
-[node name="Wall_27_7" parent="LevelLayout/Generated/Walls" unique_id=651465589 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -4)
+[node name="Wall_2_2" parent="LevelLayout/Generated/Walls" unique_id=2054152483 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3)
 
-[node name="Wall_28_7" parent="LevelLayout/Generated/Walls" unique_id=349292755 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -4)
-
-[node name="Wall_29_7" parent="LevelLayout/Generated/Walls" unique_id=1546173297 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -4)
-
-[node name="Wall_30_7" parent="LevelLayout/Generated/Walls" unique_id=742855122 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -4)
-
-[node name="Wall_0_8" parent="LevelLayout/Generated/Walls" unique_id=2124449215 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -3)
-
-[node name="Wall_3_8" parent="LevelLayout/Generated/Walls" unique_id=1402223532 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -3)
-
-[node name="Wall_9_8" parent="LevelLayout/Generated/Walls" unique_id=1596481297 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -3)
-
-[node name="Wall_13_8" parent="LevelLayout/Generated/Walls" unique_id=100176231 instance=ExtResource("5_eb6dy")]
+[node name="Wall_3_2" parent="LevelLayout/Generated/Walls" unique_id=1250760862 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
 
-[node name="Wall_15_8" parent="LevelLayout/Generated/Walls" unique_id=1884238569 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+[node name="Wall_7_2" parent="LevelLayout/Generated/Walls" unique_id=642745709 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
 
-[node name="Wall_20_8" parent="LevelLayout/Generated/Walls" unique_id=82457869 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
+[node name="Wall_8_2" parent="LevelLayout/Generated/Walls" unique_id=127854364 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3)
 
-[node name="Wall_24_8" parent="LevelLayout/Generated/Walls" unique_id=1430001304 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -3)
+[node name="Wall_9_2" parent="LevelLayout/Generated/Walls" unique_id=349157233 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -3)
 
-[node name="Wall_26_8" parent="LevelLayout/Generated/Walls" unique_id=1712303051 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -3)
+[node name="Wall_0_3" parent="LevelLayout/Generated/Walls" unique_id=1201592882 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -2)
 
-[node name="Wall_29_8" parent="LevelLayout/Generated/Walls" unique_id=1248074950 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -3)
+[node name="Wall_1_3" parent="LevelLayout/Generated/Walls" unique_id=2089177299 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
 
-[node name="Wall_30_8" parent="LevelLayout/Generated/Walls" unique_id=47306923 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -3)
-
-[node name="Wall_0_9" parent="LevelLayout/Generated/Walls" unique_id=274779074 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -2)
-
-[node name="Wall_2_9" parent="LevelLayout/Generated/Walls" unique_id=1115483634 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -2)
-
-[node name="Wall_3_9" parent="LevelLayout/Generated/Walls" unique_id=1904534008 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -2)
-
-[node name="Wall_5_9" parent="LevelLayout/Generated/Walls" unique_id=1260003438 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -2)
-
-[node name="Wall_9_9" parent="LevelLayout/Generated/Walls" unique_id=288194231 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2)
-
-[node name="Wall_15_9" parent="LevelLayout/Generated/Walls" unique_id=533594441 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-
-[node name="Wall_16_9" parent="LevelLayout/Generated/Walls" unique_id=1698464635 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
-
-[node name="Wall_17_9" parent="LevelLayout/Generated/Walls" unique_id=460516668 instance=ExtResource("5_eb6dy")]
+[node name="Wall_7_3" parent="LevelLayout/Generated/Walls" unique_id=809377106 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 
-[node name="Wall_24_9" parent="LevelLayout/Generated/Walls" unique_id=586509048 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -2)
+[node name="Wall_8_3" parent="LevelLayout/Generated/Walls" unique_id=1767283439 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
 
-[node name="Wall_26_9" parent="LevelLayout/Generated/Walls" unique_id=1584565603 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -2)
+[node name="Wall_9_3" parent="LevelLayout/Generated/Walls" unique_id=931809812 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
 
-[node name="Wall_29_9" parent="LevelLayout/Generated/Walls" unique_id=1283031219 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -2)
-
-[node name="Wall_30_9" parent="LevelLayout/Generated/Walls" unique_id=1832092076 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -2)
-
-[node name="Wall_0_10" parent="LevelLayout/Generated/Walls" unique_id=1961146728 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -1)
-
-[node name="Wall_2_10" parent="LevelLayout/Generated/Walls" unique_id=375145722 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -1)
-
-[node name="Wall_5_10" parent="LevelLayout/Generated/Walls" unique_id=1611160630 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -1)
-
-[node name="Wall_10_10" parent="LevelLayout/Generated/Walls" unique_id=2001860410 instance=ExtResource("5_eb6dy")]
+[node name="Wall_0_4" parent="LevelLayout/Generated/Walls" unique_id=744413126 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
 
-[node name="Wall_12_10" parent="LevelLayout/Generated/Walls" unique_id=1058795558 instance=ExtResource("5_eb6dy")]
+[node name="Wall_1_4" parent="LevelLayout/Generated/Walls" unique_id=931758789 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1)
+
+[node name="Wall_2_4" parent="LevelLayout/Generated/Walls" unique_id=1264662528 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1)
 
-[node name="Wall_13_10" parent="LevelLayout/Generated/Walls" unique_id=844332398 instance=ExtResource("5_eb6dy")]
+[node name="Wall_3_4" parent="LevelLayout/Generated/Walls" unique_id=681205880 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
 
-[node name="Wall_14_10" parent="LevelLayout/Generated/Walls" unique_id=1316333842 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
-
-[node name="Wall_17_10" parent="LevelLayout/Generated/Walls" unique_id=132760915 instance=ExtResource("5_eb6dy")]
+[node name="Wall_7_4" parent="LevelLayout/Generated/Walls" unique_id=1902492909 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 
-[node name="Wall_20_10" parent="LevelLayout/Generated/Walls" unique_id=113129747 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
+[node name="Wall_8_4" parent="LevelLayout/Generated/Walls" unique_id=1282467287 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -1)
 
-[node name="Wall_24_10" parent="LevelLayout/Generated/Walls" unique_id=486347877 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -1)
+[node name="Wall_9_4" parent="LevelLayout/Generated/Walls" unique_id=992502207 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -1)
 
-[node name="Wall_26_10" parent="LevelLayout/Generated/Walls" unique_id=777231976 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -1)
+[node name="Wall_0_5" parent="LevelLayout/Generated/Walls" unique_id=720511724 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
 
-[node name="Wall_29_10" parent="LevelLayout/Generated/Walls" unique_id=1841426561 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -1)
+[node name="Wall_1_5" parent="LevelLayout/Generated/Walls" unique_id=1768647989 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 
-[node name="Wall_30_10" parent="LevelLayout/Generated/Walls" unique_id=533352312 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -1)
+[node name="Wall_3_5" parent="LevelLayout/Generated/Walls" unique_id=1245625318 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
-[node name="Wall_0_11" parent="LevelLayout/Generated/Walls" unique_id=1405873828 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
-
-[node name="Wall_2_11" parent="LevelLayout/Generated/Walls" unique_id=1162667400 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 0)
-
-[node name="Wall_8_11" parent="LevelLayout/Generated/Walls" unique_id=1827061670 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0)
-
-[node name="Wall_9_11" parent="LevelLayout/Generated/Walls" unique_id=280903040 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
-
-[node name="Wall_14_11" parent="LevelLayout/Generated/Walls" unique_id=2106628885 instance=ExtResource("5_eb6dy")]
+[node name="Wall_4_5" parent="LevelLayout/Generated/Walls" unique_id=855557359 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 
-[node name="Wall_18_11" parent="LevelLayout/Generated/Walls" unique_id=243444758 instance=ExtResource("5_eb6dy")]
+[node name="Wall_7_5" parent="LevelLayout/Generated/Walls" unique_id=134152192 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Wall_8_5" parent="LevelLayout/Generated/Walls" unique_id=776614704 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 
-[node name="Wall_19_11" parent="LevelLayout/Generated/Walls" unique_id=764897415 instance=ExtResource("5_eb6dy")]
+[node name="Wall_9_5" parent="LevelLayout/Generated/Walls" unique_id=318881246 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
-[node name="Wall_24_11" parent="LevelLayout/Generated/Walls" unique_id=1383399276 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+[node name="Wall_0_6" parent="LevelLayout/Generated/Walls" unique_id=1765042413 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
 
-[node name="Wall_26_11" parent="LevelLayout/Generated/Walls" unique_id=1341365488 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0)
+[node name="Wall_1_6" parent="LevelLayout/Generated/Walls" unique_id=37962739 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1)
 
-[node name="Wall_28_11" parent="LevelLayout/Generated/Walls" unique_id=1217278697 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 0)
+[node name="Wall_3_6" parent="LevelLayout/Generated/Walls" unique_id=2085917614 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
 
-[node name="Wall_29_11" parent="LevelLayout/Generated/Walls" unique_id=277716570 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
+[node name="Wall_7_6" parent="LevelLayout/Generated/Walls" unique_id=1076929644 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
 
-[node name="Wall_30_11" parent="LevelLayout/Generated/Walls" unique_id=211605173 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
-
-[node name="Wall_0_12" parent="LevelLayout/Generated/Walls" unique_id=677169916 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 1)
-
-[node name="Wall_1_12" parent="LevelLayout/Generated/Walls" unique_id=83024252 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 1)
-
-[node name="Wall_2_12" parent="LevelLayout/Generated/Walls" unique_id=1431971347 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 1)
-
-[node name="Wall_3_12" parent="LevelLayout/Generated/Walls" unique_id=831796902 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 1)
-
-[node name="Wall_4_12" parent="LevelLayout/Generated/Walls" unique_id=58396950 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 1)
-
-[node name="Wall_9_12" parent="LevelLayout/Generated/Walls" unique_id=213438808 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 1)
-
-[node name="Wall_14_12" parent="LevelLayout/Generated/Walls" unique_id=1296410256 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
-
-[node name="Wall_15_12" parent="LevelLayout/Generated/Walls" unique_id=439088753 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-
-[node name="Wall_18_12" parent="LevelLayout/Generated/Walls" unique_id=1680234714 instance=ExtResource("5_eb6dy")]
+[node name="Wall_8_6" parent="LevelLayout/Generated/Walls" unique_id=378832039 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
 
-[node name="Wall_29_12" parent="LevelLayout/Generated/Walls" unique_id=905565336 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 1)
+[node name="Wall_9_6" parent="LevelLayout/Generated/Walls" unique_id=1708565272 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
 
-[node name="Wall_30_12" parent="LevelLayout/Generated/Walls" unique_id=1231183325 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 1)
-
-[node name="Wall_0_13" parent="LevelLayout/Generated/Walls" unique_id=88173256 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 2)
-
-[node name="Wall_1_13" parent="LevelLayout/Generated/Walls" unique_id=1105668190 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 2)
-
-[node name="Wall_4_13" parent="LevelLayout/Generated/Walls" unique_id=797765165 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 2)
-
-[node name="Wall_9_13" parent="LevelLayout/Generated/Walls" unique_id=1877004888 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 2)
-
-[node name="Wall_10_13" parent="LevelLayout/Generated/Walls" unique_id=1127225143 instance=ExtResource("5_eb6dy")]
+[node name="Wall_0_7" parent="LevelLayout/Generated/Walls" unique_id=1806965614 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 2)
 
-[node name="Wall_11_13" parent="LevelLayout/Generated/Walls" unique_id=399927530 instance=ExtResource("5_eb6dy")]
+[node name="Wall_1_7" parent="LevelLayout/Generated/Walls" unique_id=1513055943 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2)
 
-[node name="Wall_13_13" parent="LevelLayout/Generated/Walls" unique_id=239135748 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+[node name="Wall_8_7" parent="LevelLayout/Generated/Walls" unique_id=1727784954 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
 
-[node name="Wall_19_13" parent="LevelLayout/Generated/Walls" unique_id=303591473 instance=ExtResource("5_eb6dy")]
+[node name="Wall_9_7" parent="LevelLayout/Generated/Walls" unique_id=605204264 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
 
-[node name="Wall_20_13" parent="LevelLayout/Generated/Walls" unique_id=1842465165 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
+[node name="Wall_0_8" parent="LevelLayout/Generated/Walls" unique_id=1509093205 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3)
 
-[node name="Wall_21_13" parent="LevelLayout/Generated/Walls" unique_id=1769745604 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+[node name="Wall_1_8" parent="LevelLayout/Generated/Walls" unique_id=1605603169 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3)
 
-[node name="Wall_24_13" parent="LevelLayout/Generated/Walls" unique_id=2146765247 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 2)
+[node name="Wall_8_8" parent="LevelLayout/Generated/Walls" unique_id=677973005 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
 
-[node name="Wall_25_13" parent="LevelLayout/Generated/Walls" unique_id=901856123 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2)
+[node name="Wall_9_8" parent="LevelLayout/Generated/Walls" unique_id=2093827198 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
 
-[node name="Wall_26_13" parent="LevelLayout/Generated/Walls" unique_id=881931157 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 2)
+[node name="Wall_0_9" parent="LevelLayout/Generated/Walls" unique_id=861587905 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 4)
 
-[node name="Wall_29_13" parent="LevelLayout/Generated/Walls" unique_id=1088789713 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 2)
+[node name="Wall_1_9" parent="LevelLayout/Generated/Walls" unique_id=1464355579 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
 
-[node name="Wall_30_13" parent="LevelLayout/Generated/Walls" unique_id=1099068217 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 2)
+[node name="Wall_2_9" parent="LevelLayout/Generated/Walls" unique_id=1952672468 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 4)
 
-[node name="Wall_0_14" parent="LevelLayout/Generated/Walls" unique_id=343113507 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 3)
+[node name="Wall_3_9" parent="LevelLayout/Generated/Walls" unique_id=789382865 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
 
-[node name="Wall_1_14" parent="LevelLayout/Generated/Walls" unique_id=941014502 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 3)
+[node name="Wall_4_9" parent="LevelLayout/Generated/Walls" unique_id=2086179050 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
 
-[node name="Wall_7_14" parent="LevelLayout/Generated/Walls" unique_id=917504250 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 3)
+[node name="Wall_5_9" parent="LevelLayout/Generated/Walls" unique_id=2063216310 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
-[node name="Wall_8_14" parent="LevelLayout/Generated/Walls" unique_id=1647021541 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 3)
-
-[node name="Wall_23_14" parent="LevelLayout/Generated/Walls" unique_id=2140048604 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 3)
-
-[node name="Wall_24_14" parent="LevelLayout/Generated/Walls" unique_id=73904489 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 3)
-
-[node name="Wall_29_14" parent="LevelLayout/Generated/Walls" unique_id=360948315 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 3)
-
-[node name="Wall_30_14" parent="LevelLayout/Generated/Walls" unique_id=1059533028 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 3)
-
-[node name="Wall_0_15" parent="LevelLayout/Generated/Walls" unique_id=1729173341 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 4)
-
-[node name="Wall_1_15" parent="LevelLayout/Generated/Walls" unique_id=1559110759 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 4)
-
-[node name="Wall_4_15" parent="LevelLayout/Generated/Walls" unique_id=1068460120 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 4)
-
-[node name="Wall_5_15" parent="LevelLayout/Generated/Walls" unique_id=1223688124 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 4)
-
-[node name="Wall_8_15" parent="LevelLayout/Generated/Walls" unique_id=1693217830 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 4)
-
-[node name="Wall_9_15" parent="LevelLayout/Generated/Walls" unique_id=596227523 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 4)
-
-[node name="Wall_16_15" parent="LevelLayout/Generated/Walls" unique_id=1290973085 instance=ExtResource("5_eb6dy")]
+[node name="Wall_6_9" parent="LevelLayout/Generated/Walls" unique_id=1902229085 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
 
-[node name="Wall_18_15" parent="LevelLayout/Generated/Walls" unique_id=268563252 instance=ExtResource("5_eb6dy")]
+[node name="Wall_7_9" parent="LevelLayout/Generated/Walls" unique_id=1040730851 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+
+[node name="Wall_8_9" parent="LevelLayout/Generated/Walls" unique_id=1209389572 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
 
-[node name="Wall_21_15" parent="LevelLayout/Generated/Walls" unique_id=1774202187 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
+[node name="Wall_9_9" parent="LevelLayout/Generated/Walls" unique_id=104778019 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
 
-[node name="Wall_22_15" parent="LevelLayout/Generated/Walls" unique_id=688897909 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
-
-[node name="Wall_29_15" parent="LevelLayout/Generated/Walls" unique_id=62942983 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 4)
-
-[node name="Wall_30_15" parent="LevelLayout/Generated/Walls" unique_id=1711929732 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 4)
-
-[node name="Wall_0_16" parent="LevelLayout/Generated/Walls" unique_id=78071114 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 5)
-
-[node name="Wall_1_16" parent="LevelLayout/Generated/Walls" unique_id=1708174102 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 5)
-
-[node name="Wall_2_16" parent="LevelLayout/Generated/Walls" unique_id=1769232068 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 5)
-
-[node name="Wall_4_16" parent="LevelLayout/Generated/Walls" unique_id=1157202441 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 5)
-
-[node name="Wall_10_16" parent="LevelLayout/Generated/Walls" unique_id=677864034 instance=ExtResource("5_eb6dy")]
+[node name="Wall_0_10" parent="LevelLayout/Generated/Walls" unique_id=1416579321 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
 
-[node name="Wall_12_16" parent="LevelLayout/Generated/Walls" unique_id=1706468227 instance=ExtResource("5_eb6dy")]
+[node name="Wall_1_10" parent="LevelLayout/Generated/Walls" unique_id=1755550314 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 5)
+
+[node name="Wall_2_10" parent="LevelLayout/Generated/Walls" unique_id=2001935797 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 5)
 
-[node name="Wall_15_16" parent="LevelLayout/Generated/Walls" unique_id=1970875386 instance=ExtResource("5_eb6dy")]
+[node name="Wall_3_10" parent="LevelLayout/Generated/Walls" unique_id=323324277 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5)
+
+[node name="Wall_4_10" parent="LevelLayout/Generated/Walls" unique_id=388279967 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 5)
+
+[node name="Wall_5_10" parent="LevelLayout/Generated/Walls" unique_id=1046532179 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 
-[node name="Wall_16_16" parent="LevelLayout/Generated/Walls" unique_id=1863266649 instance=ExtResource("5_eb6dy")]
+[node name="Wall_6_10" parent="LevelLayout/Generated/Walls" unique_id=291794693 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
 
-[node name="Wall_19_16" parent="LevelLayout/Generated/Walls" unique_id=1099698270 instance=ExtResource("5_eb6dy")]
+[node name="Wall_7_10" parent="LevelLayout/Generated/Walls" unique_id=2021670697 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
+
+[node name="Wall_8_10" parent="LevelLayout/Generated/Walls" unique_id=1359483948 instance=ExtResource("5_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 5)
+
+[node name="Wall_9_10" parent="LevelLayout/Generated/Walls" unique_id=108060472 instance=ExtResource("5_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 5)
 
-[node name="Wall_20_16" parent="LevelLayout/Generated/Walls" unique_id=953647389 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+[node name="Crates" type="Node3D" parent="LevelLayout/Generated" unique_id=166021362]
 
-[node name="Wall_27_16" parent="LevelLayout/Generated/Walls" unique_id=461773495 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 5)
-
-[node name="Wall_28_16" parent="LevelLayout/Generated/Walls" unique_id=1317295076 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 5)
-
-[node name="Wall_29_16" parent="LevelLayout/Generated/Walls" unique_id=1482364464 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 5)
-
-[node name="Wall_30_16" parent="LevelLayout/Generated/Walls" unique_id=1628885104 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 5)
-
-[node name="Wall_0_17" parent="LevelLayout/Generated/Walls" unique_id=1063122018 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 6)
-
-[node name="Wall_1_17" parent="LevelLayout/Generated/Walls" unique_id=75996665 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 6)
-
-[node name="Wall_2_17" parent="LevelLayout/Generated/Walls" unique_id=1323697106 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 6)
-
-[node name="Wall_4_17" parent="LevelLayout/Generated/Walls" unique_id=1837582393 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 6)
-
-[node name="Wall_5_17" parent="LevelLayout/Generated/Walls" unique_id=1908400185 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 6)
-
-[node name="Wall_11_17" parent="LevelLayout/Generated/Walls" unique_id=1212012249 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6)
-
-[node name="Wall_15_17" parent="LevelLayout/Generated/Walls" unique_id=435376920 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
-
-[node name="Wall_18_17" parent="LevelLayout/Generated/Walls" unique_id=1311990031 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 6)
-
-[node name="Wall_25_17" parent="LevelLayout/Generated/Walls" unique_id=1048271091 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6)
-
-[node name="Wall_26_17" parent="LevelLayout/Generated/Walls" unique_id=1625789839 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 6)
-
-[node name="Wall_27_17" parent="LevelLayout/Generated/Walls" unique_id=1534700928 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 6)
-
-[node name="Wall_30_17" parent="LevelLayout/Generated/Walls" unique_id=1535520555 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 6)
-
-[node name="Wall_0_18" parent="LevelLayout/Generated/Walls" unique_id=458979151 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 7)
-
-[node name="Wall_1_18" parent="LevelLayout/Generated/Walls" unique_id=1556322991 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 7)
-
-[node name="Wall_8_18" parent="LevelLayout/Generated/Walls" unique_id=2080653963 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 7)
-
-[node name="Wall_9_18" parent="LevelLayout/Generated/Walls" unique_id=982928465 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 7)
-
-[node name="Wall_10_18" parent="LevelLayout/Generated/Walls" unique_id=1444588038 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 7)
-
-[node name="Wall_11_18" parent="LevelLayout/Generated/Walls" unique_id=1392667641 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 7)
-
-[node name="Wall_15_18" parent="LevelLayout/Generated/Walls" unique_id=1023815453 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
-
-[node name="Wall_23_18" parent="LevelLayout/Generated/Walls" unique_id=292768456 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 7)
-
-[node name="Wall_24_18" parent="LevelLayout/Generated/Walls" unique_id=350032073 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 7)
-
-[node name="Wall_25_18" parent="LevelLayout/Generated/Walls" unique_id=787537957 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 7)
-
-[node name="Wall_30_18" parent="LevelLayout/Generated/Walls" unique_id=1807282120 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 7)
-
-[node name="Wall_0_19" parent="LevelLayout/Generated/Walls" unique_id=142287867 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 8)
-
-[node name="Wall_1_19" parent="LevelLayout/Generated/Walls" unique_id=1877396139 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 8)
-
-[node name="Wall_5_19" parent="LevelLayout/Generated/Walls" unique_id=797521438 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 8)
-
-[node name="Wall_8_19" parent="LevelLayout/Generated/Walls" unique_id=1579212945 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 8)
-
-[node name="Wall_11_19" parent="LevelLayout/Generated/Walls" unique_id=908930543 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 8)
-
-[node name="Wall_14_19" parent="LevelLayout/Generated/Walls" unique_id=1257301214 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 8)
-
-[node name="Wall_21_19" parent="LevelLayout/Generated/Walls" unique_id=719598234 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 8)
-
-[node name="Wall_22_19" parent="LevelLayout/Generated/Walls" unique_id=269583336 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 8)
-
-[node name="Wall_23_19" parent="LevelLayout/Generated/Walls" unique_id=2019225979 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
-
-[node name="Wall_30_19" parent="LevelLayout/Generated/Walls" unique_id=1156147286 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 8)
-
-[node name="Wall_0_20" parent="LevelLayout/Generated/Walls" unique_id=307132016 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 9)
-
-[node name="Wall_1_20" parent="LevelLayout/Generated/Walls" unique_id=2111257606 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 9)
-
-[node name="Wall_2_20" parent="LevelLayout/Generated/Walls" unique_id=1893863662 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 9)
-
-[node name="Wall_3_20" parent="LevelLayout/Generated/Walls" unique_id=31979779 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 9)
-
-[node name="Wall_4_20" parent="LevelLayout/Generated/Walls" unique_id=391302910 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 9)
-
-[node name="Wall_5_20" parent="LevelLayout/Generated/Walls" unique_id=1964462196 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 9)
-
-[node name="Wall_6_20" parent="LevelLayout/Generated/Walls" unique_id=714483299 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 9)
-
-[node name="Wall_7_20" parent="LevelLayout/Generated/Walls" unique_id=1027705528 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 9)
-
-[node name="Wall_8_20" parent="LevelLayout/Generated/Walls" unique_id=55563376 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 9)
-
-[node name="Wall_11_20" parent="LevelLayout/Generated/Walls" unique_id=244999040 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 9)
-
-[node name="Wall_12_20" parent="LevelLayout/Generated/Walls" unique_id=622854254 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 9)
-
-[node name="Wall_13_20" parent="LevelLayout/Generated/Walls" unique_id=1880737557 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 9)
-
-[node name="Wall_14_20" parent="LevelLayout/Generated/Walls" unique_id=1166850625 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 9)
-
-[node name="Wall_15_20" parent="LevelLayout/Generated/Walls" unique_id=177995234 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
-
-[node name="Wall_16_20" parent="LevelLayout/Generated/Walls" unique_id=266142436 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 9)
-
-[node name="Wall_17_20" parent="LevelLayout/Generated/Walls" unique_id=2024526143 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 9)
-
-[node name="Wall_18_20" parent="LevelLayout/Generated/Walls" unique_id=1270683072 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 9)
-
-[node name="Wall_19_20" parent="LevelLayout/Generated/Walls" unique_id=1818611348 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 9)
-
-[node name="Wall_20_20" parent="LevelLayout/Generated/Walls" unique_id=941949020 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 9)
-
-[node name="Wall_21_20" parent="LevelLayout/Generated/Walls" unique_id=1748810592 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 9)
-
-[node name="Wall_30_20" parent="LevelLayout/Generated/Walls" unique_id=1193964867 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 9)
-
-[node name="Wall_0_21" parent="LevelLayout/Generated/Walls" unique_id=1529689837 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 10)
-
-[node name="Wall_1_21" parent="LevelLayout/Generated/Walls" unique_id=360753212 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 10)
-
-[node name="Wall_2_21" parent="LevelLayout/Generated/Walls" unique_id=1743164677 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 10)
-
-[node name="Wall_3_21" parent="LevelLayout/Generated/Walls" unique_id=1320106268 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 10)
-
-[node name="Wall_4_21" parent="LevelLayout/Generated/Walls" unique_id=1402864688 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 10)
-
-[node name="Wall_5_21" parent="LevelLayout/Generated/Walls" unique_id=1296167446 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 10)
-
-[node name="Wall_6_21" parent="LevelLayout/Generated/Walls" unique_id=1868714473 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 10)
-
-[node name="Wall_7_21" parent="LevelLayout/Generated/Walls" unique_id=108466501 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 10)
-
-[node name="Wall_8_21" parent="LevelLayout/Generated/Walls" unique_id=1836703838 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 10)
-
-[node name="Wall_9_21" parent="LevelLayout/Generated/Walls" unique_id=1766620267 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 10)
-
-[node name="Wall_10_21" parent="LevelLayout/Generated/Walls" unique_id=648756526 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 10)
-
-[node name="Wall_11_21" parent="LevelLayout/Generated/Walls" unique_id=361633423 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 10)
-
-[node name="Wall_12_21" parent="LevelLayout/Generated/Walls" unique_id=1704084514 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 10)
-
-[node name="Wall_13_21" parent="LevelLayout/Generated/Walls" unique_id=1958833594 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 10)
-
-[node name="Wall_14_21" parent="LevelLayout/Generated/Walls" unique_id=370872180 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 10)
-
-[node name="Wall_15_21" parent="LevelLayout/Generated/Walls" unique_id=1931990569 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
-
-[node name="Wall_16_21" parent="LevelLayout/Generated/Walls" unique_id=518672927 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 10)
-
-[node name="Wall_17_21" parent="LevelLayout/Generated/Walls" unique_id=1354122386 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
-
-[node name="Wall_18_21" parent="LevelLayout/Generated/Walls" unique_id=1485693062 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 10)
-
-[node name="Wall_19_21" parent="LevelLayout/Generated/Walls" unique_id=391503640 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 10)
-
-[node name="Wall_20_21" parent="LevelLayout/Generated/Walls" unique_id=819980338 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 10)
-
-[node name="Wall_21_21" parent="LevelLayout/Generated/Walls" unique_id=859869288 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 10)
-
-[node name="Wall_22_21" parent="LevelLayout/Generated/Walls" unique_id=1079984483 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 10)
-
-[node name="Wall_23_21" parent="LevelLayout/Generated/Walls" unique_id=1802016974 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 10)
-
-[node name="Wall_24_21" parent="LevelLayout/Generated/Walls" unique_id=1697621334 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 10)
-
-[node name="Wall_25_21" parent="LevelLayout/Generated/Walls" unique_id=1483922931 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
-
-[node name="Wall_26_21" parent="LevelLayout/Generated/Walls" unique_id=1605099951 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 10)
-
-[node name="Wall_27_21" parent="LevelLayout/Generated/Walls" unique_id=1132010385 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 10)
-
-[node name="Wall_28_21" parent="LevelLayout/Generated/Walls" unique_id=378682915 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 10)
-
-[node name="Wall_29_21" parent="LevelLayout/Generated/Walls" unique_id=1179919936 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 10)
-
-[node name="Wall_30_21" parent="LevelLayout/Generated/Walls" unique_id=770244342 instance=ExtResource("5_eb6dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 10)
-
-[node name="Crates" type="Node3D" parent="LevelLayout/Generated" unique_id=1681837956]
-
-[node name="Crate_6_6" parent="LevelLayout/Generated/Crates" unique_id=127028562 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -5)
+[node name="Crate_4_3" parent="LevelLayout/Generated/Crates" unique_id=127028562 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
 block_color = Color(0.8, 0.16, 0.16, 1)
 
-[node name="Crate_12_6" parent="LevelLayout/Generated/Crates" unique_id=1206521027 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -5)
+[node name="Crate_5_4" parent="LevelLayout/Generated/Crates" unique_id=230293281 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 block_letter = "B"
 block_color = Color(0.8, 0.7744, 0.16, 1)
 
-[node name="Crate_19_6" parent="LevelLayout/Generated/Crates" unique_id=90380883 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5)
+[node name="Crate_5_5" parent="LevelLayout/Generated/Crates" unique_id=593770276 instance=ExtResource("3_sugp2")]
 block_letter = "C"
 block_color = Color(0.2112, 0.8, 0.16, 1)
 
-[node name="Crate_7_7" parent="LevelLayout/Generated/Crates" unique_id=1676063119 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -4)
+[node name="Crate_2_7" parent="LevelLayout/Generated/Crates" unique_id=1743365967 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 2)
 block_letter = "D"
 block_color = Color(0.16, 0.8, 0.72319996, 1)
 
-[node name="Crate_6_8" parent="LevelLayout/Generated/Crates" unique_id=1305065267 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -3)
+[node name="Crate_4_7" parent="LevelLayout/Generated/Crates" unique_id=239191764 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
 block_letter = "E"
 block_color = Color(0.16, 0.26240006, 0.8, 1)
 
-[node name="Crate_12_8" parent="LevelLayout/Generated/Crates" unique_id=1829176612 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3)
-block_letter = "F"
-block_color = Color(0.6720001, 0.16, 0.8, 1)
-
-[node name="Crate_17_8" parent="LevelLayout/Generated/Crates" unique_id=401641993 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
-block_letter = "G"
-block_color = Color(0.8, 0.16, 0.31360015, 1)
-
-[node name="Crate_18_8" parent="LevelLayout/Generated/Crates" unique_id=2057601658 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3)
-block_letter = "H"
-block_color = Color(0.8, 0.62079996, 0.16, 1)
-
-[node name="Crate_22_9" parent="LevelLayout/Generated/Crates" unique_id=1797244237 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -2)
-block_letter = "I"
-block_color = Color(0.36479995, 0.8, 0.16, 1)
-
-[node name="Crate_6_10" parent="LevelLayout/Generated/Crates" unique_id=827842313 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -1)
-block_letter = "J"
-block_color = Color(0.16, 0.8, 0.5695999, 1)
-
-[node name="Crate_22_10" parent="LevelLayout/Generated/Crates" unique_id=144511623 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -1)
-block_letter = "K"
-block_color = Color(0.16, 0.4159999, 0.8, 1)
-
-[node name="Crate_23_10" parent="LevelLayout/Generated/Crates" unique_id=946160282 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -1)
-block_letter = "L"
-block_color = Color(0.51839995, 0.16, 0.8, 1)
-
-[node name="Crate_7_11" parent="LevelLayout/Generated/Crates" unique_id=2139210330 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
-block_letter = "M"
-block_color = Color(0.8, 0.16, 0.4672, 1)
-
-[node name="Crate_11_11" parent="LevelLayout/Generated/Crates" unique_id=450563329 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
-block_letter = "N"
-block_color = Color(0.8, 0.4672, 0.16, 1)
-
-[node name="Crate_21_11" parent="LevelLayout/Generated/Crates" unique_id=1832884504 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
-block_letter = "O"
-block_color = Color(0.5184, 0.8, 0.16, 1)
-
-[node name="Crate_5_12" parent="LevelLayout/Generated/Crates" unique_id=63738618 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 1)
-block_letter = "P"
-block_color = Color(0.16, 0.8, 0.4160001, 1)
-
-[node name="Crate_7_12" parent="LevelLayout/Generated/Crates" unique_id=1530070665 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 1)
-block_letter = "Q"
-block_color = Color(0.16, 0.5695999, 0.8, 1)
-
-[node name="Crate_22_12" parent="LevelLayout/Generated/Crates" unique_id=151308071 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1)
-block_letter = "R"
-block_color = Color(0.36480013, 0.16, 0.8, 1)
-
-[node name="Crate_15_13" parent="LevelLayout/Generated/Crates" unique_id=388831006 instance=ExtResource("3_sugp2")]
+[node name="Crate_5_7" parent="LevelLayout/Generated/Crates" unique_id=571174268 instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-block_letter = "S"
-block_color = Color(0.8, 0.16, 0.6208002, 1)
-
-[node name="Crate_17_13" parent="LevelLayout/Generated/Crates" unique_id=1484949726 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
-block_letter = "T"
-block_color = Color(0.8, 0.31360003, 0.16, 1)
-
-[node name="Crate_28_13" parent="LevelLayout/Generated/Crates" unique_id=1735806227 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 2)
-block_letter = "U"
-block_color = Color(0.672, 0.8, 0.16, 1)
-
-[node name="Crate_11_14" parent="LevelLayout/Generated/Crates" unique_id=1527093143 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3)
-block_letter = "V"
-block_color = Color(0.16, 0.8, 0.26240006, 1)
-
-[node name="Crate_12_14" parent="LevelLayout/Generated/Crates" unique_id=1671700932 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
-block_letter = "W"
-block_color = Color(0.16, 0.7232001, 0.8, 1)
-
-[node name="Crate_17_14" parent="LevelLayout/Generated/Crates" unique_id=1598722200 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
-block_letter = "X"
-block_color = Color(0.21119995, 0.16, 0.8, 1)
-
-[node name="Crate_13_15" parent="LevelLayout/Generated/Crates" unique_id=38230038 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
-block_letter = "Y"
-block_color = Color(0.8, 0.16, 0.77440006, 1)
-
-[node name="Crate_17_15" parent="LevelLayout/Generated/Crates" unique_id=1163813243 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
-block_letter = "Z"
-block_color = Color(0.8, 0.16, 0.16, 1)
-
-[node name="Crate_27_15" parent="LevelLayout/Generated/Crates" unique_id=1631792778 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 4)
-block_color = Color(0.8, 0.7744, 0.16, 1)
-
-[node name="Crate_7_16" parent="LevelLayout/Generated/Crates" unique_id=1045547292 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 5)
-block_letter = "B"
-block_color = Color(0.2112, 0.8, 0.16, 1)
-
-[node name="Crate_14_16" parent="LevelLayout/Generated/Crates" unique_id=714902021 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 5)
-block_letter = "C"
-block_color = Color(0.16, 0.8, 0.72319996, 1)
-
-[node name="Crate_25_16" parent="LevelLayout/Generated/Crates" unique_id=1247084242 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 5)
-block_letter = "D"
-block_color = Color(0.16, 0.26240006, 0.8, 1)
-
-[node name="Crate_8_17" parent="LevelLayout/Generated/Crates" unique_id=1347863286 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 6)
-block_letter = "E"
+block_letter = "F"
 block_color = Color(0.6720001, 0.16, 0.8, 1)
 
-[node name="Crate_13_17" parent="LevelLayout/Generated/Crates" unique_id=843064258 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6)
-block_letter = "F"
+[node name="Crate_6_7" parent="LevelLayout/Generated/Crates" unique_id=1886411243 instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+block_letter = "G"
 block_color = Color(0.8, 0.16, 0.31360015, 1)
 
-[node name="Crate_23_17" parent="LevelLayout/Generated/Crates" unique_id=1720975478 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 6)
-block_letter = "G"
-block_color = Color(0.8, 0.62079996, 0.16, 1)
+[node name="Targets" type="Node3D" parent="LevelLayout/Generated" unique_id=518804731]
 
-[node name="Crate_6_18" parent="LevelLayout/Generated/Crates" unique_id=1531801088 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 7)
-block_letter = "H"
-block_color = Color(0.36479995, 0.8, 0.16, 1)
+[node name="Target_2_3" parent="LevelLayout/Generated/Targets" unique_id=968213502 instance=ExtResource("5_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
 
-[node name="Crate_21_18" parent="LevelLayout/Generated/Crates" unique_id=1581989582 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 7)
-block_letter = "I"
-block_color = Color(0.16, 0.8, 0.5695999, 1)
+[node name="Target_6_4" parent="LevelLayout/Generated/Targets" unique_id=1643349270 instance=ExtResource("5_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 
-[node name="Crate_19_19" parent="LevelLayout/Generated/Crates" unique_id=1910822015 instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 8)
-block_letter = "J"
-block_color = Color(0.16, 0.4159999, 0.8, 1)
+[node name="Target_2_5" parent="LevelLayout/Generated/Targets" unique_id=1020925155 instance=ExtResource("5_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 
-[node name="Targets" type="Node3D" parent="LevelLayout/Generated" unique_id=1737966235]
+[node name="Target_5_6" parent="LevelLayout/Generated/Targets" unique_id=81846158 instance=ExtResource("5_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
-[node name="Target_27_12" parent="LevelLayout/Generated/Targets" unique_id=444646261 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 1)
+[node name="Target_4_7" parent="LevelLayout/Generated/Targets" unique_id=936638672 instance=ExtResource("5_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
 
-[node name="Target_28_12" parent="LevelLayout/Generated/Targets" unique_id=12523732 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 1)
+[node name="Target_7_7" parent="LevelLayout/Generated/Targets" unique_id=1513719969 instance=ExtResource("5_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
-[node name="Target_27_13" parent="LevelLayout/Generated/Targets" unique_id=1541417868 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 2)
+[node name="Target_5_8" parent="LevelLayout/Generated/Targets" unique_id=1836930009 instance=ExtResource("5_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
-[node name="Target_28_13" parent="LevelLayout/Generated/Targets" unique_id=1936117716 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 2)
+[node name="RatCage" type="Node3D" parent="LevelLayout/Generated" unique_id=1292006615]
 
-[node name="Target_25_14" parent="LevelLayout/Generated/Targets" unique_id=655874883 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 3)
+[node name="Fence" parent="LevelLayout/Generated/RatCage" unique_id=1226515948 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -8)
 
-[node name="Target_26_14" parent="LevelLayout/Generated/Targets" unique_id=1167161088 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 3)
+[node name="Fence2" parent="LevelLayout/Generated/RatCage" unique_id=869215815 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -8)
 
-[node name="Target_27_14" parent="LevelLayout/Generated/Targets" unique_id=742405012 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 3)
+[node name="Fence3" parent="LevelLayout/Generated/RatCage" unique_id=646017394 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -8)
 
-[node name="Target_28_14" parent="LevelLayout/Generated/Targets" unique_id=936634385 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 3)
+[node name="Fence4" parent="LevelLayout/Generated/RatCage" unique_id=743975788 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5, 0, -6)
 
-[node name="Target_23_15" parent="LevelLayout/Generated/Targets" unique_id=105302508 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+[node name="Fence5" parent="LevelLayout/Generated/RatCage" unique_id=2076693355 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5, 0, -2)
 
-[node name="Target_24_15" parent="LevelLayout/Generated/Targets" unique_id=1821351833 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 4)
+[node name="Fence6" parent="LevelLayout/Generated/RatCage" unique_id=313232546 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5, 0, 2)
 
-[node name="Target_25_15" parent="LevelLayout/Generated/Targets" unique_id=1584811319 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 4)
+[node name="Fence7" parent="LevelLayout/Generated/RatCage" unique_id=102055948 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5, 0, 6)
 
-[node name="Target_26_15" parent="LevelLayout/Generated/Targets" unique_id=493640437 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 4)
+[node name="Fence8" parent="LevelLayout/Generated/RatCage" unique_id=1646036810 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 8)
 
-[node name="Target_27_15" parent="LevelLayout/Generated/Targets" unique_id=204368000 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 4)
+[node name="Fence9" parent="LevelLayout/Generated/RatCage" unique_id=1904297940 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 8)
 
-[node name="Target_28_15" parent="LevelLayout/Generated/Targets" unique_id=204676979 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 4)
+[node name="Fence10" parent="LevelLayout/Generated/RatCage" unique_id=2015135493 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 8)
 
-[node name="Target_21_16" parent="LevelLayout/Generated/Targets" unique_id=426577766 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
+[node name="Fence11" parent="LevelLayout/Generated/RatCage" unique_id=284334573 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5, 0, -6)
 
-[node name="Target_22_16" parent="LevelLayout/Generated/Targets" unique_id=411423457 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5)
+[node name="Fence12" parent="LevelLayout/Generated/RatCage" unique_id=155692338 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5, 0, -2)
 
-[node name="Target_23_16" parent="LevelLayout/Generated/Targets" unique_id=863795664 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 5)
+[node name="Fence13" parent="LevelLayout/Generated/RatCage" unique_id=146085906 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5, 0, 2)
 
-[node name="Target_24_16" parent="LevelLayout/Generated/Targets" unique_id=420459154 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 5)
+[node name="Fence14" parent="LevelLayout/Generated/RatCage" unique_id=561492755 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5, 0, 6)
 
-[node name="Target_25_16" parent="LevelLayout/Generated/Targets" unique_id=1472043962 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 5)
+[node name="Fence15" parent="LevelLayout/Generated/RatCage" unique_id=846342151 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3, -8)
 
-[node name="Target_26_16" parent="LevelLayout/Generated/Targets" unique_id=1130997833 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 5)
+[node name="Fence16" parent="LevelLayout/Generated/RatCage" unique_id=1908534272 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 3, -8)
 
-[node name="Target_19_17" parent="LevelLayout/Generated/Targets" unique_id=1462085603 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6)
+[node name="Fence17" parent="LevelLayout/Generated/RatCage" unique_id=1293010468 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3, -8)
 
-[node name="Target_20_17" parent="LevelLayout/Generated/Targets" unique_id=190839964 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 6)
+[node name="Fence18" parent="LevelLayout/Generated/RatCage" unique_id=99647446 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5, 3, -6)
 
-[node name="Target_21_17" parent="LevelLayout/Generated/Targets" unique_id=2088083574 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+[node name="Fence19" parent="LevelLayout/Generated/RatCage" unique_id=964736778 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5, 3, -2)
 
-[node name="Target_22_17" parent="LevelLayout/Generated/Targets" unique_id=1208800391 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 6)
+[node name="Fence20" parent="LevelLayout/Generated/RatCage" unique_id=1320846508 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5, 3, 2)
 
-[node name="Target_23_17" parent="LevelLayout/Generated/Targets" unique_id=1409884562 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 6)
+[node name="Fence21" parent="LevelLayout/Generated/RatCage" unique_id=1957782022 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5, 3, 6)
 
-[node name="Target_24_17" parent="LevelLayout/Generated/Targets" unique_id=1802610029 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 6)
+[node name="Fence22" parent="LevelLayout/Generated/RatCage" unique_id=743391800 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3, 8)
 
-[node name="Target_17_18" parent="LevelLayout/Generated/Targets" unique_id=1898572564 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 7)
+[node name="Fence23" parent="LevelLayout/Generated/RatCage" unique_id=1952984623 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 3, 8)
 
-[node name="Target_18_18" parent="LevelLayout/Generated/Targets" unique_id=1260507266 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 7)
+[node name="Fence24" parent="LevelLayout/Generated/RatCage" unique_id=542163894 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3, 8)
 
-[node name="Target_19_18" parent="LevelLayout/Generated/Targets" unique_id=79198584 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 7)
+[node name="Fence25" parent="LevelLayout/Generated/RatCage" unique_id=2024285554 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5, 3, -6)
 
-[node name="Target_20_18" parent="LevelLayout/Generated/Targets" unique_id=998975355 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 7)
+[node name="Fence26" parent="LevelLayout/Generated/RatCage" unique_id=1096202958 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5, 3, -2)
 
-[node name="Target_21_18" parent="LevelLayout/Generated/Targets" unique_id=1687687775 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 7)
+[node name="Fence27" parent="LevelLayout/Generated/RatCage" unique_id=1828324363 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5, 3, 2)
 
-[node name="Target_22_18" parent="LevelLayout/Generated/Targets" unique_id=1190182392 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 7)
+[node name="Fence28" parent="LevelLayout/Generated/RatCage" unique_id=664580961 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5, 3, 6)
 
-[node name="Target_17_19" parent="LevelLayout/Generated/Targets" unique_id=946893992 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 8)
+[node name="Fence29" parent="LevelLayout/Generated/RatCage" unique_id=275840031 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 6, -8)
 
-[node name="Target_18_19" parent="LevelLayout/Generated/Targets" unique_id=682782999 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 8)
+[node name="Fence30" parent="LevelLayout/Generated/RatCage" unique_id=1021788090 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 6, -8)
 
-[node name="Target_19_19" parent="LevelLayout/Generated/Targets" unique_id=584665364 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 8)
+[node name="Fence31" parent="LevelLayout/Generated/RatCage" unique_id=1965812603 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 6, -8)
 
-[node name="Target_20_19" parent="LevelLayout/Generated/Targets" unique_id=458818165 instance=ExtResource("5_target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 8)
+[node name="Fence32" parent="LevelLayout/Generated/RatCage" unique_id=1170103998 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5, 6, -6)
 
-[node name="RatCage" type="Node3D" parent="LevelLayout/Generated" unique_id=152596526]
+[node name="Fence33" parent="LevelLayout/Generated/RatCage" unique_id=778674129 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5, 6, -2)
 
-[node name="Fence" parent="LevelLayout/Generated/RatCage" unique_id=1752326543 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -12.5)
+[node name="Fence34" parent="LevelLayout/Generated/RatCage" unique_id=1956739176 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5, 6, 2)
 
-[node name="Fence2" parent="LevelLayout/Generated/RatCage" unique_id=1615420268 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -12.5)
+[node name="Fence35" parent="LevelLayout/Generated/RatCage" unique_id=1050876637 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.5, 6, 6)
 
-[node name="Fence3" parent="LevelLayout/Generated/RatCage" unique_id=1040520466 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -12.5)
+[node name="Fence36" parent="LevelLayout/Generated/RatCage" unique_id=890416191 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 6, 8)
 
-[node name="Fence4" parent="LevelLayout/Generated/RatCage" unique_id=1205379229 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -12.5)
+[node name="Fence37" parent="LevelLayout/Generated/RatCage" unique_id=1810912595 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 6, 8)
 
-[node name="Fence5" parent="LevelLayout/Generated/RatCage" unique_id=110753225 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.5)
+[node name="Fence38" parent="LevelLayout/Generated/RatCage" unique_id=1084963611 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 6, 8)
 
-[node name="Fence6" parent="LevelLayout/Generated/RatCage" unique_id=2118495948 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -12.5)
+[node name="Fence39" parent="LevelLayout/Generated/RatCage" unique_id=1779002373 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5, 6, -6)
 
-[node name="Fence7" parent="LevelLayout/Generated/RatCage" unique_id=493351314 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -12.5)
+[node name="Fence40" parent="LevelLayout/Generated/RatCage" unique_id=1984724870 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5, 6, -2)
 
-[node name="Fence8" parent="LevelLayout/Generated/RatCage" unique_id=1175163355 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -12.5)
+[node name="Fence41" parent="LevelLayout/Generated/RatCage" unique_id=1016839461 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5, 6, 2)
 
-[node name="Fence9" parent="LevelLayout/Generated/RatCage" unique_id=30897383 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -12.5)
-
-[node name="Fence10" parent="LevelLayout/Generated/RatCage" unique_id=1583020577 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 0, -10.5)
-
-[node name="Fence11" parent="LevelLayout/Generated/RatCage" unique_id=798834622 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 0, -6.5)
-
-[node name="Fence12" parent="LevelLayout/Generated/RatCage" unique_id=384259328 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 0, -2.5)
-
-[node name="Fence13" parent="LevelLayout/Generated/RatCage" unique_id=1249120864 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 0, 1.5)
-
-[node name="Fence14" parent="LevelLayout/Generated/RatCage" unique_id=119587491 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 0, 5.5)
-
-[node name="Fence15" parent="LevelLayout/Generated/RatCage" unique_id=1904692901 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 0, 9.5)
-
-[node name="Fence16" parent="LevelLayout/Generated/RatCage" unique_id=2142163954 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 11.5)
-
-[node name="Fence17" parent="LevelLayout/Generated/RatCage" unique_id=1333046868 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 11.5)
-
-[node name="Fence18" parent="LevelLayout/Generated/RatCage" unique_id=1186113084 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 11.5)
-
-[node name="Fence19" parent="LevelLayout/Generated/RatCage" unique_id=29700549 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 11.5)
-
-[node name="Fence20" parent="LevelLayout/Generated/RatCage" unique_id=411969940 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.5)
-
-[node name="Fence21" parent="LevelLayout/Generated/RatCage" unique_id=541035802 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 11.5)
-
-[node name="Fence22" parent="LevelLayout/Generated/RatCage" unique_id=347872724 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 11.5)
-
-[node name="Fence23" parent="LevelLayout/Generated/RatCage" unique_id=700331534 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 11.5)
-
-[node name="Fence24" parent="LevelLayout/Generated/RatCage" unique_id=1289049046 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 11.5)
-
-[node name="Fence25" parent="LevelLayout/Generated/RatCage" unique_id=570890026 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18, 0, -10.5)
-
-[node name="Fence26" parent="LevelLayout/Generated/RatCage" unique_id=2143817840 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18, 0, -6.5)
-
-[node name="Fence27" parent="LevelLayout/Generated/RatCage" unique_id=202471210 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18, 0, -2.5)
-
-[node name="Fence28" parent="LevelLayout/Generated/RatCage" unique_id=2083166020 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18, 0, 1.5)
-
-[node name="Fence29" parent="LevelLayout/Generated/RatCage" unique_id=1570401885 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18, 0, 5.5)
-
-[node name="Fence30" parent="LevelLayout/Generated/RatCage" unique_id=1926924912 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18, 0, 9.5)
-
-[node name="Fence31" parent="LevelLayout/Generated/RatCage" unique_id=839530273 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 3, -12.5)
-
-[node name="Fence32" parent="LevelLayout/Generated/RatCage" unique_id=679088506 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3, -12.5)
-
-[node name="Fence33" parent="LevelLayout/Generated/RatCage" unique_id=1374796482 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, -12.5)
-
-[node name="Fence34" parent="LevelLayout/Generated/RatCage" unique_id=361492216 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, -12.5)
-
-[node name="Fence35" parent="LevelLayout/Generated/RatCage" unique_id=781944148 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -12.5)
-
-[node name="Fence36" parent="LevelLayout/Generated/RatCage" unique_id=1062518286 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, -12.5)
-
-[node name="Fence37" parent="LevelLayout/Generated/RatCage" unique_id=787722886 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -12.5)
-
-[node name="Fence38" parent="LevelLayout/Generated/RatCage" unique_id=354446410 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, -12.5)
-
-[node name="Fence39" parent="LevelLayout/Generated/RatCage" unique_id=1345433381 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 3, -12.5)
-
-[node name="Fence40" parent="LevelLayout/Generated/RatCage" unique_id=85416895 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 3, -10.5)
-
-[node name="Fence41" parent="LevelLayout/Generated/RatCage" unique_id=1399199926 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 3, -6.5)
-
-[node name="Fence42" parent="LevelLayout/Generated/RatCage" unique_id=775590090 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 3, -2.5)
-
-[node name="Fence43" parent="LevelLayout/Generated/RatCage" unique_id=1520802331 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 3, 1.5)
-
-[node name="Fence44" parent="LevelLayout/Generated/RatCage" unique_id=375479096 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 3, 5.5)
-
-[node name="Fence45" parent="LevelLayout/Generated/RatCage" unique_id=1487281948 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -18, 3, 9.5)
-
-[node name="Fence46" parent="LevelLayout/Generated/RatCage" unique_id=518029173 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 3, 11.5)
-
-[node name="Fence47" parent="LevelLayout/Generated/RatCage" unique_id=2043577718 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3, 11.5)
-
-[node name="Fence48" parent="LevelLayout/Generated/RatCage" unique_id=182780433 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, 11.5)
-
-[node name="Fence49" parent="LevelLayout/Generated/RatCage" unique_id=733364421 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, 11.5)
-
-[node name="Fence50" parent="LevelLayout/Generated/RatCage" unique_id=849564714 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 11.5)
-
-[node name="Fence51" parent="LevelLayout/Generated/RatCage" unique_id=1577692613 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 11.5)
-
-[node name="Fence52" parent="LevelLayout/Generated/RatCage" unique_id=2116047191 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, 11.5)
-
-[node name="Fence53" parent="LevelLayout/Generated/RatCage" unique_id=511531437 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, 11.5)
-
-[node name="Fence54" parent="LevelLayout/Generated/RatCage" unique_id=738709476 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 3, 11.5)
-
-[node name="Fence55" parent="LevelLayout/Generated/RatCage" unique_id=1255770010 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18, 3, -10.5)
-
-[node name="Fence56" parent="LevelLayout/Generated/RatCage" unique_id=819904449 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18, 3, -6.5)
-
-[node name="Fence57" parent="LevelLayout/Generated/RatCage" unique_id=1765561690 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18, 3, -2.5)
-
-[node name="Fence58" parent="LevelLayout/Generated/RatCage" unique_id=53184171 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18, 3, 1.5)
-
-[node name="Fence59" parent="LevelLayout/Generated/RatCage" unique_id=446279751 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18, 3, 5.5)
-
-[node name="Fence60" parent="LevelLayout/Generated/RatCage" unique_id=1340517699 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18, 3, 9.5)
+[node name="Fence42" parent="LevelLayout/Generated/RatCage" unique_id=453092764 instance=ExtResource("7_o6xl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5, 6, 6)
 
 [node name="DevLevelMenu" type="CanvasLayer" parent="." unique_id=2124899395]
 script = ExtResource("12_dev_menu")
