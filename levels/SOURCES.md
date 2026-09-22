@@ -1,0 +1,67 @@
+# Puzzle collection sources
+
+Downloaded 2026-09-21. These nine files add 741 puzzle entries (744 including the
+existing example and tutorials). Collections can overlap: Microban III includes
+some of Skinner's LOMA contributions. This is not a count of unique puzzles.
+
+## David W. Skinner: Microban I–IV and Sasquatch I–IV
+
+Author: **David W. Skinner**. His archived author page grants redistribution with
+proper credit:
+
+> These sets may be freely distributed provided they remain properly credited.
+
+[Author page and distribution terms](http://www.abelmartin.com/rj/sokobanJS/Skinner/David%20W.%20Skinner%20-%20Sokoban.htm)
+
+The files below were downloaded from the text links on that archived page.
+Credit is included in every collection header. Keep that credit with redistributed
+puzzles. These are that archive's editions, not a claim to be the newest revisions.
+
+| Local file | Included | Source count | Download |
+| --- | ---: | ---: | --- |
+| [microban.txt](microban.txt) | 154 | 155 | [Source](http://www.abelmartin.com/rj/sokobanJS/Skinner/David%20W.%20Skinner%20-%20Sokoban_files/Microban.txt) |
+| [microban_ii.txt](microban_ii.txt) | 134 | 135 | [Source](http://www.abelmartin.com/rj/sokobanJS/Skinner/David%20W.%20Skinner%20-%20Sokoban_files/Microban%20II.txt) |
+| [microban_iii.txt](microban_iii.txt) | 100 | 101 | [Source](http://www.abelmartin.com/rj/sokobanJS/Skinner/David%20W.%20Skinner%20-%20Sokoban_files/Microban%20III.txt) |
+| [microban_iv.txt](microban_iv.txt) | 100 | 102 | [Source](http://www.abelmartin.com/rj/sokobanJS/Skinner/David%20W.%20Skinner%20-%20Sokoban_files/Microban%20IV.txt) |
+| [sasquatch.txt](sasquatch.txt) | 46 | 50 | [Source](http://www.abelmartin.com/rj/sokobanJS/Skinner/David%20W.%20Skinner%20-%20Sokoban_files/Sasquatch.txt) |
+| [sasquatch_ii.txt](sasquatch_ii.txt) | 49 | 50 | [Source](http://www.abelmartin.com/rj/sokobanJS/Skinner/David%20W.%20Skinner%20-%20Sokoban_files/Sasquatch%20II.txt) |
+| [sasquatch_iii.txt](sasquatch_iii.txt) | 49 | 50 | [Source](http://www.abelmartin.com/rj/sokobanJS/Skinner/David%20W.%20Skinner%20-%20Sokoban_files/Sasquatch%20III.txt) |
+| [sasquatch_iv.txt](sasquatch_iv.txt) | 49 | 50 | [Source](http://www.abelmartin.com/rj/sokobanJS/Skinner/David%20W.%20Skinner%20-%20Sokoban_files/Sasquatch%20IV.txt) |
+
+## LOMA
+
+Curated by **Aymeric du Peloux**, with individual authors credited beside each
+puzzle. This is the 60-level edition dated 2010-05-18 in the SourceCode.se catalog,
+not the later 137-level edition described on the curator's site.
+
+- [Curator's page and redistribution permission](https://aymericdupeloux.wixsite.com/sokoban/post/_loma)
+- [Downloaded XML collection](https://www.sourcecode.se/sokoban/levels.php?act=dnl_level&file=Loma.slc&as_text=0)
+- [Local collection: 60 puzzles](loma.txt)
+
+The curator explicitly permits free publication without requesting permission.
+The XML level IDs, authors, and board rows were retained in the text conversion.
+
+## Conversion and compatibility
+
+Boards retain their original orientation, spacing, and tile contents. Line endings
+were normalized and headers/comments added for the plugin's text format. Selection
+uses **1-based position in the local file**; `Source level` comments retain upstream
+numbering, including gaps left by omissions. No solutions were imported.
+
+The following source puzzles were excluded so every offered level works with the
+current importer and 40×40 lab limit. Disconnected areas may be deliberate in the
+original puzzles; omission does not mean the original puzzle is invalid.
+
+- **microban.txt:** 155 'The Dungeon' (disconnected crate/target area).
+- **microban_ii.txt:** 135 'Fractal' (47x41).
+- **microban_iii.txt:** 101 (47x42).
+- **microban_iv.txt:** 101 (42x42); 102 (49x44).
+- **sasquatch.txt:** 4 (disconnected crate/target area); 19 (disconnected crate/target area); 41 (disconnected crate/target area); 46 (disconnected crate/target area).
+- **sasquatch_ii.txt:** 9 (disconnected crate/target area).
+- **sasquatch_iii.txt:** 36 (disconnected crate/target area).
+- **sasquatch_iv.txt:** 25 (disconnected crate/target area).
+
+All 744 local puzzle entries were checked using `map_reader.gd` in Godot 4.7.2:
+valid symbols, one player, matching crate/target counts, enclosure, connected
+crate/target area, and size at most 40×40. This checks import compatibility, not
+solvability or a full manual playthrough of every puzzle.
