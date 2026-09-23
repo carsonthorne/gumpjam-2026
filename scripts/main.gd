@@ -13,6 +13,7 @@ const START_MENU_SCENE := "res://scenes/start_menu.tscn"
 @onready var pause_menu: CanvasLayer = $PauseMenu
 @onready var pause_button: Button = $PauseMenu/PauseButton
 @onready var pause_overlay: Control = $PauseMenu/Overlay
+@onready var pause_level_info_label: Label = $PauseMenu/Overlay/Panel/Margin/Content/LevelInfoLabel
 @onready var resume_button: Button = $PauseMenu/Overlay/Panel/Margin/Content/ResumeButton
 @onready var restart_button: Button = $PauseMenu/Overlay/Panel/Margin/Content/RestartButton
 @onready var pause_level_select_button: Button = $PauseMenu/Overlay/Panel/Margin/Content/LevelSelectButton
@@ -34,6 +35,8 @@ func _ready() -> void:
 		level_goal.connect("level_completed", _show_level_completed_popup)
 	next_level_button.pressed.connect(_load_next_level)
 	main_menu_button.pressed.connect(_return_to_main_menu)
+	pause_menu.connect("pause_requested", _show_pause_menu)
+	pause_menu.connect("resume_requested", _resume_game)
 	pause_button.pressed.connect(_show_pause_menu)
 	resume_button.pressed.connect(_resume_game)
 	restart_button.pressed.connect(_restart_level)
@@ -91,12 +94,15 @@ func _return_to_main_menu() -> void:
 func _show_pause_menu() -> void:
 	if level_complete_popup.visible:
 		return
+	pause_level_info_label.text = "%s - level %d" % [_collection_display_name(current_collection), current_level_number]
 	pause_overlay.visible = true
+	pause_button.visible = false
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _resume_game() -> void:
 	pause_overlay.visible = false
+	pause_button.visible = true
 	get_tree().paused = false
 
 func _restart_level() -> void:
@@ -131,3 +137,8 @@ func _count_levels(path: String) -> int:
 	if has_rows:
 		count += 1
 	return count
+
+func _collection_display_name(path: String) -> String:
+	if path.is_empty():
+		return "collection"
+	return path.get_file().get_basename()
