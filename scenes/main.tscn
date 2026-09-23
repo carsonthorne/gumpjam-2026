@@ -13,8 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://c8iebyx6n5as2" path="res://assets/backdrops/lab_wall_rat_cages.png" id="10_rat_cages"]
 [ext_resource type="Texture2D" uid="uid://dod6itsmrlppv" path="res://assets/backdrops/lab_wall_door.png" id="11_door"]
 [ext_resource type="Script" uid="uid://damt8jh4jgd66" path="res://addons/sokoban_layout/level_layout.gd" id="11_muem4"]
-[ext_resource type="Script" uid="uid://1c4kvhg13fwq" path="res://scripts/dev_level_menu.gd" id="12_dev_menu"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="13_main"]
+[ext_resource type="PackedScene" path="res://scenes/level_complete_popup.tscn" id="14_level_complete"]
+[ext_resource type="PackedScene" path="res://scenes/pause_menu.tscn" id="15_pause_menu"]
 
 [sub_resource type="Environment" id="Environment_lab"]
 background_mode = 1
@@ -582,5 +583,6 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5,
 [node name="Fence42" parent="LevelLayout/Generated/RatCage" unique_id=453092764 instance=ExtResource("7_o6xl0")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5, 6, 6)
 
-[node name="DevLevelMenu" type="CanvasLayer" parent="." unique_id=2124899395]
-script = ExtResource("12_dev_menu")
+[node name="LevelCompletePopup" parent="." instance=ExtResource("14_level_complete")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("15_pause_menu")]

@@ -1,5 +1,7 @@
 extends Node
 
+signal level_completed
+
 var target_tiles: Array[Node] = []
 var is_level_completed := false
 
@@ -37,5 +39,6 @@ func _check_level_completed() -> void:
 	if all_targets_filled and not is_level_completed:
 		is_level_completed = true
 		Log.print("level completed")
+		level_completed.emit()
 	elif not all_targets_filled:
 		is_level_completed = false

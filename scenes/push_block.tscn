@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c0w7gyd12sqfn"]
 
 [ext_resource type="Script" uid="uid://m18qipmafx56" path="res://scripts/push_block.gd" id="1_pvpmv"]
-[ext_resource type="Script" path="res://scripts/push_block_skin.gd" id="1_skin"]
+[ext_resource type="Script" uid="uid://87yenf4sxmjd" path="res://scripts/push_block_skin.gd" id="1_skin"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pvpmv"]
 albedo_color = Color(0.5780224, 0.19415864, 0.28957427, 1)
@@ -9,19 +9,18 @@ albedo_color = Color(0.5780224, 0.19415864, 0.28957427, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_hqe12"]
 lightmap_size_hint = Vector2i(14, 21)
 material = SubResource("StandardMaterial3D_pvpmv")
-size = Vector3(1, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hqe12"]
-size = Vector3(1, 1, 1)
+size = Vector3(0.9, 0.9, 0.9)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pvpmv"]
-size = Vector3(0.5087890666666667, 1, 1)
+size = Vector3(0.50878906, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0obic"]
 size = Vector3(1, 1, 0.50146484)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t46rb"]
-size = Vector3(0.5089111333333333, 1, 1)
+size = Vector3(0.50891113, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2mjm0"]
 size = Vector3(1, 1, 0.515625)

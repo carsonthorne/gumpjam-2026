@@ -28,7 +28,11 @@ func _ready() -> void:
 	collection_select.item_selected.connect(_on_collection_selected)
 	go_button.pressed.connect(_go_to_selected_level)
 	_load_collections()
-	_show_main()
+	if LevelSelection.open_level_select:
+		LevelSelection.open_level_select = false
+		_show_level_select()
+	else:
+		_show_main()
 
 func _load_collections() -> void:
 	collection_select.clear()
