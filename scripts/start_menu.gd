@@ -2,25 +2,35 @@ extends Control
 
 const MAIN_SCENE := "res://scenes/main.tscn"
 const COLLECTIONS_DIRECTORY := "res://levels"
+const START_BACKGROUND_SIZE := Vector2(1538.0, 864.0)
 
-@onready var collection_select: OptionButton = $Shell/Content/LevelSelectPanel/TopBar/CollectionSelect
-@onready var level_grid: GridContainer = $Shell/Content/LevelSelectPanel/LevelScroll/LevelGrid
-@onready var go_button: Button = $Shell/Content/LevelSelectPanel/GoButton
-@onready var detail_label: Label = $Shell/Content/DetailLabel
-@onready var main_panel: Control = $Shell/Content/MainPanel
-@onready var level_panel: Control = $Shell/Content/LevelSelectPanel
-@onready var instructions_panel: Control = $Shell/Content/InstructionsPanel
-@onready var level_select_button: Button = $Shell/Content/MainPanel/LevelSelectButton
-@onready var instructions_button: Button = $Shell/Content/MainPanel/InstructionsButton
-@onready var level_back_button: Button = $Shell/Content/LevelSelectPanel/TopBar/BackButton
-@onready var instructions_back_button: Button = $Shell/Content/InstructionsPanel/BackButton
+@onready var design_root: Control = $DesignRoot
+@onready var shell: MarginContainer = $DesignRoot/Shell
+@onready var level_select_title_spacer: Control = $DesignRoot/Shell/Content/LevelSelectTitleSpacer
+@onready var collection_select: OptionButton = $DesignRoot/Shell/Content/LevelSelectPanel/CollectionSelect
+@onready var level_grid: GridContainer = $DesignRoot/Shell/Content/LevelSelectPanel/LevelScroll/LevelGrid
+@onready var go_button: Button = $DesignRoot/Shell/Content/LevelSelectPanel/Actions/GoButton
+@onready var detail_label: Label = $DesignRoot/Shell/Content/DetailLabel
+@onready var main_panel: Control = $DesignRoot/Shell/Content/MainPanel
+@onready var level_panel: Control = $DesignRoot/Shell/Content/LevelSelectPanel
+@onready var instructions_panel: Control = $DesignRoot/Shell/Content/InstructionsPanel
+@onready var level_select_button: Button = $DesignRoot/Shell/Content/MainPanel/LevelSelectButton
+@onready var instructions_button: Button = $DesignRoot/Shell/Content/MainPanel/InstructionsButton
+@onready var level_back_button: Button = $DesignRoot/Shell/Content/LevelSelectPanel/Actions/BackButton
+@onready var instructions_back_button: Button = $DesignRoot/Shell/Content/InstructionsPanel/BackButton
 
 var selected_collection := ""
 var selected_level := 0
 var selected_level_button: Button = null
+var level_selection: Node = null
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	level_selection = get_node_or_null("/root/LevelSelection")
+	_update_shell_layout()
+	resized.connect(_update_shell_layout)
+	get_viewport().size_changed.connect(_update_shell_layout)
+	_update_shell_layout.call_deferred()
 	level_select_button.pressed.connect(_show_level_select)
 	instructions_button.pressed.connect(_show_instructions)
 	level_back_button.pressed.connect(_show_main)
@@ -28,11 +38,20 @@ func _ready() -> void:
 	collection_select.item_selected.connect(_on_collection_selected)
 	go_button.pressed.connect(_go_to_selected_level)
 	_load_collections()
-	if LevelSelection.open_level_select:
-		LevelSelection.open_level_select = false
+	if level_selection != null and level_selection.open_level_select:
+		level_selection.open_level_select = false
 		_show_level_select()
 	else:
 		_show_main()
+
+func _update_shell_layout() -> void:
+	var viewport_size := get_viewport_rect().size
+	var background_scale := maxf(viewport_size.x / START_BACKGROUND_SIZE.x, viewport_size.y / START_BACKGROUND_SIZE.y)
+	var background_origin := (viewport_size - (START_BACKGROUND_SIZE * background_scale)) * 0.5
+
+	design_root.position = background_origin
+	design_root.size = START_BACKGROUND_SIZE
+	design_root.scale = Vector2.ONE * background_scale
 
 func _load_collections() -> void:
 	collection_select.clear()
@@ -78,7 +97,7 @@ func _rebuild_level_buttons() -> void:
 		var button := Button.new()
 		button.text = str(level_number)
 		button.toggle_mode = true
-		button.custom_minimum_size = Vector2(56, 38)
+		button.custom_minimum_size = Vector2(50, 38)
 		button.pressed.connect(_select_level.bind(level_number, button))
 		level_grid.add_child(button)
 
@@ -122,24 +141,31 @@ func _go_to_selected_level() -> void:
 	if selected_collection.is_empty() or selected_level < 1:
 		return
 
-	LevelSelection.choose(selected_collection, selected_level)
+	if level_selection != null:
+		level_selection.choose(selected_collection, selected_level)
 	get_tree().change_scene_to_file(MAIN_SCENE)
 
 func _show_main() -> void:
+	level_select_title_spacer.visible = false
 	main_panel.visible = true
 	level_panel.visible = false
 	instructions_panel.visible = false
-	detail_label.text = "Start a puzzle or review the controls."
+	detail_label.visible = false
+	detail_label.text = ""
 
 func _show_level_select() -> void:
+	level_select_title_spacer.visible = false
 	main_panel.visible = false
 	level_panel.visible = true
 	instructions_panel.visible = false
+	detail_label.visible = false
 	if not selected_collection.is_empty():
 		detail_label.text = "%s: %d levels" % [selected_collection.get_file(), _count_levels(selected_collection)]
 
 func _show_instructions() -> void:
+	level_select_title_spacer.visible = false
 	main_panel.visible = false
 	level_panel.visible = false
 	instructions_panel.visible = true
+	detail_label.visible = true
 	detail_label.text = "Controls"
