@@ -1,7 +1,8 @@
-[gd_scene format=3 uid="uid://ohvbify4q0vj"]
+[gd_scene load_steps=4 format=3 uid="uid://ohvbify4q0vj"]
 
 [ext_resource type="Script" uid="uid://c6d6uap3lyc58" path="res://scripts/start_menu.gd" id="1_start_menu"]
 [ext_resource type="Texture2D" uid="uid://cgheewysve784" path="res://assets/start_menu_lab_clipboard.png" id="2_background"]
+[ext_resource type="Script" uid="uid://da1fy5dkuvfb3" path="res://scripts/cloudflare_leaderboard_client.gd" id="3_leaderboard"]
 
 [node name="StartMenu" type="Control" unique_id=167175076]
 layout_mode = 3
@@ -81,6 +82,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Instructions"
 
+[node name="HighScoresButton" type="Button" parent="DesignRoot/Shell/Content/MainPanel"]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "High Scores"
+
 [node name="LevelSelectPanel" type="VBoxContainer" parent="DesignRoot/Shell/Content" unique_id=751864696]
 layout_mode = 2
 size_flags_vertical = 3
@@ -138,3 +145,108 @@ text = "Back"
 layout_mode = 2
 text = "Move with WASD. Rotate the camera with the left and right arrow keys. Press Tab to toggle running. Press E or Space to interact and push blocks. Push every block onto a red target to clear the level."
 autowrap_mode = 2
+
+[node name="HighScoresPanel" type="VBoxContainer" parent="DesignRoot/Shell/Content"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="LevelPicker" type="VBoxContainer" parent="DesignRoot/Shell/Content/HighScoresPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="CollectionSelect" type="OptionButton" parent="DesignRoot/Shell/Content/HighScoresPanel/LevelPicker"]
+custom_minimum_size = Vector2(240, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LevelScroll" type="ScrollContainer" parent="DesignRoot/Shell/Content/HighScoresPanel/LevelPicker"]
+custom_minimum_size = Vector2(400, 325)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="LevelGrid" type="GridContainer" parent="DesignRoot/Shell/Content/HighScoresPanel/LevelPicker/LevelScroll"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 8
+
+[node name="ActionSpacer" type="Control" parent="DesignRoot/Shell/Content/HighScoresPanel/LevelPicker"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScoreList" type="VBoxContainer" parent="DesignRoot/Shell/Content/HighScoresPanel"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="ScoresTitle" type="Label" parent="DesignRoot/Shell/Content/HighScoresPanel/ScoreList"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
+theme_override_font_sizes/font_size = 18
+text = "Select a level"
+horizontal_alignment = 1
+
+[node name="Scores" type="VBoxContainer" parent="DesignRoot/Shell/Content/HighScoresPanel/ScoreList"]
+custom_minimum_size = Vector2(0, 354)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/separation = 3
+
+[node name="Headers" type="HBoxContainer" parent="DesignRoot/Shell/Content/HighScoresPanel/ScoreList/Scores"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 6
+
+[node name="RankHeader" type="Label" parent="DesignRoot/Shell/Content/HighScoresPanel/ScoreList/Scores/Headers"]
+custom_minimum_size = Vector2(30, 20)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.085, 0.065, 1)
+theme_override_font_sizes/font_size = 14
+text = ""
+
+[node name="NameHeader" type="Label" parent="DesignRoot/Shell/Content/HighScoresPanel/ScoreList/Scores/Headers"]
+custom_minimum_size = Vector2(120, 20)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.085, 0.065, 1)
+theme_override_font_sizes/font_size = 14
+text = "name"
+
+[node name="MovesHeader" type="Label" parent="DesignRoot/Shell/Content/HighScoresPanel/ScoreList/Scores/Headers"]
+custom_minimum_size = Vector2(78, 20)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.085, 0.065, 1)
+theme_override_font_sizes/font_size = 14
+text = "# moves"
+horizontal_alignment = 2
+
+[node name="TimeHeader" type="Label" parent="DesignRoot/Shell/Content/HighScoresPanel/ScoreList/Scores/Headers"]
+custom_minimum_size = Vector2(62, 20)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.085, 0.065, 1)
+theme_override_font_sizes/font_size = 14
+text = "time"
+horizontal_alignment = 2
+
+[node name="Rows" type="VBoxContainer" parent="DesignRoot/Shell/Content/HighScoresPanel/ScoreList/Scores"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 2
+
+[node name="BackButton" type="Button" parent="DesignRoot/Shell/Content/HighScoresPanel"]
+custom_minimum_size = Vector2(116, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[node name="CloudflareLeaderboardClient" type="Node" parent="."]
+script = ExtResource("3_leaderboard")
+api_base_url = "https://gumpjam-leaderboard.8v6gpbph77.workers.dev"

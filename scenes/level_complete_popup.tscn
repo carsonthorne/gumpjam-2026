@@ -1,8 +1,12 @@
-[gd_scene format=3]
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/level_complete_popup.gd" id="1_popup"]
+[ext_resource type="Texture2D" path="res://assets/level_complete_clipboard.png" id="2_clipboard"]
 
 [node name="LevelCompletePopup" type="CanvasLayer"]
 visible = false
 layer = 30
+script = ExtResource("1_popup")
 
 [node name="Overlay" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -12,49 +16,127 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.45)
 
-[node name="Panel" type="PanelContainer" parent="Overlay"]
-custom_minimum_size = Vector2(360, 0)
+[node name="DesignRoot" type="Control" parent="Overlay"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -86.0
-offset_right = 180.0
-offset_bottom = 86.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 628.0
+offset_bottom = 662.0
 
-[node name="Margin" type="MarginContainer" parent="Overlay/Panel"]
-layout_mode = 2
-theme_override_constants/margin_left = 22
-theme_override_constants/margin_top = 22
-theme_override_constants/margin_right = 22
-theme_override_constants/margin_bottom = 22
+[node name="Background" type="TextureRect" parent="Overlay/DesignRoot"]
+layout_mode = 1
+offset_right = 628.0
+offset_bottom = 662.0
+texture = ExtResource("2_clipboard")
+expand_mode = 1
 
-[node name="Content" type="VBoxContainer" parent="Overlay/Panel/Margin"]
-layout_mode = 2
-theme_override_constants/separation = 16
+[node name="Shell" type="MarginContainer" parent="Overlay/DesignRoot"]
+layout_mode = 1
+offset_left = 126.0
+offset_top = 148.0
+offset_right = 512.0
+offset_bottom = 606.0
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 10
 
-[node name="Title" type="Label" parent="Overlay/Panel/Margin/Content"]
+[node name="Content" type="VBoxContainer" parent="Overlay/DesignRoot/Shell"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Overlay/DesignRoot/Shell/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.075, 0.065, 1)
+theme_override_font_sizes/font_size = 27
 text = "Level Completed"
 horizontal_alignment = 1
 
-[node name="Buttons" type="HBoxContainer" parent="Overlay/Panel/Margin/Content"]
+[node name="Subtitle" type="Label" parent="Overlay/DesignRoot/Shell/Content"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
+theme_override_font_sizes/font_size = 14
+text = "collection - level 1"
+horizontal_alignment = 1
+
+[node name="ScoresTitle" type="Label" parent="Overlay/DesignRoot/Shell/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
+theme_override_font_sizes/font_size = 17
+text = "High Scores"
+horizontal_alignment = 1
+
+[node name="Scores" type="VBoxContainer" parent="Overlay/DesignRoot/Shell/Content"]
+custom_minimum_size = Vector2(0, 274)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 3
+
+[node name="Headers" type="HBoxContainer" parent="Overlay/DesignRoot/Shell/Content/Scores"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 6
+
+[node name="RankHeader" type="Label" parent="Overlay/DesignRoot/Shell/Content/Scores/Headers"]
+custom_minimum_size = Vector2(30, 20)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.085, 0.065, 1)
+theme_override_font_sizes/font_size = 14
+text = ""
+
+[node name="NameHeader" type="Label" parent="Overlay/DesignRoot/Shell/Content/Scores/Headers"]
+custom_minimum_size = Vector2(120, 20)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.085, 0.065, 1)
+theme_override_font_sizes/font_size = 14
+text = "name"
+
+[node name="MovesHeader" type="Label" parent="Overlay/DesignRoot/Shell/Content/Scores/Headers"]
+custom_minimum_size = Vector2(78, 20)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.085, 0.065, 1)
+theme_override_font_sizes/font_size = 14
+text = "# moves"
+horizontal_alignment = 2
+
+[node name="TimeHeader" type="Label" parent="Overlay/DesignRoot/Shell/Content/Scores/Headers"]
+custom_minimum_size = Vector2(62, 20)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.085, 0.065, 1)
+theme_override_font_sizes/font_size = 14
+text = "time"
+horizontal_alignment = 2
+
+[node name="Rows" type="VBoxContainer" parent="Overlay/DesignRoot/Shell/Content/Scores"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 2
+
+[node name="StatusLabel" type="Label" parent="Overlay/DesignRoot/Shell/Content"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16, 0.14, 0.12, 1)
+theme_override_font_sizes/font_size = 13
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Overlay/DesignRoot/Shell/Content"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 8
 alignment = 1
 
-[node name="NextLevelButton" type="Button" parent="Overlay/Panel/Margin/Content/Buttons"]
-custom_minimum_size = Vector2(130, 40)
+[node name="NextLevelButton" type="Button" parent="Overlay/DesignRoot/Shell/Content/Buttons"]
+custom_minimum_size = Vector2(106, 38)
 layout_mode = 2
 text = "Next Level"
 
-[node name="MainMenuButton" type="Button" parent="Overlay/Panel/Margin/Content/Buttons"]
-custom_minimum_size = Vector2(130, 40)
+[node name="RestartButton" type="Button" parent="Overlay/DesignRoot/Shell/Content/Buttons"]
+custom_minimum_size = Vector2(88, 38)
+layout_mode = 2
+text = "Restart"
+
+[node name="MainMenuButton" type="Button" parent="Overlay/DesignRoot/Shell/Content/Buttons"]
+custom_minimum_size = Vector2(106, 38)
 layout_mode = 2
 text = "Main Menu"

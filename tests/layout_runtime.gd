@@ -25,6 +25,14 @@ func _ready() -> void:
 	layout.add_child(generated)
 	main.get_node("Player").position = Builder.cell_position(map.player, map)
 	add_child(main)
+	var score_hud := main.get_node("ScoreHUD")
+	assert(score_hud.move_count == 0 and score_hud.is_tracking, "Score tracking must start at zero")
+	score_hud._process(65.0)
+	assert(score_hud.get_node("Panel/Margin/Stats/TimerLabel").text == "Time  01:05", "Timer must use minutes and seconds")
+	score_hud.reset()
+	get_tree().paused = true
+	assert(not score_hud.can_process(), "Score timer must not process while the game is paused")
+	get_tree().paused = false
 	assert(generated.get_node("Walls").get_child_count() == 35)
 	assert(generated.get_node("Crates").get_child_count() == 7)
 	assert(generated.get_node("Targets").get_child_count() == 7)
@@ -46,6 +54,7 @@ func _ready() -> void:
 	for i in 30:
 		await get_tree().physics_frame
 	assert(crate.global_position.is_equal_approx(Vector3(0, 0.5, -2)), "Crate must travel exactly one cell")
+	assert(score_hud.move_count == 1, "A successful crate push must count as one move")
 	for child in generated.get_node("Crates").get_children():
 		child.get_node("RigidBody3D").global_position = Vector3(20, 0.5, 20)
 	for i in 7:
@@ -53,5 +62,6 @@ func _ready() -> void:
 	for i in 10:
 		await get_tree().physics_frame
 	assert(main.get_node("LevelGoal").is_level_completed, "Generated targets must complete the level")
-	print("PASS: parsing, saved instances, initial target occupancy, blocked/open pushes, one-cell movement, completion")
+	assert(not score_hud.is_tracking, "Score timer must stop when the level is complete")
+	print("PASS: parsing, score tracking, pause behavior, pushes, one-cell movement, completion")
 	get_tree().quit()
