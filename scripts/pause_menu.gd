@@ -3,7 +3,10 @@ extends CanvasLayer
 signal pause_requested
 signal resume_requested
 
+const DESIGN_SIZE := Vector2(628.0, 662.0)
+
 @onready var overlay: Control = $Overlay
+@onready var panel: Control = $Overlay/Panel
 @onready var title_label: Label = $Overlay/Panel/Margin/Content/Title
 @onready var level_info_label: Label = $Overlay/Panel/Margin/Content/LevelInfoLabel
 @onready var resume_button: Button = $Overlay/Panel/Margin/Content/ResumeButton
@@ -18,12 +21,21 @@ signal resume_requested
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	_update_layout()
+	get_viewport().size_changed.connect(_update_layout)
 	options_button.pressed.connect(_show_options)
 	options_back_button.pressed.connect(_show_pause_actions)
 	music_slider.value_changed.connect(_on_music_volume_changed)
 	sfx_slider.value_changed.connect(_on_sfx_volume_changed)
 	music_slider.value = AudioSettings.get_music_volume()
 	sfx_slider.value = AudioSettings.get_sfx_volume()
+
+func _update_layout() -> void:
+	var viewport_size := get_viewport().get_visible_rect().size
+	var scale_factor := minf(1.0, minf(viewport_size.x / DESIGN_SIZE.x, viewport_size.y / DESIGN_SIZE.y) * 0.94)
+	panel.position = (viewport_size - (DESIGN_SIZE * scale_factor)) * 0.5
+	panel.size = DESIGN_SIZE
+	panel.scale = Vector2.ONE * scale_factor
 
 func _unhandled_input(event: InputEvent) -> void:
 	var key_event := event as InputEventKey

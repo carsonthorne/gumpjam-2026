@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ohvbify4q0vj"]
+[gd_scene load_steps=6 format=3 uid="uid://ohvbify4q0vj"]
 
 [ext_resource type="Script" uid="uid://c6d6uap3lyc58" path="res://scripts/start_menu.gd" id="1_start_menu"]
 [ext_resource type="Texture2D" uid="uid://cgheewysve784" path="res://assets/start_menu_lab_clipboard.png" id="2_background"]
 [ext_resource type="Script" uid="uid://da1fy5dkuvfb3" path="res://scripts/cloudflare_leaderboard_client.gd" id="3_leaderboard"]
+[ext_resource type="Shader" path="res://shaders/pixelated_menu_background.gdshader" id="4_pixelated_menu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pixelated_menu"]
+shader = ExtResource("4_pixelated_menu")
+shader_parameter/pixel_block_size = 6.0
 
 [node name="StartMenu" type="Control" unique_id=167175076]
 layout_mode = 3
@@ -20,6 +25,7 @@ offset_right = 1538.0
 offset_bottom = 864.0
 
 [node name="Background" type="TextureRect" parent="DesignRoot" unique_id=1195691894]
+material = SubResource("ShaderMaterial_pixelated_menu")
 layout_mode = 1
 offset_right = 1538.0
 offset_bottom = 864.0

@@ -1,6 +1,48 @@
-[gd_scene format=3 uid="uid://jw4hmuwu03qf"]
+[gd_scene load_steps=8 format=3 uid="uid://jw4hmuwu03qf"]
 
 [ext_resource type="Script" uid="uid://cho40pb5ftxgx" path="res://scripts/pause_menu.gd" id="1_pause_menu"]
+[ext_resource type="Texture2D" path="res://assets/pause_menu_clipboard.png" id="2_clipboard"]
+[ext_resource type="Shader" path="res://shaders/pixelated_menu_background.gdshader" id="3_pixelated_menu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pixelated_clipboard"]
+shader = ExtResource("3_pixelated_menu")
+shader_parameter/pixel_block_size = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_normal"]
+bg_color = Color(0.035, 0.043, 0.047, 0.86)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.48, 0.72, 0.62, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_hover"]
+bg_color = Color(0.055, 0.075, 0.078, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.58, 0.84, 0.72, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_pressed"]
+bg_color = Color(0.02, 0.027, 0.03, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.66, 0.56, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1794866047]
 layer = 25
@@ -16,6 +58,12 @@ offset_top = 16.0
 offset_right = -16.0
 offset_bottom = 52.0
 grow_horizontal = 0
+theme_override_colors/font_color = Color(0.88, 1, 0.94, 1)
+theme_override_colors/font_hover_color = Color(0.94, 1, 0.97, 1)
+theme_override_colors/font_pressed_color = Color(0.82, 0.96, 0.89, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_pause_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pause_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pause_pressed")
 text = "Pause"
 
 [node name="Overlay" type="ColorRect" parent="." unique_id=115447434]
@@ -27,23 +75,30 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.45)
 
-[node name="Panel" type="PanelContainer" parent="Overlay" unique_id=1772793793]
-custom_minimum_size = Vector2(360, 0)
+[node name="Panel" type="Control" parent="Overlay" unique_id=1772793793]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -150.0
-offset_right = 180.0
-offset_bottom = 150.0
+anchors_preset = 0
+offset_right = 628.0
+offset_bottom = 662.0
+
+[node name="Background" type="TextureRect" parent="Overlay/Panel"]
+material = SubResource("ShaderMaterial_pixelated_clipboard")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_clipboard")
+expand_mode = 1
 
 [node name="Margin" type="MarginContainer" parent="Overlay/Panel" unique_id=1876839062]
-layout_mode = 2
+layout_mode = 1
+offset_left = 126.0
+offset_top = 148.0
+offset_right = 512.0
+offset_bottom = 606.0
 theme_override_constants/margin_left = 22
 theme_override_constants/margin_top = 22
 theme_override_constants/margin_right = 22
@@ -51,16 +106,19 @@ theme_override_constants/margin_bottom = 22
 
 [node name="Content" type="VBoxContainer" parent="Overlay/Panel/Margin" unique_id=1097294451]
 layout_mode = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 10
+alignment = 1
 
 [node name="Title" type="Label" parent="Overlay/Panel/Margin/Content" unique_id=1291925300]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.075, 0.065, 1)
 theme_override_font_sizes/font_size = 28
 text = "Game Paused"
 horizontal_alignment = 1
 
 [node name="LevelInfoLabel" type="Label" parent="Overlay/Panel/Margin/Content" unique_id=715318011]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
 text = "collection - level 1"
 horizontal_alignment = 1
 
@@ -96,12 +154,14 @@ theme_override_constants/separation = 12
 
 [node name="OptionsTitle" type="Label" parent="Overlay/Panel/Margin/Content/OptionsPanel"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.075, 0.065, 1)
 theme_override_font_sizes/font_size = 22
 text = "Options"
 horizontal_alignment = 1
 
 [node name="MusicLabel" type="Label" parent="Overlay/Panel/Margin/Content/OptionsPanel"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
 text = "Music Volume"
 
 [node name="MusicSlider" type="HSlider" parent="Overlay/Panel/Margin/Content/OptionsPanel"]
@@ -112,6 +172,7 @@ value = 1.0
 
 [node name="SfxLabel" type="Label" parent="Overlay/Panel/Margin/Content/OptionsPanel"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
 text = "Sound Effects Volume"
 
 [node name="SfxSlider" type="HSlider" parent="Overlay/Panel/Margin/Content/OptionsPanel"]

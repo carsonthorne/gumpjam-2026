@@ -50,6 +50,9 @@ func _ready() -> void:
 	assert(actual_collection_order == expected_collection_order, "Expected %s, got %s" % [expected_collection_order, actual_collection_order])
 	start_menu.free()
 	var start_menu_scene: Control = load("res://scenes/start_menu.tscn").instantiate()
+	var start_background_material := start_menu_scene.get_node("DesignRoot/Background").material as ShaderMaterial
+	assert(start_background_material != null)
+	assert(start_background_material.get_shader_parameter("pixel_block_size") == 6.0)
 	var main_panel: VBoxContainer = start_menu_scene.get_node("DesignRoot/Shell/Content/MainPanel")
 	var main_button_order := PackedStringArray()
 	for child in main_panel.get_children():
@@ -59,6 +62,14 @@ func _ready() -> void:
 	var start_options: VBoxContainer = start_menu_scene.get_node("DesignRoot/Shell/Content/OptionsPanel")
 	var pause_menu_scene: CanvasLayer = load("res://scenes/pause_menu.tscn").instantiate()
 	var pause_options: VBoxContainer = pause_menu_scene.get_node("Overlay/Panel/Margin/Content/OptionsPanel")
+	var pause_button: Button = pause_menu_scene.get_node("PauseButton")
+	var pause_button_style := pause_button.get_theme_stylebox("normal") as StyleBoxFlat
+	assert(pause_button_style != null and is_equal_approx(pause_button_style.bg_color.a, 0.86))
+	var pause_background: TextureRect = pause_menu_scene.get_node("Overlay/Panel/Background")
+	var pause_background_material := pause_background.material as ShaderMaterial
+	assert(pause_background.texture.get_size() == Vector2(628, 662))
+	assert(pause_background_material != null)
+	assert(pause_background_material.get_shader_parameter("pixel_block_size") == 6.0)
 	for control_name in ["OptionsTitle", "MusicLabel", "SfxLabel", "OptionsBackButton"]:
 		assert(start_options.get_node(control_name).text == pause_options.get_node(control_name).text)
 	for slider_name in ["MusicSlider", "SfxSlider"]:
@@ -77,6 +88,15 @@ func _ready() -> void:
 		assert(Reader.validate(rows).has("error"))
 	assert(not Reader.validate(PackedStringArray(["#####", "#+$ #", "#####"])).has("error"))
 	var main: Node = load("res://scenes/main.tscn").instantiate()
+	for backdrop_name in ["NorthLabWall", "EastBenchWall", "SouthRatCageWall", "WestDoorWall"]:
+		var backdrop: MeshInstance3D = main.get_node("LabBackdrop/" + backdrop_name)
+		var backdrop_material := backdrop.mesh.material as ShaderMaterial
+		assert(backdrop_material != null, "%s must use the pixelated backdrop shader" % backdrop_name)
+		assert(backdrop_material.get_shader_parameter("pixel_block_size") == 6.0)
+	var level_complete_background: TextureRect = main.get_node("LevelCompletePopup/Overlay/DesignRoot/Background")
+	var level_complete_material := level_complete_background.material as ShaderMaterial
+	assert(level_complete_material != null)
+	assert(level_complete_material.get_shader_parameter("pixel_block_size") == 6.0)
 	var layout := main.get_node("LevelLayout")
 	var saved_map := Reader.read_level(layout.collection, layout.level_number)
 	assert(not saved_map.has("error"))
