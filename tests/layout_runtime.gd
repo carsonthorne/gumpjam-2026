@@ -137,6 +137,13 @@ func _ready() -> void:
 	assert(generated.get_node("Walls").get_child_count() == 35)
 	assert(generated.get_node("Crates").get_child_count() == 7)
 	assert(generated.get_node("Targets").get_child_count() == 7)
+	var block_letters := generated.get_node("Crates/Crate_3_2/RigidBody3D").find_children("Letter", "Label3D", true, false)
+	assert(block_letters.size() == 5, "Movable blocks must show a letter on every visible face")
+	var pixel_letter := block_letters[0] as Label3D
+	assert(pixel_letter.font_size == 32 and is_equal_approx(pixel_letter.pixel_size, 0.024), "Block letters must render at a visibly pixelated resolution")
+	assert(pixel_letter.texture_filter == BaseMaterial3D.TEXTURE_FILTER_NEAREST, "Block letters must use nearest-neighbor filtering")
+	assert(pixel_letter.alpha_cut == Label3D.ALPHA_CUT_DISCARD, "Block letters must use crisp one-bit edges")
+	assert(pixel_letter.outline_size == 2 and pixel_letter.outline_modulate == Color.BLACK, "Block letters must have a thin black border")
 	assert(main.get_node("Player").position == Vector3(-2, 0, -2))
 	for i in 10:
 		await get_tree().physics_frame
