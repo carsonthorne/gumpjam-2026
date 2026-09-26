@@ -18,8 +18,23 @@ extends CharacterBody3D
 @export var brace_visual_release_hold_time := 0.2
 @export var brace_release_backstep_distance := 0.12
 @export var brace_release_backstep_speed := 0.75
+@export var push_sound: AudioStream
+@export_range(0.0, 16.8, 0.01) var push_sound_start_seconds := 4.5
+@export_range(0.0, 16.8, 0.01) var push_sound_end_seconds := 5.4
+@export_range(-40.0, 24.0, 0.1) var push_sound_volume_db := 10.0
+@export_range(0.0, 36.0, 0.1) var push_sound_max_db := 24.0
+@export var walk_sound: AudioStream
+@export_range(0.0, 4.32, 0.01) var walk_sound_start_seconds := 0.08
+@export_range(0.0, 4.32, 0.01) var walk_sound_end_seconds := 0.35
+@export_range(0.05, 3.0, 0.01) var walk_sound_rate_seconds := 0.25
+@export_range(0.05, 3.0, 0.01) var run_sound_rate_seconds := 0.2
+@export_range(-40.0, 24.0, 0.1) var walk_sound_volume_db := -14.0
+@export_range(0.0, 36.0, 0.1) var walk_sound_max_db := 24.0
 
 @export var camera: Camera3D
+
+@onready var push_sound_player: AudioStreamPlayer3D = $PushSoundPlayer
+@onready var walk_sound_player: AudioStreamPlayer3D = $WalkSoundPlayer
 
 signal interact_pressed
 signal push_ready_started
@@ -42,6 +57,12 @@ var push_follow_speed := 0.0
 var push_follow_distance := 0.0
 var push_follow_source: Node = null
 var is_run_toggled := false
+var walk_sound_time_left := 0.0
+
+func _ready() -> void:
+	AudioSettings.ensure_audio_buses()
+	push_sound_player.bus = AudioSettings.SFX_BUS
+	walk_sound_player.bus = AudioSettings.SFX_BUS
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("run") and not event.is_echo():
@@ -144,8 +165,54 @@ func play_push_animation(direction := Vector3.ZERO, contact_delay := 0.0, push_s
 	brace_visual_release_hold_left = 0.0
 	brace_release_backstep_direction = Vector3.ZERO
 	brace_release_backstep_distance_left = 0.0
+	_play_push_sound()
 	push_started.emit()
 	start_push_follow(direction, contact_delay + movement_delay, push_speed, push_distance, source)
+
+func _process(_delta: float) -> void:
+	if push_sound_player.playing and push_sound_end_seconds > push_sound_start_seconds:
+		if push_sound_player.get_playback_position() >= push_sound_end_seconds:
+			push_sound_player.stop()
+
+	if walk_sound_player.playing and walk_sound_end_seconds > walk_sound_start_seconds:
+		if walk_sound_player.get_playback_position() >= walk_sound_end_seconds:
+			walk_sound_player.stop()
+
+	_update_walk_sound(_delta)
+
+func _play_push_sound() -> void:
+	if push_sound == null:
+		return
+
+	push_sound_player.stop()
+	push_sound_player.stream = push_sound
+	push_sound_player.volume_db = push_sound_volume_db
+	push_sound_player.max_db = maxf(push_sound_max_db, push_sound_volume_db)
+	push_sound_player.play(push_sound_start_seconds)
+
+func _update_walk_sound(delta: float) -> void:
+	var horizontal_speed := Vector2(velocity.x, velocity.z).length()
+	if horizontal_speed < 0.1 or is_push_animation_active():
+		walk_sound_time_left = 0.0
+		walk_sound_player.stop()
+		return
+
+	walk_sound_time_left -= delta
+	if walk_sound_time_left > 0.0:
+		return
+
+	_play_walk_sound()
+	walk_sound_time_left = run_sound_rate_seconds if wants_to_run() else walk_sound_rate_seconds
+
+func _play_walk_sound() -> void:
+	if walk_sound == null:
+		return
+
+	walk_sound_player.stop()
+	walk_sound_player.stream = walk_sound
+	walk_sound_player.volume_db = walk_sound_volume_db
+	walk_sound_player.max_db = maxf(walk_sound_max_db, walk_sound_volume_db)
+	walk_sound_player.play(walk_sound_start_seconds)
 
 func start_push_follow(direction: Vector3, contact_delay: float, push_speed: float, push_distance: float, source: Node = null) -> void:
 	direction.y = 0.0

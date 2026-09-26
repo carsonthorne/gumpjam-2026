@@ -76,17 +76,23 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Level Select"
 
+[node name="HighScoresButton" type="Button" parent="DesignRoot/Shell/Content/MainPanel"]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "High Scores"
+
 [node name="InstructionsButton" type="Button" parent="DesignRoot/Shell/Content/MainPanel" unique_id=1190318671]
 custom_minimum_size = Vector2(240, 44)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Instructions"
 
-[node name="HighScoresButton" type="Button" parent="DesignRoot/Shell/Content/MainPanel"]
+[node name="OptionsButton" type="Button" parent="DesignRoot/Shell/Content/MainPanel"]
 custom_minimum_size = Vector2(240, 44)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "High Scores"
+text = "Options"
 
 [node name="LevelSelectPanel" type="VBoxContainer" parent="DesignRoot/Shell/Content" unique_id=751864696]
 layout_mode = 2
@@ -145,6 +151,46 @@ text = "Back"
 layout_mode = 2
 text = "Move with WASD. Rotate the camera with the left and right arrow keys. Press Tab to toggle running. Press E or Space to interact and push blocks. Push every block onto a red target to clear the level."
 autowrap_mode = 2
+
+[node name="OptionsPanel" type="VBoxContainer" parent="DesignRoot/Shell/Content"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+
+[node name="OptionsTitle" type="Label" parent="DesignRoot/Shell/Content/OptionsPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
+theme_override_font_sizes/font_size = 22
+text = "Options"
+horizontal_alignment = 1
+
+[node name="MusicLabel" type="Label" parent="DesignRoot/Shell/Content/OptionsPanel"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="DesignRoot/Shell/Content/OptionsPanel"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SfxLabel" type="Label" parent="DesignRoot/Shell/Content/OptionsPanel"]
+layout_mode = 2
+text = "Sound Effects Volume"
+
+[node name="SfxSlider" type="HSlider" parent="DesignRoot/Shell/Content/OptionsPanel"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="OptionsBackButton" type="Button" parent="DesignRoot/Shell/Content/OptionsPanel"]
+custom_minimum_size = Vector2(240, 44)
+layout_mode = 2
+text = "Back"
 
 [node name="HighScoresPanel" type="VBoxContainer" parent="DesignRoot/Shell/Content"]
 visible = false

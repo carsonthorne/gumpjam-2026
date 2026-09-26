@@ -1,7 +1,7 @@
 # Puzzle collection sources
 
-Downloaded 2026-09-21 and updated 2026-09-22. These ten files add 801 puzzle
-entries (803 including the tutorials). Collections can overlap: Microban III
+Downloaded 2026-09-21 and updated 2026-09-26. These ten files add 878 puzzle
+entries (880 including the tutorials). Collections can overlap: Microban III
 includes some of Skinner's LOMA contributions. This is not a count of unique
 puzzles.
 
@@ -32,15 +32,14 @@ puzzles. These are that archive's editions, not a claim to be the newest revisio
 ## LOMA
 
 Curated by **Aymeric du Peloux**, with individual authors credited beside each
-puzzle. This is the 60-level edition dated 2010-05-18 in the SourceCode.se catalog,
-not the later 137-level edition described on the curator's site.
+puzzle. This is the 137-level edition published in 2021 on the curator's site.
+The source titles, authors, comments, and board rows were retained when its XSB
+metadata was converted to this project's semicolon-comment format.
 
 - [Curator's page and redistribution permission](https://aymericdupeloux.wixsite.com/sokoban/post/_loma)
-- [Downloaded XML collection](https://www.sourcecode.se/sokoban/levels.php?act=dnl_level&file=Loma.slc&as_text=0)
-- [Local collection: 60 puzzles](loma.txt)
+- [Local collection: 137 puzzles](loma.txt)
 
 The curator explicitly permits free publication without requesting permission.
-The XML level IDs, authors, and board rows were retained in the text conversion.
 
 ## Math Is Fun Sokoban
 

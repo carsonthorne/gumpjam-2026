@@ -18,6 +18,8 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 
 Log="*uid://bci704i15v2c3"
 LevelSelection="*res://scripts/level_selection.gd"
+AudioSettings="*res://scripts/audio_settings.gd"
+MusicPlayer="*res://scripts/music_player.gd"
 
 [display]
 

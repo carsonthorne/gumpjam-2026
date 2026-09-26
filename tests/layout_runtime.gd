@@ -2,6 +2,7 @@ extends Node
 
 const Builder = preload("res://addons/sokoban_layout/layout_builder.gd")
 const Reader = preload("res://addons/sokoban_layout/map_reader.gd")
+const StartMenu = preload("res://scripts/start_menu.gd")
 
 func _ready() -> void:
 	var map := Reader.validate(PackedStringArray(["  #####", "###   #", "#.@$  #", "### $.#", "#.##$ #", "# # . ##", "#$ *$$.#", "#   .  #", "########"]))
@@ -9,6 +10,69 @@ func _ready() -> void:
 	assert(map.width == 8 and map.height == 9 and map.crates == 7)
 	assert(Reader.read_level("res://levels/tutorials.txt", 2).crates == 2)
 	assert(Reader.read_level("res://levels/tutorials.txt", 3).has("error"))
+	for level_number in range(1, 138):
+		var loma_map := Reader.read_level("res://levels/loma.txt", level_number)
+		assert(not loma_map.has("error"), "LOMA level %d failed to load: %s" % [level_number, loma_map.get("error", "")])
+	assert(Reader.read_level("res://levels/loma.txt", 138).has("error"))
+	var start_menu := StartMenu.new()
+	var expected_collection_labels := {
+		"tutorials.txt": "Tutorials (tutorial)",
+		"microban.txt": "Microban I (easy)",
+		"microban_ii.txt": "Microban II (easy)",
+		"microban_iii.txt": "Microban III (easy)",
+		"microban_iv.txt": "Microban IV (easy)",
+		"sasquatch.txt": "Sasquatch I (medium)",
+		"sasquatch_ii.txt": "Sasquatch II (hard)",
+		"sasquatch_iii.txt": "Sasquatch III (medium-very hard)",
+		"sasquatch_iv.txt": "Sasquatch IV (medium-very hard)",
+		"loma.txt": "LOMA (easy-hard)",
+		"wikipedia.txt": "Math Is Fun Sokoban (easy - hard)",
+	}
+	for file_name in expected_collection_labels:
+		var path: String = "res://levels/" + str(file_name)
+		assert(start_menu._collection_option_label(path) == expected_collection_labels[file_name])
+	var expected_collection_order := PackedStringArray([
+		"tutorials.txt",
+		"microban.txt",
+		"microban_ii.txt",
+		"microban_iii.txt",
+		"microban_iv.txt",
+		"sasquatch.txt",
+		"sasquatch_ii.txt",
+		"sasquatch_iii.txt",
+		"sasquatch_iv.txt",
+		"wikipedia.txt",
+		"loma.txt",
+	])
+	var actual_collection_order := PackedStringArray()
+	for collection_path in start_menu._collections():
+		actual_collection_order.append(collection_path.get_file())
+	assert(actual_collection_order == expected_collection_order, "Expected %s, got %s" % [expected_collection_order, actual_collection_order])
+	start_menu.free()
+	var start_menu_scene: Control = load("res://scenes/start_menu.tscn").instantiate()
+	var main_panel: VBoxContainer = start_menu_scene.get_node("DesignRoot/Shell/Content/MainPanel")
+	var main_button_order := PackedStringArray()
+	for child in main_panel.get_children():
+		if child is Button:
+			main_button_order.append(child.text)
+	assert(main_button_order == PackedStringArray(["Level Select", "High Scores", "Instructions", "Options"]))
+	var start_options: VBoxContainer = start_menu_scene.get_node("DesignRoot/Shell/Content/OptionsPanel")
+	var pause_menu_scene: CanvasLayer = load("res://scenes/pause_menu.tscn").instantiate()
+	var pause_options: VBoxContainer = pause_menu_scene.get_node("Overlay/Panel/Margin/Content/OptionsPanel")
+	for control_name in ["OptionsTitle", "MusicLabel", "SfxLabel", "OptionsBackButton"]:
+		assert(start_options.get_node(control_name).text == pause_options.get_node(control_name).text)
+	for slider_name in ["MusicSlider", "SfxSlider"]:
+		var start_slider: HSlider = start_options.get_node(slider_name)
+		var pause_slider: HSlider = pause_options.get_node(slider_name)
+		assert(start_slider.max_value == pause_slider.max_value and start_slider.step == pause_slider.step)
+	add_child(start_menu_scene)
+	main_panel.get_node("OptionsButton").pressed.emit()
+	assert(start_options.visible and not main_panel.visible, "Options button must open the start-menu options panel")
+	start_options.get_node("OptionsBackButton").pressed.emit()
+	assert(main_panel.visible and not start_options.visible, "Options Back button must return to the start menu")
+	remove_child(start_menu_scene)
+	start_menu_scene.free()
+	pause_menu_scene.free()
 	for rows in [PackedStringArray(["###", "#@$", "#.#"]), PackedStringArray(["#####", "#@@$#", "# . #", "#####"]), PackedStringArray(["#####", "#@x.#", "#####"]), PackedStringArray(["#####", "#@$ #", "#####"])]:
 		assert(Reader.validate(rows).has("error"))
 	assert(not Reader.validate(PackedStringArray(["#####", "#+$ #", "#####"])).has("error"))

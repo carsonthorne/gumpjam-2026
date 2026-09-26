@@ -1,6 +1,7 @@
-; Collection: LOMA (60-level mirror edition, 2010-05-18)
+; Collection: LOMA (137-level edition, 2021-04-13)
 ; Curator: Aymeric du Peloux
-; Source: https://www.sourcecode.se/sokoban/levels.php?act=dnl_level&file=Loma.slc&as_text=0
+; Source: https://aymericdupeloux.wixsite.com/sokoban/post/_loma
+; Original file copyright: 2004-2021, many authors.
 ; Redistribution permitted by curator; see SOURCES.md.
 
 ; Source level: LOMA01-01
@@ -26,7 +27,7 @@
    ####
 
 ; Source level: LOMA01-03
-; Author: David W Skinner
+; Author: David Skinner
   #####
  ##   ##
 ### #  #
@@ -77,6 +78,119 @@
   ####  #
      #  #
      ####
+
+; Source level: LOMA01-07
+; Author: Frantisek Pokorny
+  ######
+  #    #
+###$.# #
+#  $.#@#
+# #$.  #
+#    ##
+##  ###
+#####
+
+; Source level: LOMA01-08
+; Author: Arpad Fekete
+#####
+#   ####
+# #$.  #
+#@ $.# #
+###$.  #
+  #  ###
+  #  #
+  ####
+
+; Source level: LOMA01-09
+; Author: David Skinner
+########
+#      #
+# #$.@ #
+#  $.###
+# #$.#
+#   ##
+#####
+
+; Source level: LOMA01-10
+; Author: Roger Delaporte
+  ####
+  #  #
+  #  #
+###$.#
+#  $.###
+# #$.@ #
+#   ## #
+###    #
+  ######
+
+; Source level: LOMA01-11
+; Author: David Skinner
+; Comment: Microban 3 #64
+##### ####
+#   ###  #
+#    ##@ #
+##    #$.#
+ ##    $.#
+# ##  #$.#
+## ## #  #
+### ######
+
+; Source level: LOMA01-12
+; Author: Jordi Domenech
+; Comment: Pufiban #59
+#######
+#   $.#
+#   $.#
+#  #$.#
+#  #@ #
+#######
+
+; Source level: LOMA01-13
+; Author: Jordi Domenech
+; Comment: Miniatures #3 Mirror
+ ######
+ #    #
+ # $. #
+###$.##
+#  $.#
+# @  #
+###  #
+  ####
+
+; Source level: LOMA01-14
+; Author: Jordi Domenech
+; Comment: Magic Sokoban 7 #4 Mirror
+  ####
+  #  ##
+ ##$. #
+## $.@#
+#  $. #
+# # ###
+#   #
+#####
+
+; Source level: LOMA01-15
+; Author: Jorge Gloria
+########
+#      #
+# #$.# #
+#  $.#@#
+###$.  #
+  #  ###
+  ######
+
+; Source level: LOMA01-16
+; Author: Marti Homs
+; Comment: Funny template levels #100 Funtastic
+  #####
+  #   #
+###   #
+#  $.##
+#  $.#
+###$.#
+  #  #
+  #@ #
+  ####
 
 ; Source level: LOMA02-01
 ; Author: François Marques
@@ -135,7 +249,7 @@
 ########
 
 ; Source level: LOMA02-06
-; Author: David W Skinner
+; Author: David Skinner
 #####
 #   ####
 # #$.  #
@@ -144,6 +258,86 @@
   #  ###
   #  #
   ####
+
+; Source level: LOMA02-07
+; Author: Frantisek Pokorny
+  #####
+###   #
+#   # #
+# #$. #
+#  .$@#
+###$.##
+  #  #
+  #  #
+  ####
+
+; Source level: LOMA02-08
+; Author: Arpad Fekete
+  ####
+  #@ #
+###$.####
+#  .$   #
+#  $. # #
+### ##  #
+  #    ##
+  ######
+
+; Source level: LOMA02-09
+; Author: David Skinner
+  ######
+###    #
+#   ## #
+# #$.  #
+#@#.$###
+# #$.##
+#     #
+###   #
+  #####
+
+; Source level: LOMA02-10
+; Author: Roger Delaporte
+#####
+#   ####
+#   $. #
+####.$@#
+#   $. #
+#   ####
+#####
+
+; Source level: LOMA02-11
+; Author: David Skinner
+; Comment: Microban 3 #67
+  ######
+###    #
+#  $.# #
+#@#.$  #
+# #$.###
+#    #
+######
+
+; Source level: LOMA02-12
+; Author: Jorge Gloria
+#####
+#   #
+# # ####
+# #$.@ #
+# #.$# #
+#  $.  #
+### ## #
+  #    #
+  ######
+
+; Source level: LOMA02-13
+; Author: Marti Homs
+; Comment: Maps after all #99
+  ####
+  #  #
+  #  #
+###$.#
+# @.$##
+# #$. #
+#     #
+#######
 
 ; Source level: LOMA03-01
 ; Author: François Marques
@@ -199,7 +393,7 @@
   #####
 
 ; Source level: LOMA03-06
-; Author: David W Skinner
+; Author: David Skinner
   ####
  ##  #
  # . #
@@ -207,6 +401,108 @@
 ## *###
 #  $ #
 #  @ #
+#  ###
+####
+
+; Source level: LOMA03-07
+; Author: Frantisek Pokorny
+  #####
+  # . #
+  # * #
+ ## *###
+ #  $@ #
+ # # # #
+ #     #
+ #######
+
+; Source level: LOMA03-08
+; Author: Arpad Fekete
+    ####
+  ###  ####
+  # .     #
+  # * @#  #
+####*###  #
+#   $     #
+#   ####  #
+#####  ####
+
+; Source level: LOMA03-09
+; Author: David Skinner
+####
+#  ####
+#     #
+#  .# #
+###*# ##
+ #@*   #
+ # $   #
+ ###  ##
+   ####
+
+; Source level: LOMA03-10
+; Author: Roger Delaporte
+########
+#@ .   #
+#  * # #
+###*## #
+#  $   #
+#      #
+########
+
+; Source level: LOMA03-11
+; Author: David Skinner
+; Comment: Microban 3 #71 arr.
+ #####
+ # . #
+## * #
+#  * #
+# @$ #
+#  ###
+####
+
+; Source level: LOMA03-12
+; Author: Jordi Domenech
+; Comment: Pour Aymeric
+########
+#  # . #
+#    * #
+#  #@*##
+## # $ #
+ #     #
+ #######
+
+; Source level: LOMA03-13
+; Author: Jordi Domenech
+  ####
+###  #
+#  . ##
+#  *  #
+###*# #
+ # $  #
+ #   ##
+ # @ #
+ #####
+
+; Source level: LOMA03-14
+; Author: Jorge Gloria
+#####
+#   #
+# #.###
+#  *  #
+###*#@#
+#  $  #
+# # # #
+#     #
+#######
+
+; Source level: LOMA03-15
+; Author: Marti Homs
+; Comment: Maps after all #72
+ ####
+ #  ###
+ # .  #
+## *# #
+#  *  #
+#  $@##
 #  ###
 ####
 
@@ -223,7 +519,7 @@
  ########
 
 ; Source level: LOMA04-02
-; Author: David W Skinner
+; Author: David Skinner
 ###### #
 #   ## #
 #  . #
@@ -280,8 +576,93 @@
  #.#
  ###
 
+; Source level: LOMA04-07
+; Author: Frantisek Pokorny
+#######
+#   . ##
+# # $  #
+#  #*# #
+##  $  #
+ #@#.###
+ #   #
+ #####
+
+; Source level: LOMA04-08
+; Author: Arpad Fekete
+   ####
+ ###  ####
+ # .     #
+ #@$  #  #
+###*###  #
+#  $     #
+#  .###  #
+##### ####
+
+; Source level: LOMA04-09
+; Author: David Skinner
+#####
+#   ##
+# #. ###
+#  $ @ #
+###*   #
+#  $ ###
+# #.##
+#   #
+#####
+
+; Source level: LOMA04-10
+; Author: Roger Delaporte
+#######
+#  .  #
+#  $  #
+###*#@#
+#  $  #
+#  .###
+#####
+
+; Source level: LOMA04-11
+; Author: David Skinner
+; Comment: Microban 3 #76
+ ######
+ ###  #
+ # . @#
+ # $  #
+###* ##
+#  $ ##
+# #. #
+#   ##
+##  ##
+######
+
+; Source level: LOMA04-12
+; Author: Jorge Gloria
+       #####
+    ####   #
+    #  # # #
+    #      #
+    # ### ###
+ ####.###   #
+ #   $    # #
+ #@##*###   #
+ #   $ ######
+ # # . #
+ #   ###
+ #####
+
+; Source level: LOMA04-13
+; Author: Marti Homs
+; Comment: Template-based levels #7
+   ######
+####    #
+#  . ## #
+#@ $  # #
+###*# # #
+ # $    #
+ # . ####
+ #####
+
 ; Source level: LOMA05-01
-; Author: David W Skinner
+; Author: David Skinner
  ####
  #  #
  #  #
@@ -360,6 +741,96 @@
  #   #  ##
  ########
 
+; Source level: LOMA05-07
+; Author: Frantisek Pokorny
+  #####
+  #   #
+  # # #
+###$$ #
+#  $. #
+# #..##
+#@   #
+######
+
+; Source level: LOMA05-08
+; Author: Arpad Fekete
+ ####
+ #  #
+ #  #
+ #  ######
+###$$    #
+#  $. ## #
+#  ..#  @#
+####   ###
+   #####
+
+; Source level: LOMA05-09
+; Author: David Skinner
+#####
+#  @####
+# #$$  #
+#  $.# #
+###..  #
+  ##   #
+   #####
+
+; Source level: LOMA05-10
+; Author: Roger Delaporte
+  ####
+  #  #
+###  ###
+#  $$@ #
+# #$.# #
+#  ..  #
+########
+
+; Source level: LOMA05-11
+; Author: David Skinner
+; Comment: Microban 3 #80
+ #####
+ #   #
+ # # #
+ # @ #
+##$$###
+# $.  #
+# ..# #
+###   #
+  #####
+
+; Source level: LOMA05-12
+; Author: Jorge Gloria
+   #######
+####     #
+#    ### #
+# #    $$#
+#   ###$.#
+#######..#
+      #@ #
+      ####
+
+; Source level: LOMA05-13
+; Author: Marti Homs
+; Comment: Orange levels #6
+#########
+#  ##   #
+#   $$  #
+#  #$. ##
+##  ..##
+ # @###
+ ####
+
+; Source level: LOMA05-14
+; Author: Aymeric du Peloux
+; Comment: Zeptocosmos #20
+###########
+#  #   #  #
+#      #  #
+#   ####  #
+###$$    ##
+ # $.##   #
+ #@..##   #
+ ##########
+
 ; Source level: LOMA06-01
 ; Author: François Marques
    ###
@@ -422,7 +893,7 @@
  ####
 
 ; Source level: LOMA06-06
-; Author: David W Skinner
+; Author: David Skinner
   #####
   ##  #
 ###   #
@@ -431,6 +902,95 @@
 ## $ #
 ###@ #
   ####
+
+; Source level: LOMA06-07
+; Author: Frantisek Pokorny
+ ####
+ #  #
+ # $###
+##.*. #
+#  $  #
+# # # #
+#  @  #
+#######
+
+; Source level: LOMA06-08
+; Author: Arpad Fekete
+    ####
+    #  #
+#####  #####
+# @   $#   #
+#   #.*.   #
+##### $#####
+    #  #
+    #  #
+    ####
+
+; Source level: LOMA06-09
+; Author: David Skinner
+  ####
+ ##  #
+###$ #
+# .*.#
+# #$ #
+#  @ #
+#   ##
+#####
+
+; Source level: LOMA06-10
+; Author: Roger Delaporte
+ ######
+ #    #
+## ##$###
+#   .*.@#
+#   #$###
+###   #
+  #####
+
+; Source level: LOMA06-11
+; Author: David Skinner
+; Comment: Microban 3 #84
+### #####
+#####   #
+### $ # #
+# @.*.  #
+# # $ ###
+#   #####
+##### ###
+
+; Source level: LOMA06-12
+; Author: Jordi Domenech
+; Comment: Magic Sokoban #11 Pufi 1+
+ ####
+ #  ##
+## $ #
+# .*.##
+# #$  #
+#  @  #
+#######
+
+; Source level: LOMA06-13
+; Author: Jorge Gloria
+#####
+#   #  #####
+#   #  #   #
+##  ####$# #
+ #     .*.@#
+##  ####$# #
+#   #  #   #
+#   #  #####
+#####
+
+; Source level: LOMA06-14
+; Author: Marti Homs
+; Comment: Funny template levels #25
+     ####
+######  #
+#    $  #
+# # .*. #
+# # @$  #
+#   #####
+#####
 
 ; Source level: LOMA07-01
 ; Author: François Marques
@@ -493,7 +1053,7 @@
 #####
 
 ; Source level: LOMA07-06
-; Author: David W Skinner
+; Author: David Skinner
 #####
 #   ##
 #  $ ##
@@ -502,6 +1062,90 @@
  #  #  #
 #####  #
 ##  ####
+
+; Source level: LOMA07-07
+; Author: Frantisek Pokorny
+  ####
+###  #
+#    ###
+# #  $@#
+#  #$*.#
+##   . #
+ ###  ##
+   ####
+
+; Source level: LOMA07-08
+; Author: Arpad Fekete
+ ######
+##    ##
+#  ##  #
+# #  # #
+#  @$# #
+###$*. #
+  # .###
+  #  #
+  #  #
+  #  #
+  #  #
+  ####
+
+; Source level: LOMA07-09
+; Author: David Skinner
+#####
+#   ####
+# #@$  #
+#  $*. #
+####. ##
+ #    #
+ #   ##
+ #####
+
+; Source level: LOMA07-10
+; Author: Roger Delaporte
+######
+#    #
+# # $####
+# #$*. @#
+# # .#  #
+#      #
+#####  #
+     ##
+
+; Source level: LOMA07-11
+; Author: David Skinner
+; Comment: Microban 3 #87
+  ########
+  #      #
+### #### #
+#  @$  # #
+#  $*. # #
+#  #.### #
+#  #     #
+##########
+
+; Source level: LOMA07-12
+; Author: Jorge Gloria
+   ####
+####  #
+#     #
+#  ## ####
+## #@$   #
+ # #$*.# #
+ # # . # #
+ # # ### #
+ #       #
+ #  ######
+ ####
+
+; Source level: LOMA07-13
+; Author: Marti Homs
+; Comment: Maps after all #159
+####
+#  ###
+#  $ ##
+# $*. #
+#  . @#
+#######
 
 ; Source level: LOMA08-01
 ; Author: François Marques
@@ -564,7 +1208,7 @@
     ####
 
 ; Source level: LOMA08-06
-; Author: David W Skinner
+; Author: David Skinner
   #####
  ##   #
 ###   #
@@ -573,6 +1217,80 @@
 #  * ##
 ##  ##
 #####
+
+; Source level: LOMA08-07
+; Author: Frantisek Pokorny
+   #####
+####   #
+#   *  #
+#  . $##
+### * #
+  ##@##
+   ###
+
+; Source level: LOMA08-08
+; Author: Arpad Fekete
+########
+#   #  #
+#@# *  ##
+#  .#$  #
+##  * # #
+ #  #   #
+ ########
+
+; Source level: LOMA08-09
+; Author: David Skinner
+ ####
+ #  ##
+## * ##
+# .@$ #
+#  *  #
+#  #  #
+#######
+
+; Source level: LOMA08-10
+; Author: Roger Delaporte
+#####
+#   ####
+#  @*  ###
+###.#$   #
+  # *    #
+  ########
+
+; Source level: LOMA08-11
+; Author: David Skinner
+; Comment: Microban 3 #91
+  #####
+ ##   #
+## *  #
+# .@$##
+#  *  #
+###   #
+#######
+
+; Source level: LOMA08-12
+; Author: Jorge Gloria
+########
+#   #  #
+#      #
+### ## ####
+  # ##*#  #
+  # #.@$  ##
+  # ##*##  #
+  #        #
+  # # ######
+  #   #
+  #####
+
+; Source level: LOMA08-13
+; Author: Marti Homs
+ ####
+ #  ##
+## * #
+# .@$###
+#  *   #
+###    #
+  ######
 
 ; Source level: LOMA09-01
 ; Author: François Marques
@@ -637,7 +1355,7 @@
 ########
 
 ; Source level: LOMA09-06
-; Author: David W Skinner
+; Author: David Skinner
   ####
   #  #
 ###  ###
@@ -647,8 +1365,85 @@
 #  ##
 #####
 
+; Source level: LOMA09-07
+; Author: Frantisek Pokorny
+  ####
+  #  #
+### @###
+#  $*  #
+#  *.  #
+###   ##
+  #####
+
+; Source level: LOMA09-08
+; Author: Arpad Fekete
+  ####
+  #  #
+###@ ####
+#  $*   #
+#  *. # #
+### ##  #
+  #    ##
+  ######
+
+; Source level: LOMA09-09
+; Author: David Skinner
+#####
+#   #####
+#   #   #
+## $*@  #
+ # *.  ##
+ #  ####
+ ####
+
+; Source level: LOMA09-10
+; Author: Roger Delaporte
+    #####
+    #   #
+    # # ##
+#####    #
+#   ##$* #
+#     *. #
+#######@##
+      ###
+
+; Source level: LOMA09-11
+; Author: David Skinner
+; Comment: Microban 3 #96
+     ####
+######  #
+#  ##   #
+#   $*  #
+#  #*. ##
+##  @ ##
+ #  ###
+ ####
+
+; Source level: LOMA09-12
+; Author: Jorge Gloria
+      #####
+  #####   #
+  #     # #
+  # ### # #
+###$*     #
+#  *.  ####
+#@ #####
+####
+
+; Source level: LOMA09-13
+; Author: Marti Homs
+; Comment: Louder than hell levels #7
+  ####
+  #  #
+  #@ #
+###$*###
+#  *.  #
+#      #
+#  #####
+####
+
 ; Source level: LOMA10-01
-; Author: David W Skinner
+; Author: David Skinner
 #### ###
 #@ ### #
 # $$ ###
@@ -714,3 +1509,82 @@
 #    $@.  #
 ######.. ##
      #####
+
+; Source level: LOMA10-07
+; Author: Frantisek Pokorny
+######
+#    #
+# ##@#
+#  $$##
+###$ .#
+  # ..#
+  #   #
+  #####
+
+; Source level: LOMA10-08
+; Author: Arpad Fekete
+######
+#  #@#
+#  $$#####
+#  $ .   #
+### ..   #
+  ##  ####
+   ####
+
+; Source level: LOMA10-09
+; Author: David Skinner
+####
+#  #
+#@ ###
+# $$ ##
+# $ . #
+###.. #
+ #   ##
+ #   #
+ #####
+
+; Source level: LOMA10-10
+; Author: Roger Delaporte
+########
+#      #
+# #### #
+# #  # #
+# #  # #
+# #  # #
+# #$$# #
+#  $@. #
+### ..##
+  #####
+
+; Source level: LOMA10-11
+; Author: David Skinner
+; Comment: Microban 3 #100
+  #####
+###   #
+# $$# #
+# $@. #
+#  .. #
+#######
+
+; Source level: LOMA10-12
+; Author: Jorge Gloria
+    #####
+    #   #
+    # # #
+#####$$ #
+#    $@.#
+#   # ..#
+#########
+
+; Source level: LOMA10-13
+; Author: Marti Homs
+; Comment: Louder than hell levels #2
+     ####
+     #  #
+     #  #
+     #  #
+###### ###
+#    $$  #
+#   #$ .@#
+##### ..##
+    #####

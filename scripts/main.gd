@@ -128,6 +128,8 @@ func _return_to_main_menu() -> void:
 func _show_pause_menu() -> void:
 	if level_complete_popup.visible:
 		return
+	if pause_menu.has_method("_show_pause_actions"):
+		pause_menu._show_pause_actions()
 	pause_level_info_label.text = "%s - level %d" % [_collection_display_name(current_collection), current_level_number]
 	pause_overlay.visible = true
 	pause_button.visible = false

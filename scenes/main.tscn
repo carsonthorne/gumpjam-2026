@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://damt8jh4jgd66" path="res://addons/sokoban_layout/level_layout.gd" id="11_muem4"]
 [ext_resource type="Script" uid="uid://4fr1acau7lqi" path="res://scripts/main.gd" id="13_main"]
 [ext_resource type="PackedScene" path="res://scenes/level_complete_popup.tscn" id="14_level_complete"]
-[ext_resource type="PackedScene" path="res://scenes/pause_menu.tscn" id="15_pause_menu"]
+[ext_resource type="PackedScene" uid="uid://jw4hmuwu03qf" path="res://scenes/pause_menu.tscn" id="15_pause_menu"]
 [ext_resource type="PackedScene" path="res://scenes/score_hud.tscn" id="16_score_hud"]
 [ext_resource type="Script" uid="uid://da1fy5dkuvfb3" path="res://scripts/cloudflare_leaderboard_client.gd" id="17_leaderboard"]
 
@@ -590,8 +590,8 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.5,
 
 [node name="PauseMenu" parent="." unique_id=246414030 instance=ExtResource("15_pause_menu")]
 
-[node name="ScoreHUD" parent="." instance=ExtResource("16_score_hud")]
+[node name="ScoreHUD" parent="." unique_id=1582290439 instance=ExtResource("16_score_hud")]
 
-[node name="CloudflareLeaderboardClient" type="Node" parent="."]
+[node name="CloudflareLeaderboardClient" type="Node" parent="." unique_id=1299553341]
 script = ExtResource("17_leaderboard")
 api_base_url = "https://gumpjam-leaderboard.8v6gpbph77.workers.dev"

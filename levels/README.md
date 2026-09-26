@@ -28,11 +28,11 @@ Choose one of these files in **LevelLayout → Collection**, then set **Level Nu
 | Sasquatch II | `sasquatch_ii.txt` | 49 |
 | Sasquatch III | `sasquatch_iii.txt` | 49 |
 | Sasquatch IV | `sasquatch_iv.txt` | 49 |
-| LOMA (2010 mirror edition) | `loma.txt` | 60 |
+| LOMA (2021 edition) | `loma.txt` | 137 |
 | Math Is Fun Sokoban | `wikipedia.txt` | 60 |
 
 Start with Microban I for small introductory puzzles; Sasquatch provides more
-variety and larger boards. These add **801 puzzle entries** beyond the two
+variety and larger boards. These add **878 puzzle entries** beyond the two
 project-authored tutorials, with some overlap between collections. See
 [sources, credits, and omitted puzzles](SOURCES.md).
 

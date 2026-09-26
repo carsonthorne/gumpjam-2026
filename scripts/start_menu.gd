@@ -3,6 +3,45 @@ extends Control
 const MAIN_SCENE := "res://scenes/main.tscn"
 const COLLECTIONS_DIRECTORY := "res://levels"
 const START_BACKGROUND_SIZE := Vector2(1538.0, 864.0)
+const COLLECTION_ORDER := [
+	"tutorials.txt",
+	"microban.txt",
+	"microban_ii.txt",
+	"microban_iii.txt",
+	"microban_iv.txt",
+	"sasquatch.txt",
+	"sasquatch_ii.txt",
+	"sasquatch_iii.txt",
+	"sasquatch_iv.txt",
+	"wikipedia.txt",
+	"loma.txt",
+]
+const COLLECTION_TITLES := {
+	"tutorials.txt": "Tutorials",
+	"microban.txt": "Microban I",
+	"microban_ii.txt": "Microban II",
+	"microban_iii.txt": "Microban III",
+	"microban_iv.txt": "Microban IV",
+	"sasquatch.txt": "Sasquatch I",
+	"sasquatch_ii.txt": "Sasquatch II",
+	"sasquatch_iii.txt": "Sasquatch III",
+	"sasquatch_iv.txt": "Sasquatch IV",
+	"loma.txt": "LOMA",
+	"wikipedia.txt": "Math Is Fun Sokoban",
+}
+const COLLECTION_DIFFICULTIES := {
+	"tutorials.txt": "tutorial",
+	"microban.txt": "easy",
+	"microban_ii.txt": "easy",
+	"microban_iii.txt": "easy",
+	"microban_iv.txt": "easy",
+	"sasquatch.txt": "medium",
+	"sasquatch_ii.txt": "hard",
+	"sasquatch_iii.txt": "medium-very hard",
+	"sasquatch_iv.txt": "medium-very hard",
+	"loma.txt": "easy-hard",
+	"wikipedia.txt": "easy - hard",
+}
 
 @onready var design_root: Control = $DesignRoot
 @onready var shell: MarginContainer = $DesignRoot/Shell
@@ -14,12 +53,17 @@ const START_BACKGROUND_SIZE := Vector2(1538.0, 864.0)
 @onready var main_panel: Control = $DesignRoot/Shell/Content/MainPanel
 @onready var level_panel: Control = $DesignRoot/Shell/Content/LevelSelectPanel
 @onready var instructions_panel: Control = $DesignRoot/Shell/Content/InstructionsPanel
+@onready var options_panel: Control = $DesignRoot/Shell/Content/OptionsPanel
 @onready var high_scores_panel: Control = $DesignRoot/Shell/Content/HighScoresPanel
 @onready var level_select_button: Button = $DesignRoot/Shell/Content/MainPanel/LevelSelectButton
 @onready var instructions_button: Button = $DesignRoot/Shell/Content/MainPanel/InstructionsButton
 @onready var high_scores_button: Button = $DesignRoot/Shell/Content/MainPanel/HighScoresButton
+@onready var options_button: Button = $DesignRoot/Shell/Content/MainPanel/OptionsButton
 @onready var level_back_button: Button = $DesignRoot/Shell/Content/LevelSelectPanel/Actions/BackButton
 @onready var instructions_back_button: Button = $DesignRoot/Shell/Content/InstructionsPanel/BackButton
+@onready var music_slider: HSlider = $DesignRoot/Shell/Content/OptionsPanel/MusicSlider
+@onready var sfx_slider: HSlider = $DesignRoot/Shell/Content/OptionsPanel/SfxSlider
+@onready var options_back_button: Button = $DesignRoot/Shell/Content/OptionsPanel/OptionsBackButton
 @onready var high_scores_level_picker: Control = $DesignRoot/Shell/Content/HighScoresPanel/LevelPicker
 @onready var high_scores_score_list: Control = $DesignRoot/Shell/Content/HighScoresPanel/ScoreList
 @onready var high_scores_collection_select: OptionButton = $DesignRoot/Shell/Content/HighScoresPanel/LevelPicker/CollectionSelect
@@ -39,6 +83,7 @@ var level_selection: Node = null
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	MusicPlayer.play_background_music()
 	level_selection = get_node_or_null("/root/LevelSelection")
 	_update_shell_layout()
 	resized.connect(_update_shell_layout)
@@ -47,8 +92,12 @@ func _ready() -> void:
 	level_select_button.pressed.connect(_show_level_select)
 	instructions_button.pressed.connect(_show_instructions)
 	high_scores_button.pressed.connect(_show_high_scores)
+	options_button.pressed.connect(_show_options)
 	level_back_button.pressed.connect(_show_main)
 	instructions_back_button.pressed.connect(_show_main)
+	options_back_button.pressed.connect(_show_main)
+	music_slider.value_changed.connect(_on_music_volume_changed)
+	sfx_slider.value_changed.connect(_on_sfx_volume_changed)
 	high_scores_back_button.pressed.connect(_on_high_scores_back_pressed)
 	collection_select.item_selected.connect(_on_collection_selected)
 	high_scores_collection_select.item_selected.connect(_on_high_scores_collection_selected)
@@ -76,9 +125,10 @@ func _load_collections() -> void:
 	high_scores_collection_select.clear()
 	var collections := _collections()
 	for collection in collections:
-		collection_select.add_item(collection.get_file())
+		var label := _collection_option_label(collection)
+		collection_select.add_item(label)
 		collection_select.set_item_metadata(collection_select.get_item_count() - 1, collection)
-		high_scores_collection_select.add_item(collection.get_file())
+		high_scores_collection_select.add_item(label)
 		high_scores_collection_select.set_item_metadata(high_scores_collection_select.get_item_count() - 1, collection)
 
 	if collection_select.get_item_count() > 0:
@@ -100,8 +150,19 @@ func _collections() -> Array[String]:
 			result.append(COLLECTIONS_DIRECTORY.path_join(file_name))
 		file_name = dir.get_next()
 	dir.list_dir_end()
-	result.sort()
+	result.sort_custom(_collection_precedes)
 	return result
+
+func _collection_precedes(first_path: String, second_path: String) -> bool:
+	var first_index := COLLECTION_ORDER.find(first_path.get_file())
+	var second_index := COLLECTION_ORDER.find(second_path.get_file())
+	if first_index == -1:
+		first_index = COLLECTION_ORDER.size()
+	if second_index == -1:
+		second_index = COLLECTION_ORDER.size()
+	if first_index == second_index:
+		return first_path < second_path
+	return first_index < second_index
 
 func _on_collection_selected(index: int) -> void:
 	selected_collection = collection_select.get_item_metadata(index)
@@ -124,7 +185,7 @@ func _rebuild_level_buttons() -> void:
 		button.pressed.connect(_select_level.bind(level_number, button))
 		level_grid.add_child(button)
 
-	detail_label.text = "%s: %d levels" % [selected_collection.get_file(), level_count]
+	detail_label.text = "%s: %d levels" % [_collection_option_label(selected_collection), level_count]
 
 func _on_high_scores_collection_selected(index: int) -> void:
 	high_scores_collection = high_scores_collection_select.get_item_metadata(index)
@@ -154,7 +215,7 @@ func _select_high_scores_level(level_number: int, button: Button) -> void:
 	high_scores_level = level_number
 	high_scores_level_button = button
 	high_scores_level_button.button_pressed = true
-	high_scores_title.text = "%s level %d" % [high_scores_collection.get_file().get_basename(), high_scores_level]
+	high_scores_title.text = "%s level %d" % [_collection_title(high_scores_collection), high_scores_level]
 	_show_high_scores_score_list()
 	_load_selected_high_scores()
 
@@ -166,7 +227,7 @@ func _select_level(level_number: int, button: Button) -> void:
 	selected_level_button = button
 	selected_level_button.button_pressed = true
 	go_button.disabled = false
-	detail_label.text = "%s level %d selected" % [selected_collection.get_file(), selected_level]
+	detail_label.text = "%s level %d selected" % [_collection_title(selected_collection), selected_level]
 
 func _count_levels(path: String) -> int:
 	if not FileAccess.file_exists(path):
@@ -205,6 +266,7 @@ func _show_main() -> void:
 	main_panel.visible = true
 	level_panel.visible = false
 	instructions_panel.visible = false
+	options_panel.visible = false
 	high_scores_panel.visible = false
 	detail_label.visible = false
 	detail_label.text = ""
@@ -214,16 +276,18 @@ func _show_level_select() -> void:
 	main_panel.visible = false
 	level_panel.visible = true
 	instructions_panel.visible = false
+	options_panel.visible = false
 	high_scores_panel.visible = false
 	detail_label.visible = false
 	if not selected_collection.is_empty():
-		detail_label.text = "%s: %d levels" % [selected_collection.get_file(), _count_levels(selected_collection)]
+		detail_label.text = "%s: %d levels" % [_collection_option_label(selected_collection), _count_levels(selected_collection)]
 
 func _show_instructions() -> void:
 	level_select_title_spacer.visible = false
 	main_panel.visible = false
 	level_panel.visible = false
 	instructions_panel.visible = true
+	options_panel.visible = false
 	high_scores_panel.visible = false
 	detail_label.visible = true
 	detail_label.text = "Controls"
@@ -233,16 +297,37 @@ func _show_high_scores() -> void:
 	main_panel.visible = false
 	level_panel.visible = false
 	instructions_panel.visible = false
+	options_panel.visible = false
 	high_scores_panel.visible = true
 	detail_label.visible = false
 	_show_high_scores_level_picker()
+
+func _show_options() -> void:
+	level_select_title_spacer.visible = false
+	main_panel.visible = false
+	level_panel.visible = false
+	instructions_panel.visible = false
+	options_panel.visible = true
+	high_scores_panel.visible = false
+	detail_label.visible = false
+	_sync_options_from_settings()
+
+func _sync_options_from_settings() -> void:
+	music_slider.set_value_no_signal(AudioSettings.get_music_volume())
+	sfx_slider.set_value_no_signal(AudioSettings.get_sfx_volume())
+
+func _on_music_volume_changed(value: float) -> void:
+	AudioSettings.set_music_volume(value)
+
+func _on_sfx_volume_changed(value: float) -> void:
+	AudioSettings.set_sfx_volume(value)
 
 func _load_selected_high_scores() -> void:
 	if high_scores_collection.is_empty() or high_scores_level < 1:
 		_clear_high_scores_rows("Select a level")
 		return
 
-	high_scores_title.text = "%s level %d" % [high_scores_collection.get_file().get_basename(), high_scores_level]
+	high_scores_title.text = "%s level %d" % [_collection_title(high_scores_collection), high_scores_level]
 	_clear_high_scores_rows("Loading...")
 	leaderboard_client.load_scores(high_scores_collection, high_scores_level, 10)
 
@@ -326,3 +411,14 @@ func _format_time(milliseconds: int) -> String:
 	var minutes := total_seconds / 60
 	var seconds := total_seconds % 60
 	return "%02d:%02d" % [minutes, seconds]
+
+func _collection_option_label(path: String) -> String:
+	var file_name := path.get_file()
+	var difficulty: String = COLLECTION_DIFFICULTIES.get(file_name, "")
+	if difficulty.is_empty():
+		return _collection_title(path)
+	return "%s (%s)" % [_collection_title(path), difficulty]
+
+func _collection_title(path: String) -> String:
+	var file_name := path.get_file()
+	return COLLECTION_TITLES.get(file_name, file_name.get_basename())

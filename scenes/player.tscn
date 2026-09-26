@@ -1,10 +1,12 @@
-[gd_scene format=3 uid="uid://cvxln66jtlkdc"]
+[gd_scene load_steps=16 format=3 uid="uid://cvxln66jtlkdc"]
 
 [ext_resource type="Script" uid="uid://dxtu1610kaksb" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="PackedScene" uid="uid://dhddplnkpdqjl" path="res://scenes/character_model.tscn" id="2_d2wvv"]
 [ext_resource type="Script" uid="uid://db6ygdc2gtww3" path="res://scripts/camera_orbit.gd" id="2_g2els"]
 [ext_resource type="Script" uid="uid://jysp2jfgrx56" path="res://scripts/camera_follow.gd" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://ch16tcdy8uxum" path="res://StateMachine/PlayerStateMachine/player_state_machine.gd" id="4_y4r1p"]
+[ext_resource type="AudioStream" path="res://assets/audio/block_push_scrape.mp3" id="5_scrape"]
+[ext_resource type="AudioStream" path="res://assets/audio/walking_steps.mp3" id="6_steps"]
 [ext_resource type="Script" uid="uid://bhdm5bilaxa5j" path="res://StateMachine/PlayerStateMachine/States/idle.gd" id="5_d2wvv"]
 [ext_resource type="Script" uid="uid://cojse0182ar86" path="res://StateMachine/PlayerStateMachine/States/walk.gd" id="6_3v2ag"]
 [ext_resource type="Script" uid="uid://dnx8hh10o4qax" path="res://StateMachine/PlayerStateMachine/States/run.gd" id="7_jej6c"]
@@ -27,6 +29,8 @@ height = 1.2592773
 
 [node name="Player" type="CharacterBody3D" unique_id=160821695 node_paths=PackedStringArray("camera") groups=["player"]]
 script = ExtResource("1_3vyb7")
+push_sound = ExtResource("5_scrape")
+walk_sound = ExtResource("6_steps")
 camera = NodePath("CameraPivot/Camera3D")
 
 [node name="Pivot" type="Node3D" parent="." unique_id=1663565421]
@@ -46,6 +50,16 @@ mesh = SubResource("SphereMesh_hqe12")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=784814810]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6825025, 0)
 shape = SubResource("CapsuleShape3D_hqe12")
+
+[node name="PushSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+unit_size = 8.0
+max_db = 24.0
+max_distance = 30.0
+
+[node name="WalkSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+unit_size = 8.0
+max_db = 24.0
+max_distance = 30.0
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=1263533875]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
