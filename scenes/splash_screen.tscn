@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/splash_screen.gd" id="1_splash"]
+[ext_resource type="Texture2D" path="res://assets/splash/rat_albert_splash.png" id="2_logo"]
+[ext_resource type="Shader" path="res://shaders/pixelated_menu_background.gdshader" id="3_pixelated"]
+[ext_resource type="AudioStream" path="res://assets/audio/rat_albert_intro.mp3" id="4_intro_audio"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pixelated_logo"]
+shader = ExtResource("3_pixelated")
+shader_parameter/pixel_block_size = 6.0
+
+[node name="SplashScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_splash")
+
+[node name="WhiteBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="Logo" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_pixelated_logo")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IntroAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_intro_audio")
+bus = &"SFX"
+
+[node name="StartPrompt" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -72.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.04, 0.04, 0.04, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+text = "press space to start"
+horizontal_alignment = 1
+vertical_alignment = 1

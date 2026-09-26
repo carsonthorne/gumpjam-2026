@@ -5,6 +5,23 @@ const Reader = preload("res://addons/sokoban_layout/map_reader.gd")
 const StartMenu = preload("res://scripts/start_menu.gd")
 
 func _ready() -> void:
+	assert(ProjectSettings.get_setting("application/run/main_scene") == "res://scenes/splash_screen.tscn", "Game must launch through the splash screen")
+	var splash_scene: Control = load("res://scenes/splash_screen.tscn").instantiate()
+	var splash_background := splash_scene.get_node("WhiteBackground") as ColorRect
+	var splash_logo := splash_scene.get_node("Logo") as TextureRect
+	var splash_material := splash_logo.material as ShaderMaterial
+	var splash_audio := splash_scene.get_node("IntroAudio") as AudioStreamPlayer
+	var splash_prompt := splash_scene.get_node("StartPrompt") as Label
+	assert(splash_background.color == Color.WHITE, "Splash screen must use a white background")
+	assert(splash_logo.texture.get_size() == Vector2(1378, 1141), "Splash screen must use the corrected Rat Albert image")
+	assert(splash_logo.stretch_mode == TextureRect.STRETCH_KEEP_ASPECT_CENTERED, "Splash logo must fill the screen without cropping")
+	assert(splash_material != null and splash_material.get_shader_parameter("pixel_block_size") == 6.0, "Splash logo must use the pixelated shader")
+	assert(splash_scene.get("start_scale") <= 0.01 and splash_scene.get("clockwise_turns") == 5.0, "Splash logo must grow from nearly invisible while rotating clockwise five times")
+	assert(splash_scene.get("animation_duration") >= 4.0 and splash_scene.get("bounce_overshoot_scale") > 1.0, "Splash logo must use a longer accelerating entrance with a finishing bounce")
+	assert(splash_audio.stream != null and splash_audio.bus == &"SFX", "Splash screen must play the Rat Albert intro through the SFX bus")
+	assert(splash_scene.get("audio_start_delay") > 2.0 and splash_scene.get("audio_start_delay") < splash_scene.get("animation_duration"), "Splash audio must begin during the spinning phase")
+	assert(splash_prompt.text == "press space to start" and not splash_prompt.visible, "Splash start prompt must remain hidden until the presentation finishes")
+	splash_scene.free()
 	var map := Reader.validate(PackedStringArray(["  #####", "###   #", "#.@$  #", "### $.#", "#.##$ #", "# # . ##", "#$ *$$.#", "#   .  #", "########"]))
 	assert(not map.has("error"))
 	assert(map.width == 8 and map.height == 9 and map.crates == 7)
@@ -147,6 +164,23 @@ func _ready() -> void:
 	assert(main.get_node("Player").position == Vector3(-2, 0, -2))
 	for i in 10:
 		await get_tree().physics_frame
+	var runtime_pause_menu: CanvasLayer = main.get_node("PauseMenu")
+	runtime_pause_menu.set("entrance_duration", 0.08)
+	runtime_pause_menu.set("exit_duration", 0.08)
+	main._show_pause_menu()
+	assert(get_tree().paused and runtime_pause_menu.get_node("Overlay").visible, "Pause menu must pause the game and show its overlay")
+	assert(runtime_pause_menu.get("is_entering"), "Pause clipboard must animate into view")
+	assert(runtime_pause_menu.get("entrance_start_position").y > get_viewport().get_visible_rect().size.y, "Pause clipboard must begin below the viewport")
+	await get_tree().create_timer(0.12).timeout
+	assert(not runtime_pause_menu.get("is_entering"), "Pause clipboard entrance must finish while the game is paused")
+	assert(runtime_pause_menu.get_node("Overlay/Panel").position.is_equal_approx(runtime_pause_menu.get("resting_position")))
+	main._resume_game()
+	await get_tree().process_frame
+	assert(runtime_pause_menu.get("is_exiting") and runtime_pause_menu.get_node("Overlay").visible, "Pause clipboard must remain visible while exiting")
+	assert(runtime_pause_menu.get("exit_target_position").y > get_viewport().get_visible_rect().size.y, "Pause clipboard must exit below the viewport")
+	assert(get_tree().paused and not main.get_node("PauseMenu/PauseButton").visible, "Gameplay must remain paused until the clipboard is off-screen")
+	await get_tree().create_timer(0.12).timeout
+	assert(not get_tree().paused and not runtime_pause_menu.get_node("Overlay").visible, "Resume must finish after the pause clipboard exits")
 	var target := generated.get_node("Targets/Target_3_6")
 	assert(target.has_block_on_target(), "Crate initially on target must register")
 	var crate := generated.get_node("Crates/Crate_3_2/RigidBody3D")

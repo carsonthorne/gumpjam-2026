@@ -52,6 +52,7 @@ var default_camera_target_position := Vector3.ZERO
 var completion_camera_start_transform := Transform3D.IDENTITY
 var completion_camera_tween: Tween = null
 var completion_camera_active := false
+var pause_exit_in_progress := false
 
 func _ready() -> void:
 	default_camera_target_position = player_camera_target.position
@@ -127,7 +128,7 @@ func load_level(collection: String, level_number: int) -> void:
 	current_leaderboard_score = {}
 	leaderboard_score_saved = false
 	leaderboard_save_pending = false
-	_resume_game()
+	_resume_game(false)
 
 func _show_level_completed_popup() -> void:
 	if level_completion_in_progress:
@@ -311,16 +312,28 @@ func _return_to_main_menu() -> void:
 func _show_pause_menu() -> void:
 	if level_complete_popup.visible or level_completion_in_progress:
 		return
-	if pause_menu.has_method("_show_pause_actions"):
-		pause_menu._show_pause_actions()
 	pause_level_info_label.text = "%s - level %d" % [_collection_display_name(current_collection), current_level_number]
-	pause_overlay.visible = true
+	if pause_menu.has_method("show_with_entrance"):
+		pause_menu.show_with_entrance()
+	else:
+		pause_overlay.visible = true
 	pause_button.visible = false
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-func _resume_game() -> void:
-	pause_overlay.visible = false
+func _resume_game(animate_exit := true) -> void:
+	if pause_exit_in_progress and animate_exit:
+		return
+	if not animate_exit:
+		pause_exit_in_progress = false
+	if animate_exit and pause_overlay.visible and pause_menu.has_method("hide_with_exit"):
+		pause_exit_in_progress = true
+		await pause_menu.hide_with_exit()
+		pause_exit_in_progress = false
+	elif pause_menu.has_method("hide_menu"):
+		pause_menu.hide_menu()
+	else:
+		pause_overlay.visible = false
 	pause_button.visible = true
 	get_tree().paused = false
 
