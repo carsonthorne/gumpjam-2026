@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dyplv2wrfcrea" path="res://scripts/character_model.gd" id="1_d5uc0"]
 [ext_resource type="PackedScene" uid="uid://dahuku44gqhle" path="res://characters/rat-albert-animated.glb" id="2_dnbsg"]
+[ext_resource type="AnimationLibrary" path="res://characters/animations/character_animation_library.tres" id="3_animation_library"]
+[ext_resource type="Script" path="res://scripts/cheese_reach_modifier.gd" id="4_cheese_reach"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d5uc0"]
 animation = &"idle"
@@ -32,6 +34,10 @@ input_5/name = "push_end"
 input_5/auto_advance = false
 input_5/break_loop_at_end = false
 input_5/reset = true
+input_6/name = "chicken_dance"
+input_6/auto_advance = false
+input_6/break_loop_at_end = false
+input_6/reset = true
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_movement"]
 
@@ -49,6 +55,9 @@ loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pushing"]
 animation = &"pushing"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_chicken_dance"]
+animation = &"chicken_dance"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dnbsg"]
 animation = &"run"
@@ -75,7 +84,9 @@ nodes/push_start/node = SubResource("AnimationNodeAnimation_push_start")
 nodes/push_start/position = Vector2(80, 590)
 nodes/pushing/node = SubResource("AnimationNodeAnimation_pushing")
 nodes/pushing/position = Vector2(80, 770)
-node_connections = [&"output", 0, &"movement_time_scale", &"movement", 0, &"idle 2", &"movement", 1, &"walk", &"movement", 2, &"run", &"movement", 3, &"push_start", &"movement", 4, &"pushing", &"movement", 5, &"push_end", &"movement_time_scale", 0, &"movement"]
+nodes/chicken_dance/node = SubResource("AnimationNodeAnimation_chicken_dance")
+nodes/chicken_dance/position = Vector2(80, 1130)
+node_connections = [&"output", 0, &"movement_time_scale", &"movement", 0, &"idle 2", &"movement", 1, &"walk", &"movement", 2, &"run", &"movement", 3, &"push_start", &"movement", 4, &"pushing", &"movement", 5, &"push_end", &"movement", 6, &"chicken_dance", &"movement_time_scale", 0, &"movement"]
 
 [node name="CharacterModel" type="Node3D" unique_id=1320379113 node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("1_d5uc0")
@@ -126,6 +137,16 @@ bones/30/rotation = Quaternion(0.34991974, 0.12135821, 0.07849203, 0.92556334)
 bones/31/position = Vector3(-0.9635389, 2.440987, 0.52131754)
 bones/31/rotation = Quaternion(0.09078246, 0.014029398, 0.014077443, 0.99567246)
 bones/32/position = Vector3(-0.29900408, 1.335328, 0.59745055)
+
+[node name="CheeseReachModifier" type="SkeletonModifier3D" parent="rat-albert-animated/Armature/Skeleton3D"]
+active = false
+influence = 0.0
+script = ExtResource("4_cheese_reach")
+
+[node name="AnimationPlayer" parent="rat-albert-animated" index="1"]
+libraries = {
+&"": ExtResource("3_animation_library")
+}
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=881266461]
 root_node = NodePath("../rat-albert-animated")

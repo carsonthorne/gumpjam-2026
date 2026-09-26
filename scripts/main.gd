@@ -2,6 +2,7 @@ extends Node
 
 const Reader = preload("res://addons/sokoban_layout/map_reader.gd")
 const Builder = preload("res://addons/sokoban_layout/layout_builder.gd")
+const CheeseReward = preload("res://scenes/cheese_reward.tscn")
 const START_MENU_SCENE := "res://scenes/start_menu.tscn"
 const MAX_LEADERBOARD_SCORE := 1000000000
 
@@ -9,6 +10,9 @@ const MAX_LEADERBOARD_SCORE := 1000000000
 
 @onready var level_layout: Node3D = $LevelLayout
 @onready var player: CharacterBody3D = $Player
+@onready var character_model: CharacterModel = $Player/Pivot/CharacterModel
+@onready var player_pivot: Node3D = $Player/Pivot
+@onready var player_camera: Camera3D = $Player/CameraPivot/Camera3D
 @onready var level_goal: Node = $LevelGoal
 @onready var level_complete_popup: CanvasLayer = $LevelCompletePopup
 @onready var pause_menu: CanvasLayer = $PauseMenu
@@ -27,6 +31,18 @@ var current_level_number := 1
 var current_leaderboard_score := {}
 var leaderboard_score_saved := false
 var leaderboard_save_pending := false
+var level_completion_in_progress := false
+var level_completion_sequence := 0
+var completion_dance_duration_override := -1.0
+var completion_idle_settle_duration := 0.18
+var completion_turn_duration := 0.55
+var completion_cheese_descent_duration := 1.6
+var completion_cheese_disappear_duration := 0.18
+var completion_cheese_contact_height := 1.27
+var completion_reach_blend_duration := 0.42
+var completion_reach_release_duration := 0.8
+var completion_phase := ""
+var active_reward_cheese: Node3D = null
 
 func _ready() -> void:
 	current_collection = level_layout.get("collection")
@@ -62,6 +78,11 @@ func _ready() -> void:
 		score_hud.reset()
 
 func load_level(collection: String, level_number: int) -> void:
+	level_completion_sequence += 1
+	level_completion_in_progress = false
+	completion_phase = ""
+	_cleanup_reward_cheese()
+	character_model.reset_cheese_reach_pose()
 	var map := Reader.read_level(collection, level_number)
 	if map.has("error"):
 		push_error(map.error)
@@ -82,6 +103,8 @@ func load_level(collection: String, level_number: int) -> void:
 
 	player.global_position = level_layout.to_global(Builder.cell_position(map.player, map))
 	player.velocity = Vector3.ZERO
+	if player.has_method("set_gameplay_enabled"):
+		player.set_gameplay_enabled(true)
 	if player.has_method("set_push_ready"):
 		player.set_push_ready(false)
 
@@ -96,13 +119,47 @@ func load_level(collection: String, level_number: int) -> void:
 	_resume_game()
 
 func _show_level_completed_popup() -> void:
-	_resume_game()
+	if level_completion_in_progress:
+		return
+
+	level_completion_in_progress = true
+	level_completion_sequence += 1
+	var completion_sequence := level_completion_sequence
+	get_tree().paused = false
+	pause_overlay.visible = false
 	score_hud.stop()
-	get_tree().paused = true
 	pause_button.visible = false
 	current_leaderboard_score = _current_score_payload()
 	leaderboard_score_saved = false
 	leaderboard_save_pending = false
+	if player.has_method("set_gameplay_enabled"):
+		player.set_gameplay_enabled(false)
+	completion_phase = "idle"
+	character_model.play_idle()
+	if completion_idle_settle_duration > 0.0:
+		await get_tree().create_timer(completion_idle_settle_duration).timeout
+	if completion_sequence != level_completion_sequence or not is_inside_tree():
+		return
+	completion_phase = "turning"
+	await _turn_player_toward_camera()
+	if completion_sequence != level_completion_sequence or not is_inside_tree():
+		return
+	completion_phase = "cheese"
+	await _drop_cheese_reward()
+	if completion_sequence != level_completion_sequence or not is_inside_tree():
+		return
+	completion_phase = "dance"
+	character_model.end_cheese_reach_pose(completion_reach_release_duration)
+	var dance_duration := character_model.play_chicken_dance()
+	if completion_dance_duration_override >= 0.0:
+		dance_duration = completion_dance_duration_override
+	if dance_duration > 0.0:
+		await get_tree().create_timer(dance_duration).timeout
+	if completion_sequence != level_completion_sequence or not is_inside_tree():
+		return
+
+	completion_phase = "popup"
+	get_tree().paused = true
 	var level_count := _count_levels(current_collection)
 	level_complete_popup.show_results(
 		leaderboard_player_name,
@@ -115,6 +172,61 @@ func _show_level_completed_popup() -> void:
 		leaderboard_client.load_scores(current_collection, current_level_number, 10)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+func _turn_player_toward_camera() -> void:
+	var camera_direction := player_camera.global_position - player.global_position
+	camera_direction.y = 0.0
+	if camera_direction.length_squared() == 0.0:
+		return
+
+	var look_position := player.global_position + camera_direction.normalized()
+	var target_transform := player.global_transform.looking_at(look_position, Vector3.UP, true)
+	var target_yaw := target_transform.basis.get_euler().y
+	var yaw_offset := wrapf(target_yaw - player_pivot.rotation.y, -PI, PI)
+	if completion_turn_duration <= 0.0:
+		player_pivot.rotation.y += yaw_offset
+		return
+
+	var turn_tween := create_tween()
+	turn_tween.set_trans(Tween.TRANS_SINE)
+	turn_tween.set_ease(Tween.EASE_IN_OUT)
+	turn_tween.tween_property(player_pivot, "rotation:y", player_pivot.rotation.y + yaw_offset, completion_turn_duration)
+	await turn_tween.finished
+
+func _drop_cheese_reward() -> void:
+	_cleanup_reward_cheese()
+	active_reward_cheese = CheeseReward.instantiate() as Node3D
+	add_child(active_reward_cheese)
+	var cheese_target := player.global_position + Vector3.UP * completion_cheese_contact_height
+	active_reward_cheese.global_position = cheese_target + Vector3.UP * 2.0
+	active_reward_cheese.scale = Vector3.ONE * 0.38
+	active_reward_cheese.rotation.y = player_pivot.global_rotation.y
+	character_model.begin_cheese_reach_pose(cheese_target, completion_reach_blend_duration)
+
+	if completion_cheese_descent_duration > 0.0:
+		var descent_tween := create_tween().set_parallel(true)
+		descent_tween.set_trans(Tween.TRANS_SINE)
+		descent_tween.set_ease(Tween.EASE_IN_OUT)
+		descent_tween.tween_property(active_reward_cheese, "global_position", cheese_target, completion_cheese_descent_duration)
+		descent_tween.tween_property(active_reward_cheese, "rotation:y", active_reward_cheese.rotation.y + PI * 0.35, completion_cheese_descent_duration)
+		await descent_tween.finished
+	else:
+		active_reward_cheese.global_position = cheese_target
+
+	if not is_instance_valid(active_reward_cheese):
+		return
+	if completion_cheese_disappear_duration > 0.0:
+		var disappear_tween := create_tween()
+		disappear_tween.set_trans(Tween.TRANS_BACK)
+		disappear_tween.set_ease(Tween.EASE_IN)
+		disappear_tween.tween_property(active_reward_cheese, "scale", Vector3.ZERO, completion_cheese_disappear_duration)
+		await disappear_tween.finished
+	_cleanup_reward_cheese()
+
+func _cleanup_reward_cheese() -> void:
+	if is_instance_valid(active_reward_cheese):
+		active_reward_cheese.queue_free()
+	active_reward_cheese = null
+
 func _load_next_level() -> void:
 	await _save_leaderboard_score()
 	load_level(current_collection, current_level_number + 1)
@@ -126,7 +238,7 @@ func _return_to_main_menu() -> void:
 	get_tree().change_scene_to_file(START_MENU_SCENE)
 
 func _show_pause_menu() -> void:
-	if level_complete_popup.visible:
+	if level_complete_popup.visible or level_completion_in_progress:
 		return
 	if pause_menu.has_method("_show_pause_actions"):
 		pause_menu._show_pause_actions()

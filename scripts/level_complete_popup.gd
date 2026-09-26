@@ -9,6 +9,8 @@ const MAX_SCORE_ROWS := 10
 const DESIGN_SIZE := Vector2(628.0, 662.0)
 const CURRENT_ROW_COLOR := Color(0.82, 0.06, 0.04, 1.0)
 
+@export_range(0.0, 2.0, 0.01) var entrance_duration := 0.55
+
 @onready var design_root: Control = $Overlay/DesignRoot
 @onready var title_label: Label = $Overlay/DesignRoot/Shell/Content/Title
 @onready var subtitle_label: Label = $Overlay/DesignRoot/Shell/Content/Subtitle
@@ -21,6 +23,10 @@ const CURRENT_ROW_COLOR := Color(0.82, 0.06, 0.04, 1.0)
 var current_score := {}
 var loaded_scores: Array = []
 var current_name_input: LineEdit = null
+var resting_position := Vector2.ZERO
+var entrance_start_position := Vector2.ZERO
+var entrance_tween: Tween = null
+var is_entering := false
 
 func _ready() -> void:
 	_update_layout()
@@ -33,7 +39,9 @@ func _ready() -> void:
 func _update_layout() -> void:
 	var viewport_size := get_viewport().get_visible_rect().size
 	var scale_factor := minf(1.0, minf(viewport_size.x / DESIGN_SIZE.x, viewport_size.y / DESIGN_SIZE.y) * 0.94)
-	design_root.position = (viewport_size - (DESIGN_SIZE * scale_factor)) * 0.5
+	resting_position = (viewport_size - (DESIGN_SIZE * scale_factor)) * 0.5
+	if not is_entering:
+		design_root.position = resting_position
 	design_root.size = DESIGN_SIZE
 	design_root.scale = Vector2.ONE * scale_factor
 
@@ -46,7 +54,28 @@ func show_results(player_name: String, score: Dictionary, collection_name: Strin
 	next_level_button.visible = has_next_level
 	status_label.text = "Loading high scores..."
 	_render_scores()
+	_update_layout()
+	if entrance_tween != null and entrance_tween.is_valid():
+		entrance_tween.kill()
+	var viewport_size := get_viewport().get_visible_rect().size
+	entrance_start_position = Vector2(resting_position.x, viewport_size.y + 16.0)
+	design_root.position = entrance_start_position
+	is_entering = true
 	visible = true
+	if entrance_duration <= 0.0:
+		_finish_entrance()
+		return
+	entrance_tween = create_tween()
+	entrance_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	entrance_tween.set_trans(Tween.TRANS_CUBIC)
+	entrance_tween.set_ease(Tween.EASE_OUT)
+	entrance_tween.tween_property(design_root, "position", resting_position, entrance_duration)
+	entrance_tween.finished.connect(_finish_entrance)
+
+func _finish_entrance() -> void:
+	design_root.position = resting_position
+	is_entering = false
+	entrance_tween = null
 	_focus_current_name.call_deferred()
 
 func set_scores(scores: Array) -> void:

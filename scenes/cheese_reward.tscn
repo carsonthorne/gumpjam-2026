@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/models/cheese/Cheese_Raw.obj" id="1_cheese"]
+
+[node name="CheeseReward" type="Node3D"]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+mesh = ExtResource("1_cheese")

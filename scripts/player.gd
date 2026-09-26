@@ -35,6 +35,7 @@ extends CharacterBody3D
 
 @onready var push_sound_player: AudioStreamPlayer3D = $PushSoundPlayer
 @onready var walk_sound_player: AudioStreamPlayer3D = $WalkSoundPlayer
+@onready var state_machine: StateMachine = $StateMachine
 
 signal interact_pressed
 signal push_ready_started
@@ -70,6 +71,32 @@ func _input(event: InputEvent) -> void:
 
 func wants_to_run() -> bool:
 	return is_run_toggled or Input.is_action_pressed("run_hold")
+
+func set_gameplay_enabled(enabled: bool) -> void:
+	set_physics_process(enabled)
+	set_process_input(enabled)
+	state_machine.set_physics_process(enabled)
+	state_machine.set_process_input(enabled)
+
+	if enabled:
+		if state_machine.current_state != null:
+			state_machine._change_state("Idle")
+		return
+
+	velocity = Vector3.ZERO
+	is_push_ready = false
+	push_ready_source = null
+	push_ready_direction = Vector3.ZERO
+	has_push_ready_position = false
+	push_ready_align_delay_left = 0.0
+	push_follow_direction = Vector3.ZERO
+	push_follow_source = null
+	push_follow_contact_time_left = 0.0
+	push_follow_distance_left = 0.0
+	brace_release_backstep_direction = Vector3.ZERO
+	brace_release_backstep_distance_left = 0.0
+	push_sound_player.stop()
+	walk_sound_player.stop()
 
 func is_push_ready_active(source: Node = null) -> bool:
 	_clear_invalid_push_sources()

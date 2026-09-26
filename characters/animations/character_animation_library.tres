@@ -1,0 +1,22 @@
+[gd_resource type="AnimationLibrary" load_steps=9 format=3]
+
+[ext_resource type="Animation" path="res://characters/animations/Armature_mixamo_com_Layer0.res" id="1_default"]
+[ext_resource type="Animation" path="res://characters/animations/idle.res" id="2_idle"]
+[ext_resource type="Animation" path="res://characters/animations/push_end.res" id="3_push_end"]
+[ext_resource type="Animation" path="res://characters/animations/push_start.res" id="4_push_start"]
+[ext_resource type="Animation" path="res://characters/animations/pushing.res" id="5_pushing"]
+[ext_resource type="Animation" path="res://characters/animations/run.res" id="6_run"]
+[ext_resource type="Animation" path="res://characters/animations/walk.res" id="7_walk"]
+[ext_resource type="Animation" path="res://characters/animations/chicken_dance.res" id="8_chicken_dance"]
+
+[resource]
+_data = {
+&"Armature|mixamo_com|Layer0": ExtResource("1_default"),
+&"chicken_dance": ExtResource("8_chicken_dance"),
+&"idle": ExtResource("2_idle"),
+&"push_end": ExtResource("3_push_end"),
+&"push_start": ExtResource("4_push_start"),
+&"pushing": ExtResource("5_pushing"),
+&"run": ExtResource("6_run"),
+&"walk": ExtResource("7_walk")
+}

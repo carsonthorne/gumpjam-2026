@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ceg1in1gxhlg8"
+path="res://.godot/imported/Cheese_Raw.obj-72d6f6cb2d921a19bc5f3c120856f25f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Cheese_Raw.obj-72d6f6cb2d921a19bc5f3c120856f25f.mesh"]
+
+source_file="res://assets/models/cheese/Cheese_Raw.obj"
+dest_files=["res://.godot/imported/Cheese_Raw.obj-72d6f6cb2d921a19bc5f3c120856f25f.mesh", "res://.godot/imported/Cheese_Raw.obj-72d6f6cb2d921a19bc5f3c120856f25f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

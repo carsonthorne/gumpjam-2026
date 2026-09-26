@@ -60,6 +60,25 @@ var pushing_uniform_pose_source_animation := &"pushing"
 var pushing_uniform_pose_source_time := 0.0
 
 const PUSH_END_SAFE_ANIMATION := &"push_end_safe"
+const CHICKEN_DANCE_ANIMATION := &"chicken_dance"
+const IDLE_ANIMATION := &"idle"
+const DEFAULT_MOVEMENT_CROSSFADE := 0.12
+const CELEBRATION_CROSSFADE := 0.8
+const CHEESE_REACH_BONES := [
+	"mixamorig_Neck",
+	"mixamorig_Head",
+	"mixamorig_LeftArm",
+	"mixamorig_LeftForeArm",
+	"mixamorig_RightArm",
+	"mixamorig_RightForeArm",
+]
+
+var cheese_reach_base_rotations := {}
+var cheese_reach_target_rotations := {}
+var cheese_reach_weight := 0.0
+var cheese_reach_tween: Tween = null
+
+@onready var cheese_reach_modifier = get_node("rat-albert-animated/Armature/Skeleton3D/CheeseReachModifier")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -68,11 +87,146 @@ func _ready() -> void:
 
 
 func on_state_machine_animation_state_changed(state: String) -> void:
+	_set_movement_crossfade(DEFAULT_MOVEMENT_CROSSFADE)
 	set_movement_time_scale(1.0)
 	animation_tree["parameters/movement/transition_request"] = state
 
 func set_movement_time_scale(value: float) -> void:
 	animation_tree["parameters/movement_time_scale/scale"] = value
+
+func play_idle() -> void:
+	reset_cheese_reach_pose()
+	_set_movement_crossfade(DEFAULT_MOVEMENT_CROSSFADE)
+	set_movement_time_scale(1.0)
+	animation_tree["parameters/movement/transition_request"] = IDLE_ANIMATION
+
+func play_chicken_dance() -> float:
+	var animation_player := _get_animation_player()
+	if animation_player == null or not animation_player.has_animation(CHICKEN_DANCE_ANIMATION):
+		return 0.0
+
+	_set_movement_crossfade(CELEBRATION_CROSSFADE)
+	set_movement_time_scale(1.0)
+	animation_tree["parameters/movement/transition_request"] = CHICKEN_DANCE_ANIMATION
+	return animation_player.get_animation(CHICKEN_DANCE_ANIMATION).length
+
+func begin_cheese_reach_pose(cheese_world_position: Vector3, blend_duration: float = 0.4) -> void:
+	reset_cheese_reach_pose()
+	var skeleton := _get_skeleton()
+	if skeleton == null:
+		return
+
+	skeleton.force_update_all_bone_transforms()
+	for bone_name in CHEESE_REACH_BONES:
+		var bone_index := skeleton.find_bone(bone_name)
+		if bone_index >= 0:
+			cheese_reach_base_rotations[bone_index] = skeleton.get_bone_pose_rotation(bone_index)
+
+	var left_arm_target := _arm_target_for_side(skeleton, "mixamorig_LeftArm", cheese_world_position)
+	var right_arm_target := _arm_target_for_side(skeleton, "mixamorig_RightArm", cheese_world_position)
+	_point_bone_toward(skeleton, "mixamorig_LeftArm", "mixamorig_LeftForeArm", left_arm_target)
+	_point_bone_toward(skeleton, "mixamorig_LeftForeArm", "mixamorig_LeftHand", left_arm_target)
+	_point_bone_toward(skeleton, "mixamorig_RightArm", "mixamorig_RightForeArm", right_arm_target)
+	_point_bone_toward(skeleton, "mixamorig_RightForeArm", "mixamorig_RightHand", right_arm_target)
+	_tilt_bone_in_world(skeleton, "mixamorig_Neck", -12.0)
+	_tilt_bone_in_world(skeleton, "mixamorig_Head", -24.0)
+
+	for bone_index in cheese_reach_base_rotations:
+		cheese_reach_target_rotations[bone_index] = skeleton.get_bone_pose_rotation(bone_index)
+		skeleton.set_bone_pose_rotation(bone_index, cheese_reach_base_rotations[bone_index])
+	skeleton.force_update_all_bone_transforms()
+	cheese_reach_modifier.set_target_rotations(cheese_reach_target_rotations)
+
+	if blend_duration <= 0.0:
+		_apply_cheese_reach_weight(1.0)
+		return
+	cheese_reach_tween = create_tween()
+	cheese_reach_tween.set_trans(Tween.TRANS_SINE)
+	cheese_reach_tween.set_ease(Tween.EASE_IN_OUT)
+	cheese_reach_tween.tween_method(_apply_cheese_reach_weight, 0.0, 1.0, blend_duration)
+
+func end_cheese_reach_pose(blend_duration: float = 0.15) -> void:
+	if cheese_reach_base_rotations.is_empty():
+		return
+	if cheese_reach_tween != null and cheese_reach_tween.is_valid():
+		cheese_reach_tween.kill()
+	if blend_duration > 0.0:
+		cheese_reach_tween = create_tween()
+		cheese_reach_tween.set_trans(Tween.TRANS_SINE)
+		cheese_reach_tween.set_ease(Tween.EASE_IN_OUT)
+		cheese_reach_tween.tween_method(_apply_cheese_reach_weight, cheese_reach_weight, 0.0, blend_duration)
+		await cheese_reach_tween.finished
+	reset_cheese_reach_pose()
+
+func reset_cheese_reach_pose() -> void:
+	if cheese_reach_tween != null and cheese_reach_tween.is_valid():
+		cheese_reach_tween.kill()
+	cheese_reach_tween = null
+	if cheese_reach_modifier != null:
+		cheese_reach_modifier.clear_target_rotations()
+	cheese_reach_base_rotations.clear()
+	cheese_reach_target_rotations.clear()
+	cheese_reach_weight = 0.0
+
+func _apply_cheese_reach_weight(weight: float) -> void:
+	var skeleton := _get_skeleton()
+	if skeleton == null:
+		return
+	cheese_reach_weight = clampf(weight, 0.0, 1.0)
+	cheese_reach_modifier.influence = cheese_reach_weight
+
+func _arm_target_for_side(skeleton: Skeleton3D, arm_name: String, cheese_world_position: Vector3) -> Vector3:
+	var arm_index := skeleton.find_bone(arm_name)
+	if arm_index < 0:
+		return cheese_world_position
+	var shoulder_world_position := skeleton.to_global(skeleton.get_bone_global_pose(arm_index).origin)
+	var side_direction := shoulder_world_position - cheese_world_position
+	side_direction.y = 0.0
+	if side_direction.length_squared() > 0.0:
+		side_direction = side_direction.normalized()
+	return cheese_world_position + side_direction * 0.1
+
+func _point_bone_toward(skeleton: Skeleton3D, bone_name: String, child_name: String, world_target: Vector3) -> void:
+	var bone_index := skeleton.find_bone(bone_name)
+	var child_index := skeleton.find_bone(child_name)
+	if bone_index < 0 or child_index < 0:
+		return
+	var bone_global_pose := skeleton.get_bone_global_pose(bone_index)
+	var current_direction := skeleton.get_bone_global_pose(child_index).origin - bone_global_pose.origin
+	var desired_direction := skeleton.to_local(world_target) - bone_global_pose.origin
+	if current_direction.length_squared() == 0.0 or desired_direction.length_squared() == 0.0:
+		return
+	var rotation_delta := Quaternion(current_direction.normalized(), desired_direction.normalized())
+	var target_global_pose := Transform3D(Basis(rotation_delta) * bone_global_pose.basis, bone_global_pose.origin)
+	var parent_index := skeleton.get_bone_parent(bone_index)
+	var target_local_pose := target_global_pose
+	if parent_index >= 0:
+		target_local_pose = skeleton.get_bone_global_pose(parent_index).affine_inverse() * target_global_pose
+	skeleton.set_bone_pose_rotation(bone_index, target_local_pose.basis.get_rotation_quaternion())
+	skeleton.force_update_all_bone_transforms()
+
+func _tilt_bone_in_world(skeleton: Skeleton3D, bone_name: String, angle_degrees: float) -> void:
+	var bone_index := skeleton.find_bone(bone_name)
+	if bone_index < 0:
+		return
+	var model_right_world := global_transform.basis.x.normalized()
+	var tilt_axis := (skeleton.global_transform.basis.inverse() * model_right_world).normalized()
+	var bone_global_pose := skeleton.get_bone_global_pose(bone_index)
+	var tilt := Basis(Quaternion(tilt_axis, deg_to_rad(angle_degrees)))
+	var target_global_pose := Transform3D(tilt * bone_global_pose.basis, bone_global_pose.origin)
+	var parent_index := skeleton.get_bone_parent(bone_index)
+	var target_local_pose := target_global_pose
+	if parent_index >= 0:
+		target_local_pose = skeleton.get_bone_global_pose(parent_index).affine_inverse() * target_global_pose
+	skeleton.set_bone_pose_rotation(bone_index, target_local_pose.basis.get_rotation_quaternion())
+	skeleton.force_update_all_bone_transforms()
+
+func _set_movement_crossfade(duration: float) -> void:
+	if animation_tree == null or animation_tree.tree_root == null:
+		return
+	var movement_transition := animation_tree.tree_root.get_node("movement") as AnimationNodeTransition
+	if movement_transition != null:
+		movement_transition.xfade_time = duration
 
 func set_push_start_trim_offset(value: float) -> void:
 	var push_start_node: AnimationNodeAnimation = animation_tree.tree_root.get_node("push_start") as AnimationNodeAnimation
@@ -290,3 +444,6 @@ func _get_animation_player() -> AnimationPlayer:
 		return null
 
 	return animation_tree.get_node_or_null(animation_tree.anim_player) as AnimationPlayer
+
+func _get_skeleton() -> Skeleton3D:
+	return get_node_or_null("rat-albert-animated/Armature/Skeleton3D") as Skeleton3D
