@@ -162,6 +162,7 @@ func _ready() -> void:
 	main.set("completion_cheese_disappear_duration", 0.0)
 	main.set("completion_reach_blend_duration", 0.0)
 	main.set("completion_reach_release_duration", 0.12)
+	main.set("completion_camera_return_duration", 0.0)
 	main.set("completion_dance_duration_override", 0.25)
 	var completion_popup: CanvasLayer = main.get_node("LevelCompletePopup")
 	completion_popup.set("entrance_duration", 0.08)
@@ -185,6 +186,8 @@ func _ready() -> void:
 	assert(main.get("completion_phase") == "cheese", "Cheese must descend before the chicken dance")
 	var reward_cheese := main.get("active_reward_cheese") as Node3D
 	assert(is_instance_valid(reward_cheese), "Cheese reward must be visible during its descent")
+	assert(main.get("completion_camera_active"), "Completion camera must activate for the cheese descent")
+	assert(not main.get_node("Player/CameraPivot/Camera3D").is_processing(), "Normal camera follow must pause during the cheese shot")
 	assert(main.get("completion_cheese_contact_height") < 1.48, "Cheese contact point must reach lower than the original descent")
 	assert(reward_cheese.global_position.y > main.get_node("Player").global_position.y + main.get("completion_cheese_contact_height"), "Cheese must begin above the player's head")
 	assert(is_equal_approx(character_model.get("cheese_reach_weight"), 1.0), "Head and arms must blend into the cheese-reaching pose")
@@ -201,6 +204,9 @@ func _ready() -> void:
 	await get_tree().create_timer(0.14).timeout
 	assert(main.get("completion_phase") == "dance", "Chicken dance must start after the cheese touches the player")
 	assert(not is_instance_valid(main.get("active_reward_cheese")), "Cheese must disappear before the chicken dance")
+	assert(not main.get("completion_camera_active"), "Completion camera must return before the dance")
+	var completion_camera_target: Node3D = main.get_node("Player/CameraPivot/CameraPosition")
+	assert(completion_camera_target.position.is_equal_approx(main.get("default_camera_target_position") * main.get("completion_camera_distance_ratio")), "Returned camera must keep the previous view one-third closer")
 	assert(character_animation_tree["parameters/movement/current_state"] == "chicken_dance")
 	assert(character_animation_tree.active and character_model.get("cheese_reach_weight") > 0.0, "Raised-arm pose must overlap the start of the dance")
 	assert(is_equal_approx(movement_transition.xfade_time, CharacterModel.CELEBRATION_CROSSFADE), "Chicken dance must use the smoother celebration crossfade")

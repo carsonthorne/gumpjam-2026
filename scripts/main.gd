@@ -12,6 +12,8 @@ const MAX_LEADERBOARD_SCORE := 1000000000
 @onready var player: CharacterBody3D = $Player
 @onready var character_model: CharacterModel = $Player/Pivot/CharacterModel
 @onready var player_pivot: Node3D = $Player/Pivot
+@onready var player_camera_pivot: Node3D = $Player/CameraPivot
+@onready var player_camera_target: Node3D = $Player/CameraPivot/CameraPosition
 @onready var player_camera: Camera3D = $Player/CameraPivot/Camera3D
 @onready var level_goal: Node = $LevelGoal
 @onready var level_complete_popup: CanvasLayer = $LevelCompletePopup
@@ -41,10 +43,18 @@ var completion_cheese_disappear_duration := 0.18
 var completion_cheese_contact_height := 1.27
 var completion_reach_blend_duration := 0.42
 var completion_reach_release_duration := 0.8
+var completion_camera_return_duration := 0.65
+var completion_camera_distance_ratio := 2.0 / 3.0
+var completion_cheese_camera_distance := 1.25
 var completion_phase := ""
 var active_reward_cheese: Node3D = null
+var default_camera_target_position := Vector3.ZERO
+var completion_camera_start_transform := Transform3D.IDENTITY
+var completion_camera_tween: Tween = null
+var completion_camera_active := false
 
 func _ready() -> void:
+	default_camera_target_position = player_camera_target.position
 	current_collection = level_layout.get("collection")
 	current_level_number = level_layout.get("level_number")
 	if current_collection.is_empty():
@@ -83,6 +93,7 @@ func load_level(collection: String, level_number: int) -> void:
 	completion_phase = ""
 	_cleanup_reward_cheese()
 	character_model.reset_cheese_reach_pose()
+	_reset_completion_camera()
 	var map := Reader.read_level(collection, level_number)
 	if map.has("error"):
 		push_error(map.error)
@@ -201,6 +212,7 @@ func _drop_cheese_reward() -> void:
 	active_reward_cheese.scale = Vector3.ONE * 0.38
 	active_reward_cheese.rotation.y = player_pivot.global_rotation.y
 	character_model.begin_cheese_reach_pose(cheese_target, completion_reach_blend_duration)
+	_begin_cheese_camera()
 
 	if completion_cheese_descent_duration > 0.0:
 		var descent_tween := create_tween().set_parallel(true)
@@ -208,19 +220,78 @@ func _drop_cheese_reward() -> void:
 		descent_tween.set_ease(Tween.EASE_IN_OUT)
 		descent_tween.tween_property(active_reward_cheese, "global_position", cheese_target, completion_cheese_descent_duration)
 		descent_tween.tween_property(active_reward_cheese, "rotation:y", active_reward_cheese.rotation.y + PI * 0.35, completion_cheese_descent_duration)
+		completion_camera_tween = create_tween()
+		completion_camera_tween.set_trans(Tween.TRANS_SINE)
+		completion_camera_tween.set_ease(Tween.EASE_IN_OUT)
+		completion_camera_tween.tween_method(_track_cheese_camera, 0.0, 1.0, completion_cheese_descent_duration)
 		await descent_tween.finished
 	else:
 		active_reward_cheese.global_position = cheese_target
+		_track_cheese_camera(1.0)
 
 	if not is_instance_valid(active_reward_cheese):
 		return
-	if completion_cheese_disappear_duration > 0.0:
-		var disappear_tween := create_tween()
-		disappear_tween.set_trans(Tween.TRANS_BACK)
-		disappear_tween.set_ease(Tween.EASE_IN)
-		disappear_tween.tween_property(active_reward_cheese, "scale", Vector3.ZERO, completion_cheese_disappear_duration)
-		await disappear_tween.finished
+	await _return_camera_after_cheese()
 	_cleanup_reward_cheese()
+
+func _begin_cheese_camera() -> void:
+	if completion_camera_tween != null and completion_camera_tween.is_valid():
+		completion_camera_tween.kill()
+	completion_camera_start_transform = player_camera.global_transform
+	completion_camera_active = true
+	player_camera_pivot.set_process(false)
+	player_camera.set_process(false)
+
+func _track_cheese_camera(progress: float) -> void:
+	if not completion_camera_active or not is_instance_valid(active_reward_cheese):
+		return
+	var player_focus := player.global_position + Vector3.UP * 1.2
+	var camera_direction := completion_camera_start_transform.origin - player_focus
+	if camera_direction.length_squared() == 0.0:
+		camera_direction = Vector3.BACK
+	var camera_offset := camera_direction.normalized() * completion_cheese_camera_distance
+	var desired_position := active_reward_cheese.global_position + camera_offset
+	var desired_transform := Transform3D(completion_camera_start_transform.basis, desired_position)
+	desired_transform = desired_transform.looking_at(active_reward_cheese.global_position, Vector3.UP)
+	player_camera.global_transform = completion_camera_start_transform.interpolate_with(desired_transform, progress)
+
+func _return_camera_after_cheese() -> void:
+	if not completion_camera_active:
+		return
+	if completion_camera_tween != null and completion_camera_tween.is_valid():
+		completion_camera_tween.kill()
+	player_camera_target.position = default_camera_target_position * completion_camera_distance_ratio
+	var return_transform := player_camera_target.global_transform
+	var return_duration := maxf(completion_camera_return_duration, completion_cheese_disappear_duration)
+	if return_duration <= 0.0:
+		player_camera.global_transform = return_transform
+		active_reward_cheese.scale = Vector3.ZERO
+		_finish_completion_camera()
+		return
+	completion_camera_tween = create_tween().set_parallel(true)
+	completion_camera_tween.set_trans(Tween.TRANS_SINE)
+	completion_camera_tween.set_ease(Tween.EASE_IN_OUT)
+	completion_camera_tween.tween_property(player_camera, "global_transform", return_transform, completion_camera_return_duration)
+	completion_camera_tween.tween_property(active_reward_cheese, "scale", Vector3.ZERO, completion_cheese_disappear_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	await completion_camera_tween.finished
+	_finish_completion_camera()
+
+func _finish_completion_camera() -> void:
+	completion_camera_active = false
+	completion_camera_tween = null
+	player_camera.global_transform = player_camera_target.global_transform
+	player_camera.set_process(true)
+	player_camera_pivot.set_process(true)
+
+func _reset_completion_camera() -> void:
+	if completion_camera_tween != null and completion_camera_tween.is_valid():
+		completion_camera_tween.kill()
+	completion_camera_tween = null
+	completion_camera_active = false
+	player_camera_target.position = default_camera_target_position
+	player_camera.transform = player_camera_target.transform
+	player_camera.set_process(true)
+	player_camera_pivot.set_process(true)
 
 func _cleanup_reward_cheese() -> void:
 	if is_instance_valid(active_reward_cheese):
