@@ -1,5 +1,7 @@
 extends AnimatableBody3D
 
+const PixelFont = preload("res://assets/fonts/LowresPixel-Regular.otf")
+
 @export var block_letter := "A"
 @export var block_color := Color(0.78, 0.06, 0.04, 1.0)
 @export_range(0.0, 0.35, 0.005) var block_border_thickness := 0.09
@@ -172,6 +174,7 @@ func _add_letter(parent: Node3D) -> void:
 	label.text = block_letter.substr(0, 1).to_upper()
 	label.pixel_size = 0.024
 	label.font_size = 32
+	label.font = PixelFont
 	label.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 	label.alpha_cut = Label3D.ALPHA_CUT_DISCARD
 	label.alpha_scissor_threshold = 0.5

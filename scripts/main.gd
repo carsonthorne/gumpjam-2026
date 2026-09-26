@@ -23,7 +23,6 @@ const MAX_LEADERBOARD_SCORE := 1000000000
 @onready var pause_level_info_label: Label = $PauseMenu/Overlay/Panel/Margin/Content/LevelInfoLabel
 @onready var resume_button: Button = $PauseMenu/Overlay/Panel/Margin/Content/ResumeButton
 @onready var restart_button: Button = $PauseMenu/Overlay/Panel/Margin/Content/RestartButton
-@onready var pause_level_select_button: Button = $PauseMenu/Overlay/Panel/Margin/Content/LevelSelectButton
 @onready var pause_main_menu_button: Button = $PauseMenu/Overlay/Panel/Margin/Content/MainMenuButton
 @onready var score_hud: CanvasLayer = $ScoreHUD
 @onready var leaderboard_client: Node = $CloudflareLeaderboardClient
@@ -76,7 +75,6 @@ func _ready() -> void:
 	pause_button.pressed.connect(_show_pause_menu)
 	resume_button.pressed.connect(_resume_game)
 	restart_button.pressed.connect(_restart_level)
-	pause_level_select_button.pressed.connect(_return_to_level_select)
 	pause_main_menu_button.pressed.connect(_return_to_main_menu)
 	player.push_started.connect(_record_move)
 	leaderboard_client.scores_loaded.connect(_on_leaderboard_scores_loaded)
@@ -312,7 +310,7 @@ func _return_to_main_menu() -> void:
 func _show_pause_menu() -> void:
 	if level_complete_popup.visible or level_completion_in_progress:
 		return
-	pause_level_info_label.text = "%s - level %d" % [_collection_display_name(current_collection), current_level_number]
+	pause_level_info_label.text = ("%s - level %d" % [_collection_display_name(current_collection), current_level_number]).replace(" ", "  ")
 	if pause_menu.has_method("show_with_entrance"):
 		pause_menu.show_with_entrance()
 	else:

@@ -31,7 +31,7 @@ var is_entering := false
 func _ready() -> void:
 	_update_layout()
 	get_viewport().size_changed.connect(_update_layout)
-	title_label.text = "Level Completed"
+	title_label.text = "Level  Completed"
 	next_level_button.pressed.connect(next_requested.emit)
 	restart_button.pressed.connect(restart_requested.emit)
 	main_menu_button.pressed.connect(main_menu_requested.emit)
@@ -50,9 +50,9 @@ func show_results(player_name: String, score: Dictionary, collection_name: Strin
 	current_score["playerName"] = _clean_player_name(player_name)
 	loaded_scores = []
 	current_name_input = null
-	subtitle_label.text = "%s - level %d" % [collection_name, level_number]
+	subtitle_label.text = _menu_text("%s - level %d" % [collection_name, level_number])
 	next_level_button.visible = has_next_level
-	status_label.text = "Loading high scores..."
+	status_label.text = "Loading  high  scores..."
 	_render_scores()
 	_update_layout()
 	if entrance_tween != null and entrance_tween.is_valid():
@@ -84,7 +84,7 @@ func set_scores(scores: Array) -> void:
 	_render_scores()
 
 func set_status(message: String) -> void:
-	status_label.text = message
+	status_label.text = _menu_text(message)
 
 func player_name() -> String:
 	if current_name_input == null:
@@ -127,7 +127,7 @@ func _scores_with_current_run() -> Array:
 
 func _add_empty_row() -> void:
 	var label := Label.new()
-	label.text = "No scores yet"
+	label.text = "No  scores  yet"
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_color_override("font_color", Color(0.16, 0.14, 0.12, 1.0))
 	score_rows.add_child(label)
@@ -211,3 +211,6 @@ func _format_time(milliseconds: int) -> String:
 	var minutes := total_seconds / 60
 	var seconds := total_seconds % 60
 	return "%02d:%02d" % [minutes, seconds]
+
+func _menu_text(value: String) -> String:
+	return value.replace(" ", "  ")

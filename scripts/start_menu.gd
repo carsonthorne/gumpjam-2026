@@ -125,7 +125,7 @@ func _load_collections() -> void:
 	high_scores_collection_select.clear()
 	var collections := _collections()
 	for collection in collections:
-		var label := _collection_option_label(collection)
+		var label := _menu_text(_collection_option_label(collection))
 		collection_select.add_item(label)
 		collection_select.set_item_metadata(collection_select.get_item_count() - 1, collection)
 		high_scores_collection_select.add_item(label)
@@ -185,7 +185,7 @@ func _rebuild_level_buttons() -> void:
 		button.pressed.connect(_select_level.bind(level_number, button))
 		level_grid.add_child(button)
 
-	detail_label.text = "%s: %d levels" % [_collection_option_label(selected_collection), level_count]
+	detail_label.text = _menu_text("%s: %d levels" % [_collection_option_label(selected_collection), level_count])
 
 func _on_high_scores_collection_selected(index: int) -> void:
 	high_scores_collection = high_scores_collection_select.get_item_metadata(index)
@@ -215,7 +215,7 @@ func _select_high_scores_level(level_number: int, button: Button) -> void:
 	high_scores_level = level_number
 	high_scores_level_button = button
 	high_scores_level_button.button_pressed = true
-	high_scores_title.text = "%s level %d" % [_collection_title(high_scores_collection), high_scores_level]
+	high_scores_title.text = _menu_text("%s level %d" % [_collection_title(high_scores_collection), high_scores_level])
 	_show_high_scores_score_list()
 	_load_selected_high_scores()
 
@@ -227,7 +227,7 @@ func _select_level(level_number: int, button: Button) -> void:
 	selected_level_button = button
 	selected_level_button.button_pressed = true
 	go_button.disabled = false
-	detail_label.text = "%s level %d selected" % [_collection_title(selected_collection), selected_level]
+	detail_label.text = _menu_text("%s level %d selected" % [_collection_title(selected_collection), selected_level])
 
 func _count_levels(path: String) -> int:
 	if not FileAccess.file_exists(path):
@@ -268,8 +268,8 @@ func _show_main() -> void:
 	instructions_panel.visible = false
 	options_panel.visible = false
 	high_scores_panel.visible = false
-	detail_label.visible = false
-	detail_label.text = ""
+	detail_label.visible = true
+	detail_label.text = "A  sokoban  experiment"
 
 func _show_level_select() -> void:
 	level_select_title_spacer.visible = false
@@ -280,7 +280,7 @@ func _show_level_select() -> void:
 	high_scores_panel.visible = false
 	detail_label.visible = false
 	if not selected_collection.is_empty():
-		detail_label.text = "%s: %d levels" % [_collection_option_label(selected_collection), _count_levels(selected_collection)]
+		detail_label.text = _menu_text("%s: %d levels" % [_collection_option_label(selected_collection), _count_levels(selected_collection)])
 
 func _show_instructions() -> void:
 	level_select_title_spacer.visible = false
@@ -289,8 +289,8 @@ func _show_instructions() -> void:
 	instructions_panel.visible = true
 	options_panel.visible = false
 	high_scores_panel.visible = false
-	detail_label.visible = true
-	detail_label.text = "Controls"
+	detail_label.visible = false
+	detail_label.text = ""
 
 func _show_high_scores() -> void:
 	level_select_title_spacer.visible = false
@@ -299,7 +299,8 @@ func _show_high_scores() -> void:
 	instructions_panel.visible = false
 	options_panel.visible = false
 	high_scores_panel.visible = true
-	detail_label.visible = false
+	detail_label.visible = true
+	detail_label.text = "High  Scores"
 	_show_high_scores_level_picker()
 
 func _show_options() -> void:
@@ -327,7 +328,7 @@ func _load_selected_high_scores() -> void:
 		_clear_high_scores_rows("Select a level")
 		return
 
-	high_scores_title.text = "%s level %d" % [_collection_title(high_scores_collection), high_scores_level]
+	high_scores_title.text = _menu_text("%s level %d" % [_collection_title(high_scores_collection), high_scores_level])
 	_clear_high_scores_rows("Loading...")
 	leaderboard_client.load_scores(high_scores_collection, high_scores_level, 10)
 
@@ -374,7 +375,7 @@ func _clear_high_scores_rows(message: String) -> void:
 func _add_high_scores_empty_row(message: String) -> void:
 	var label := Label.new()
 	label.custom_minimum_size = Vector2(0, 22)
-	label.text = message
+	label.text = _menu_text(message)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_color_override("font_color", Color(0.16, 0.14, 0.12, 1.0))
 	label.add_theme_font_size_override("font_size", 16)
@@ -411,6 +412,9 @@ func _format_time(milliseconds: int) -> String:
 	var minutes := total_seconds / 60
 	var seconds := total_seconds % 60
 	return "%02d:%02d" % [minutes, seconds]
+
+func _menu_text(value: String) -> String:
+	return value.replace(" ", "  ")
 
 func _collection_option_label(path: String) -> String:
 	var file_name := path.get_file()

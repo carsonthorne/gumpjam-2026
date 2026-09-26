@@ -9,28 +9,28 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.48, 0.72, 0.62, 0.9)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="ScoreHUD" type="CanvasLayer"]
 layer = 20
 script = ExtResource("1_score_hud")
 
 [node name="Panel" type="PanelContainer" parent="."]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 166.0
-offset_bottom = 84.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 125.0
+offset_bottom = 63.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_score")
 
 [node name="Margin" type="MarginContainer" parent="Panel"]
 layout_mode = 2
-theme_override_constants/margin_left = 14
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 14
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
 
 [node name="Stats" type="VBoxContainer" parent="Panel/Margin"]
 layout_mode = 2
@@ -42,7 +42,7 @@ theme_override_colors/font_color = Color(0.88, 1, 0.94, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 14
 text = "Time  00:00"
 
 [node name="MovesLabel" type="Label" parent="Panel/Margin/Stats"]
@@ -51,5 +51,5 @@ theme_override_colors/font_color = Color(0.88, 1, 0.94, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 14
 text = "Moves  0"

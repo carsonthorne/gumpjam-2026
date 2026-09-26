@@ -96,7 +96,7 @@ expand_mode = 1
 [node name="Margin" type="MarginContainer" parent="Overlay/Panel" unique_id=1876839062]
 layout_mode = 1
 offset_left = 126.0
-offset_top = 148.0
+offset_top = 152.0
 offset_right = 512.0
 offset_bottom = 606.0
 theme_override_constants/margin_left = 22
@@ -107,19 +107,19 @@ theme_override_constants/margin_bottom = 22
 [node name="Content" type="VBoxContainer" parent="Overlay/Panel/Margin" unique_id=1097294451]
 layout_mode = 2
 theme_override_constants/separation = 10
-alignment = 1
+alignment = 0
 
 [node name="Title" type="Label" parent="Overlay/Panel/Margin/Content" unique_id=1291925300]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.08, 0.075, 0.065, 1)
 theme_override_font_sizes/font_size = 28
-text = "Game Paused"
+text = "Game  Paused"
 horizontal_alignment = 1
 
 [node name="LevelInfoLabel" type="Label" parent="Overlay/Panel/Margin/Content" unique_id=715318011]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
-text = "collection - level 1"
+text = "collection  -  level  1"
 horizontal_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="Overlay/Panel/Margin/Content" unique_id=1112129250]
@@ -132,20 +132,20 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Restart"
 
-[node name="LevelSelectButton" type="Button" parent="Overlay/Panel/Margin/Content" unique_id=926279969]
+[node name="InstructionsButton" type="Button" parent="Overlay/Panel/Margin/Content"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-text = "Level Select"
+text = "Instructions"
 
 [node name="OptionsButton" type="Button" parent="Overlay/Panel/Margin/Content"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-text = "Options"
+text = "Audio  Options"
 
 [node name="MainMenuButton" type="Button" parent="Overlay/Panel/Margin/Content" unique_id=1420693765]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-text = "Main Menu"
+text = "Main  Menu"
 
 [node name="OptionsPanel" type="VBoxContainer" parent="Overlay/Panel/Margin/Content"]
 visible = false
@@ -156,13 +156,13 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_colors/font_color = Color(0.08, 0.075, 0.065, 1)
 theme_override_font_sizes/font_size = 22
-text = "Options"
+text = "Audio  Options"
 horizontal_alignment = 1
 
 [node name="MusicLabel" type="Label" parent="Overlay/Panel/Margin/Content/OptionsPanel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
-text = "Music Volume"
+text = "Music  Volume"
 
 [node name="MusicSlider" type="HSlider" parent="Overlay/Panel/Margin/Content/OptionsPanel"]
 layout_mode = 2
@@ -173,7 +173,7 @@ value = 1.0
 [node name="SfxLabel" type="Label" parent="Overlay/Panel/Margin/Content/OptionsPanel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
-text = "Sound Effects Volume"
+text = "Sound  Effects  Volume"
 
 [node name="SfxSlider" type="HSlider" parent="Overlay/Panel/Margin/Content/OptionsPanel"]
 layout_mode = 2
@@ -182,6 +182,49 @@ step = 0.01
 value = 1.0
 
 [node name="OptionsBackButton" type="Button" parent="Overlay/Panel/Margin/Content/OptionsPanel"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Back"
+
+[node name="InstructionsPanel" type="VBoxContainer" parent="Overlay/Panel/Margin/Content"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="GoalTitle" type="Label" parent="Overlay/Panel/Margin/Content/InstructionsPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.075, 0.065, 1)
+theme_override_font_sizes/font_size = 18
+text = "Goal"
+horizontal_alignment = 1
+
+[node name="GoalText" type="Label" parent="Overlay/Panel/Margin/Content/InstructionsPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
+theme_override_font_sizes/font_size = 15
+text = "•  Push  every  lettered  block  onto  a  red  target.\n•  Cover  every  target  to  complete  the  puzzle.\n•  Blocks  can  be  pushed,  never  pulled."
+autowrap_mode = 2
+
+[node name="ControlsTitle" type="Label" parent="Overlay/Panel/Margin/Content/InstructionsPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.075, 0.065, 1)
+theme_override_font_sizes/font_size = 18
+text = "Controls"
+horizontal_alignment = 1
+
+[node name="InstructionsText" type="Label" parent="Overlay/Panel/Margin/Content/InstructionsPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
+theme_override_font_sizes/font_size = 15
+text = "•  Move:  W  A  S  D\n•  Rotate  camera:  Left  /  Right  arrow  keys\n•  Run:  Hold  Shift,  or  press  Tab  to  toggle\n•  Push  /  interact:  E  or  Space\n•  Pause  /  resume:  Escape  or  the  Pause  button"
+autowrap_mode = 2
+
+[node name="BackSpacer" type="Control" parent="Overlay/Panel/Margin/Content/InstructionsPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BackButton" type="Button" parent="Overlay/Panel/Margin/Content/InstructionsPanel"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Back"

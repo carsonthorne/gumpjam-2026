@@ -8,6 +8,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	AudioSettings.ensure_audio_buses()
 	bus = AudioSettings.MUSIC_BUS
+	playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 	_load_background_music()
 	finished.connect(_on_finished)
 

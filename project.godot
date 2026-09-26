@@ -32,6 +32,10 @@ window/stretch/aspect="expand"
 
 enabled=PackedStringArray("res://addons/sokoban_layout/plugin.cfg")
 
+[gui]
+
+theme/custom_font="res://assets/fonts/LowresPixel-Regular.otf"
+
 [input]
 
 move_left={

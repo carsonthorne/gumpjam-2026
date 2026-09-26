@@ -36,15 +36,15 @@ expand_mode = 1
 
 [node name="Shell" type="MarginContainer" parent="DesignRoot" unique_id=1671849616]
 layout_mode = 1
-offset_left = 594.0
+offset_left = 524.0
 offset_top = 215.0
-offset_right = 914.0
+offset_right = 984.0
 offset_bottom = 775.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 18
+theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 18
+theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 16
 
 [node name="Content" type="VBoxContainer" parent="DesignRoot/Shell" unique_id=1109495430]
@@ -59,12 +59,14 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.08, 0.075, 0.065, 1)
 theme_override_font_sizes/font_size = 34
-text = "Rat Albert"
+text = "Rat  Albert"
 horizontal_alignment = 1
 
 [node name="DetailLabel" type="Label" parent="DesignRoot/Shell/Content" unique_id=857414746]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
+theme_override_font_sizes/font_size = 26
+text = "A  sokoban  experiment"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -77,28 +79,32 @@ theme_override_constants/separation = 12
 alignment = 1
 
 [node name="LevelSelectButton" type="Button" parent="DesignRoot/Shell/Content/MainPanel" unique_id=1733060851]
-custom_minimum_size = Vector2(240, 44)
+custom_minimum_size = Vector2(420, 44)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Level Select"
+theme_override_font_sizes/font_size = 20
+text = "Level  Select"
 
 [node name="HighScoresButton" type="Button" parent="DesignRoot/Shell/Content/MainPanel"]
-custom_minimum_size = Vector2(240, 44)
+custom_minimum_size = Vector2(420, 44)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "High Scores"
+theme_override_font_sizes/font_size = 20
+text = "High  Scores"
 
 [node name="InstructionsButton" type="Button" parent="DesignRoot/Shell/Content/MainPanel" unique_id=1190318671]
-custom_minimum_size = Vector2(240, 44)
+custom_minimum_size = Vector2(420, 44)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
 text = "Instructions"
 
 [node name="OptionsButton" type="Button" parent="DesignRoot/Shell/Content/MainPanel"]
-custom_minimum_size = Vector2(240, 44)
+custom_minimum_size = Vector2(420, 44)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Options"
+theme_override_font_sizes/font_size = 20
+text = "Audio  Options"
 
 [node name="LevelSelectPanel" type="VBoxContainer" parent="DesignRoot/Shell/Content" unique_id=751864696]
 layout_mode = 2
@@ -146,17 +152,49 @@ text = "Start"
 
 [node name="InstructionsPanel" type="VBoxContainer" parent="DesignRoot/Shell/Content" unique_id=176661534]
 visible = false
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
 theme_override_constants/separation = 12
 
-[node name="BackButton" type="Button" parent="DesignRoot/Shell/Content/InstructionsPanel" unique_id=1801932081]
+[node name="GoalTitle" type="Label" parent="DesignRoot/Shell/Content/InstructionsPanel"]
 layout_mode = 2
-text = "Back"
+theme_override_colors/font_color = Color(0.08, 0.075, 0.065, 1)
+theme_override_font_sizes/font_size = 20
+text = "Goal"
+horizontal_alignment = 1
+
+[node name="GoalText" type="Label" parent="DesignRoot/Shell/Content/InstructionsPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
+theme_override_font_sizes/font_size = 18
+text = "•  Push  every  lettered  block  onto  a  red  target.\n•  Cover  every  target  to  complete  the  puzzle.\n•  Blocks  can  be  pushed,  never  pulled."
+autowrap_mode = 2
+
+[node name="ControlsTitle" type="Label" parent="DesignRoot/Shell/Content/InstructionsPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.075, 0.065, 1)
+theme_override_font_sizes/font_size = 20
+text = "Controls"
+horizontal_alignment = 1
 
 [node name="InstructionsText" type="Label" parent="DesignRoot/Shell/Content/InstructionsPanel" unique_id=1576019704]
 layout_mode = 2
-text = "Move with WASD. Rotate the camera with the left and right arrow keys. Press Tab to toggle running. Press E or Space to interact and push blocks. Push every block onto a red target to clear the level."
+theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
+theme_override_font_sizes/font_size = 18
+text = "•  Move:  W  A  S  D\n•  Rotate  camera:  Left  /  Right  arrow  keys\n•  Run:  Hold  Shift,  or  press  Tab  to  toggle\n•  Push  /  interact:  E  or  Space\n•  Pause  /  resume:  Escape  or  the  Pause  button"
 autowrap_mode = 2
+
+[node name="BackSpacer" type="Control" parent="DesignRoot/Shell/Content/InstructionsPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BackButton" type="Button" parent="DesignRoot/Shell/Content/InstructionsPanel" unique_id=1801932081]
+custom_minimum_size = Vector2(116, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
 
 [node name="OptionsPanel" type="VBoxContainer" parent="DesignRoot/Shell/Content"]
 visible = false
@@ -168,12 +206,12 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
 theme_override_font_sizes/font_size = 22
-text = "Options"
+text = "Audio  Options"
 horizontal_alignment = 1
 
 [node name="MusicLabel" type="Label" parent="DesignRoot/Shell/Content/OptionsPanel"]
 layout_mode = 2
-text = "Music Volume"
+text = "Music  Volume"
 
 [node name="MusicSlider" type="HSlider" parent="DesignRoot/Shell/Content/OptionsPanel"]
 custom_minimum_size = Vector2(240, 0)
@@ -184,7 +222,7 @@ value = 1.0
 
 [node name="SfxLabel" type="Label" parent="DesignRoot/Shell/Content/OptionsPanel"]
 layout_mode = 2
-text = "Sound Effects Volume"
+text = "Sound  Effects  Volume"
 
 [node name="SfxSlider" type="HSlider" parent="DesignRoot/Shell/Content/OptionsPanel"]
 custom_minimum_size = Vector2(240, 0)
@@ -243,7 +281,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
 theme_override_font_sizes/font_size = 18
-text = "Select a level"
+text = "Select  a  level"
 horizontal_alignment = 1
 
 [node name="Scores" type="VBoxContainer" parent="DesignRoot/Shell/Content/HighScoresPanel/ScoreList"]
@@ -277,7 +315,7 @@ custom_minimum_size = Vector2(78, 20)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.085, 0.065, 1)
 theme_override_font_sizes/font_size = 14
-text = "# moves"
+text = "#  moves"
 horizontal_alignment = 2
 
 [node name="TimeHeader" type="Label" parent="DesignRoot/Shell/Content/HighScoresPanel/ScoreList/Scores/Headers"]

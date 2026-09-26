@@ -54,21 +54,21 @@ theme_override_constants/separation = 6
 layout_mode = 2
 theme_override_colors/font_color = Color(0.08, 0.075, 0.065, 1)
 theme_override_font_sizes/font_size = 27
-text = "Level Completed"
+text = "Level  Completed"
 horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="Overlay/DesignRoot/Shell/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
 theme_override_font_sizes/font_size = 14
-text = "collection - level 1"
+text = "collection  -  level  1"
 horizontal_alignment = 1
 
 [node name="ScoresTitle" type="Label" parent="Overlay/DesignRoot/Shell/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.12, 0.11, 0.095, 1)
 theme_override_font_sizes/font_size = 17
-text = "High Scores"
+text = "High  Scores"
 horizontal_alignment = 1
 
 [node name="Scores" type="VBoxContainer" parent="Overlay/DesignRoot/Shell/Content"]
@@ -101,7 +101,7 @@ custom_minimum_size = Vector2(78, 20)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.085, 0.065, 1)
 theme_override_font_sizes/font_size = 14
-text = "# moves"
+text = "#  moves"
 horizontal_alignment = 2
 
 [node name="TimeHeader" type="Label" parent="Overlay/DesignRoot/Shell/Content/Scores/Headers"]
@@ -135,7 +135,7 @@ alignment = 1
 [node name="NextLevelButton" type="Button" parent="Overlay/DesignRoot/Shell/Content/Buttons"]
 custom_minimum_size = Vector2(106, 38)
 layout_mode = 2
-text = "Next Level"
+text = "Next  Level"
 
 [node name="RestartButton" type="Button" parent="Overlay/DesignRoot/Shell/Content/Buttons"]
 custom_minimum_size = Vector2(88, 38)
@@ -145,4 +145,4 @@ text = "Restart"
 [node name="MainMenuButton" type="Button" parent="Overlay/DesignRoot/Shell/Content/Buttons"]
 custom_minimum_size = Vector2(106, 38)
 layout_mode = 2
-text = "Main Menu"
+text = "Main  Menu"

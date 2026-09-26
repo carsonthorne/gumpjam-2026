@@ -5,6 +5,11 @@ const Reader = preload("res://addons/sokoban_layout/map_reader.gd")
 const StartMenu = preload("res://scripts/start_menu.gd")
 
 func _ready() -> void:
+	const ui_font_path := "res://assets/fonts/LowresPixel-Regular.otf"
+	assert(ProjectSettings.get_setting("gui/theme/custom_font") == ui_font_path, "All UI text must use the selected pixel font")
+	var ui_font := load(ui_font_path) as Font
+	for character in [":", "-", "!", "?", "•", "—"]:
+		assert(ui_font.has_char(character.unicode_at(0)), "UI font must support '%s'" % character)
 	assert(ProjectSettings.get_setting("application/run/main_scene") == "res://scenes/splash_screen.tscn", "Game must launch through the splash screen")
 	var splash_scene: Control = load("res://scenes/splash_screen.tscn").instantiate()
 	var splash_background := splash_scene.get_node("WhiteBackground") as ColorRect
@@ -12,6 +17,7 @@ func _ready() -> void:
 	var splash_material := splash_logo.material as ShaderMaterial
 	var splash_audio := splash_scene.get_node("IntroAudio") as AudioStreamPlayer
 	var splash_prompt := splash_scene.get_node("StartPrompt") as Label
+	var splash_callout := splash_scene.get_node("LevelCountCallout") as Label
 	assert(splash_background.color == Color.WHITE, "Splash screen must use a white background")
 	assert(splash_logo.texture.get_size() == Vector2(1378, 1141), "Splash screen must use the corrected Rat Albert image")
 	assert(splash_logo.stretch_mode == TextureRect.STRETCH_KEEP_ASPECT_CENTERED, "Splash logo must fill the screen without cropping")
@@ -19,8 +25,11 @@ func _ready() -> void:
 	assert(splash_scene.get("start_scale") <= 0.01 and splash_scene.get("clockwise_turns") == 5.0, "Splash logo must grow from nearly invisible while rotating clockwise five times")
 	assert(splash_scene.get("animation_duration") >= 4.0 and splash_scene.get("bounce_overshoot_scale") > 1.0, "Splash logo must use a longer accelerating entrance with a finishing bounce")
 	assert(splash_audio.stream != null and splash_audio.bus == &"SFX", "Splash screen must play the Rat Albert intro through the SFX bus")
+	assert(splash_audio.playback_type == AudioServer.PLAYBACK_TYPE_STREAM, "Splash intro must use reliable stream playback on the web")
 	assert(splash_scene.get("audio_start_delay") > 2.0 and splash_scene.get("audio_start_delay") < splash_scene.get("animation_duration"), "Splash audio must begin during the spinning phase")
 	assert(splash_prompt.text == "press space to start" and not splash_prompt.visible, "Splash start prompt must remain hidden until the presentation finishes")
+	assert(splash_callout.text == "over 800\nmind-bending\nlevels!" and not splash_callout.visible, "Splash level-count callout must appear only after the presentation finishes")
+	assert(is_equal_approx(splash_callout.rotation_degrees, 25.0) and splash_callout.anchor_left > 0.5, "Splash level-count callout must be rotated 25 degrees clockwise on the image's right side")
 	splash_scene.free()
 	var map := Reader.validate(PackedStringArray(["  #####", "###   #", "#.@$  #", "### $.#", "#.##$ #", "# # . ##", "#$ *$$.#", "#   .  #", "########"]))
 	assert(not map.has("error"))
@@ -75,10 +84,26 @@ func _ready() -> void:
 	for child in main_panel.get_children():
 		if child is Button:
 			main_button_order.append(child.text)
-	assert(main_button_order == PackedStringArray(["Level Select", "High Scores", "Instructions", "Options"]))
+	assert(main_button_order == PackedStringArray(["Level  Select", "High  Scores", "Instructions", "Audio  Options"]))
+	assert(start_menu_scene.get_node("DesignRoot/Shell/Content/DetailLabel").text == "A  sokoban  experiment")
+	assert(start_menu_scene.get_node("DesignRoot/Shell/Content/DetailLabel").get_theme_font_size("font_size") == 26, "Main menu subtitle must be three-quarters of the title size")
+	assert(start_menu_scene.get_node("DesignRoot/Shell").position.x == 524.0, "Start menu content must align with the clipboard's visual center")
+	assert(main_panel.get_node("LevelSelectButton").custom_minimum_size.x == 420.0, "Main menu buttons must nearly span the clipboard paper")
+	for button in main_panel.get_children():
+		if button is Button:
+			assert(button.get_theme_font_size("font_size") == 20, "Start-menu button text must visually match the pause-menu button text")
+	var instructions_panel: VBoxContainer = start_menu_scene.get_node("DesignRoot/Shell/Content/InstructionsPanel")
+	assert(instructions_panel.get_child(-1).name == "BackButton", "Instructions Back button must sit at the bottom of the paper")
+	assert(instructions_panel.get_node("GoalText").text.contains("•  Push") and instructions_panel.get_node("InstructionsText").text.contains("Hold  Shift"), "Instructions must use larger, double-spaced Goal and Controls bullet points")
+	assert(instructions_panel.get_node("InstructionsText").get_theme_font_size("font_size") == 18, "Instruction copy must use the larger font size")
 	var start_options: VBoxContainer = start_menu_scene.get_node("DesignRoot/Shell/Content/OptionsPanel")
 	var pause_menu_scene: CanvasLayer = load("res://scenes/pause_menu.tscn").instantiate()
 	var pause_options: VBoxContainer = pause_menu_scene.get_node("Overlay/Panel/Margin/Content/OptionsPanel")
+	var pause_instructions: VBoxContainer = pause_menu_scene.get_node("Overlay/Panel/Margin/Content/InstructionsPanel")
+	assert(not pause_menu_scene.has_node("Overlay/Panel/Margin/Content/LevelSelectButton"), "Pause menu must not duplicate the main menu's level select")
+	assert(pause_menu_scene.get_node("Overlay/Panel/Margin/Content").get_child(4).name == "InstructionsButton", "Pause-menu Instructions button must follow Restart")
+	assert(pause_instructions.get_node("GoalText").text == instructions_panel.get_node("GoalText").text, "Pause menu must reuse the start menu's Goal instructions")
+	assert(pause_instructions.get_node("InstructionsText").text == instructions_panel.get_node("InstructionsText").text, "Pause menu must reuse the start menu's Controls instructions")
 	var pause_button: Button = pause_menu_scene.get_node("PauseButton")
 	var pause_button_style := pause_button.get_theme_stylebox("normal") as StyleBoxFlat
 	assert(pause_button_style != null and is_equal_approx(pause_button_style.bg_color.a, 0.86))
@@ -93,7 +118,17 @@ func _ready() -> void:
 		var start_slider: HSlider = start_options.get_node(slider_name)
 		var pause_slider: HSlider = pause_options.get_node(slider_name)
 		assert(start_slider.max_value == pause_slider.max_value and start_slider.step == pause_slider.step)
+	add_child(pause_menu_scene)
+	pause_menu_scene.get_node("Overlay/Panel/Margin/Content/InstructionsButton").pressed.emit()
+	assert(pause_instructions.visible and not pause_menu_scene.get_node("Overlay/Panel/Margin/Content/ResumeButton").visible, "Instructions button must open the pause instructions panel")
+	pause_instructions.get_node("BackButton").pressed.emit()
+	assert(not pause_instructions.visible and pause_menu_scene.get_node("Overlay/Panel/Margin/Content/ResumeButton").visible, "Instructions Back button must return to the pause actions")
+	remove_child(pause_menu_scene)
 	add_child(start_menu_scene)
+	assert(start_menu_scene.get_node("DesignRoot/Shell/Content/LevelSelectPanel/CollectionSelect").get_item_text(0).contains("  "), "Generated collection menu labels must use double spaces")
+	main_panel.get_node("HighScoresButton").pressed.emit()
+	assert(start_menu_scene.get_node("DesignRoot/Shell/Content/DetailLabel").text == "High  Scores", "High scores submenu must show its double-spaced subtitle")
+	start_menu_scene.get_node("DesignRoot/Shell/Content/HighScoresPanel/BackButton").pressed.emit()
 	main_panel.get_node("OptionsButton").pressed.emit()
 	assert(start_options.visible and not main_panel.visible, "Options button must open the start-menu options panel")
 	start_options.get_node("OptionsBackButton").pressed.emit()
@@ -101,10 +136,16 @@ func _ready() -> void:
 	remove_child(start_menu_scene)
 	start_menu_scene.free()
 	pause_menu_scene.free()
+	var score_hud_scene: CanvasLayer = load("res://scenes/score_hud.tscn").instantiate()
+	assert(score_hud_scene.get_node("Panel").size == Vector2(113.0, 51.0), "Score HUD container must be 50 percent larger than its previous size")
+	assert(score_hud_scene.get_node("Panel/Margin/Stats/TimerLabel").get_theme_font_size("font_size") == 14, "Score HUD font must be 50 percent larger than its previous size")
+	score_hud_scene.free()
 	for rows in [PackedStringArray(["###", "#@$", "#.#"]), PackedStringArray(["#####", "#@@$#", "# . #", "#####"]), PackedStringArray(["#####", "#@x.#", "#####"]), PackedStringArray(["#####", "#@$ #", "#####"])]:
 		assert(Reader.validate(rows).has("error"))
 	assert(not Reader.validate(PackedStringArray(["#####", "#+$ #", "#####"])).has("error"))
 	var main: Node = load("res://scenes/main.tscn").instantiate()
+	assert(main.get_node("PauseMenu/Overlay/Panel/Margin/Content/Title").text == "Game  Paused", "Pause menu labels must use double spaces")
+	assert(main.get_node("LevelCompletePopup/Overlay/DesignRoot/Shell/Content/Title").text == "Level  Completed", "Completion popup labels must use double spaces")
 	var character_model: CharacterModel = main.get_node("Player/Pivot/CharacterModel")
 	var character_animation_player: AnimationPlayer = main.get_node("Player/Pivot/CharacterModel/rat-albert-animated/AnimationPlayer")
 	assert(character_animation_player.has_animation(&"chicken_dance"))

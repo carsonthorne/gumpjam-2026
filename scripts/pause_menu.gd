@@ -14,9 +14,11 @@ const DESIGN_SIZE := Vector2(628.0, 662.0)
 @onready var level_info_label: Label = $Overlay/Panel/Margin/Content/LevelInfoLabel
 @onready var resume_button: Button = $Overlay/Panel/Margin/Content/ResumeButton
 @onready var restart_button: Button = $Overlay/Panel/Margin/Content/RestartButton
-@onready var level_select_button: Button = $Overlay/Panel/Margin/Content/LevelSelectButton
+@onready var instructions_button: Button = $Overlay/Panel/Margin/Content/InstructionsButton
 @onready var options_button: Button = $Overlay/Panel/Margin/Content/OptionsButton
 @onready var main_menu_button: Button = $Overlay/Panel/Margin/Content/MainMenuButton
+@onready var instructions_panel: VBoxContainer = $Overlay/Panel/Margin/Content/InstructionsPanel
+@onready var instructions_back_button: Button = $Overlay/Panel/Margin/Content/InstructionsPanel/BackButton
 @onready var options_panel: VBoxContainer = $Overlay/Panel/Margin/Content/OptionsPanel
 @onready var music_slider: HSlider = $Overlay/Panel/Margin/Content/OptionsPanel/MusicSlider
 @onready var sfx_slider: HSlider = $Overlay/Panel/Margin/Content/OptionsPanel/SfxSlider
@@ -34,6 +36,8 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_update_layout()
 	get_viewport().size_changed.connect(_update_layout)
+	instructions_button.pressed.connect(_show_instructions)
+	instructions_back_button.pressed.connect(_show_pause_actions)
 	options_button.pressed.connect(_show_options)
 	options_back_button.pressed.connect(_show_pause_actions)
 	music_slider.value_changed.connect(_on_music_volume_changed)
@@ -138,7 +142,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	get_viewport().set_input_as_handled()
 	if overlay.visible:
-		if options_panel.visible:
+		if options_panel.visible or instructions_panel.visible:
 			_show_pause_actions()
 		else:
 			resume_requested.emit()
@@ -150,19 +154,32 @@ func _show_options() -> void:
 	level_info_label.visible = false
 	resume_button.visible = false
 	restart_button.visible = false
-	level_select_button.visible = false
+	instructions_button.visible = false
 	options_button.visible = false
 	main_menu_button.visible = false
+	instructions_panel.visible = false
 	options_panel.visible = true
+
+func _show_instructions() -> void:
+	title_label.visible = false
+	level_info_label.visible = false
+	resume_button.visible = false
+	restart_button.visible = false
+	instructions_button.visible = false
+	options_button.visible = false
+	main_menu_button.visible = false
+	options_panel.visible = false
+	instructions_panel.visible = true
 
 func _show_pause_actions() -> void:
 	title_label.visible = true
 	level_info_label.visible = true
 	resume_button.visible = true
 	restart_button.visible = true
-	level_select_button.visible = true
+	instructions_button.visible = true
 	options_button.visible = true
 	main_menu_button.visible = true
+	instructions_panel.visible = false
 	options_panel.visible = false
 
 func _on_music_volume_changed(value: float) -> void:
