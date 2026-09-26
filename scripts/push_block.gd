@@ -8,6 +8,7 @@ extends AnimatableBody3D
 @export var push_distance := 1.0
 @export var brace_distance_from_block_center := 1.0
 @export var brace_face_alignment_half_width := 0.35
+@export_range(0.0, 0.5, 0.01) var brace_side_offset := 0.25
 @export var player_push_movement_delay := 0.12
 
 @onready var front_zone: Area3D = $PushZones/FrontZone
@@ -24,6 +25,7 @@ var push_distance_left := 0.0
 var push_start_position := Vector3.ZERO
 var push_target_position := Vector3.ZERO
 var push_brace_distance_from_block_center := 0.0
+var push_brace_lateral_offset := Vector3.ZERO
 var player_push_delay_left := 0.0
 var player_push_distance_left := 0.0
 var player_push_moved_distance := 0.0
@@ -206,6 +208,7 @@ func _physics_process(delta: float) -> void:
 
 	if push_distance_left == 0.0 and player_push_distance_left == 0.0:
 		active_push_direction = Vector3.ZERO
+		push_brace_lateral_offset = Vector3.ZERO
 		is_push_in_progress = false
 
 func _on_front_zone_body_entered(body: Node3D) -> void:
@@ -330,19 +333,39 @@ func _get_player_brace_position() -> Vector3:
 
 func _get_player_brace_position_for_direction(direction: Vector3, distance_from_block_center := brace_distance_from_block_center) -> Vector3:
 	var brace_position: Vector3 = global_position - direction.normalized() * distance_from_block_center
+	brace_position += _get_closest_brace_lateral_offset(direction)
 	if player != null:
 		brace_position.y = player.global_position.y
 	return brace_position
+
+func _get_closest_brace_lateral_offset(direction: Vector3) -> Vector3:
+	if player == null or direction.length_squared() == 0.0 or brace_side_offset <= 0.0:
+		return Vector3.ZERO
+	var lateral_axis := _get_brace_lateral_axis(direction)
+	var player_lateral_position: float = (player.global_position - global_position).dot(lateral_axis)
+	var selected_offset: float = 0.0
+	if player_lateral_position > brace_side_offset * 0.5:
+		selected_offset = brace_side_offset
+	elif player_lateral_position < -brace_side_offset * 0.5:
+		selected_offset = -brace_side_offset
+	return lateral_axis * selected_offset
+
+func _get_brace_lateral_axis(direction: Vector3) -> Vector3:
+	var block_x := global_transform.basis.x.normalized()
+	var block_z := global_transform.basis.z.normalized()
+	if absf(direction.dot(block_x)) > absf(direction.dot(block_z)):
+		return block_z
+	return block_x
 
 func _get_player_distance_from_block_center() -> float:
 	if player == null:
 		return brace_distance_from_block_center
 
-	if player.has_method("get_horizontal_distance_to_position"):
-		return float(player.get_horizontal_distance_to_position(global_position))
-
 	var offset: Vector3 = player.global_position - global_position
 	offset.y = 0.0
+	var normal_direction: Vector3 = active_push_direction if active_push_direction.length_squared() > 0.0 else push_direction
+	if normal_direction.length_squared() > 0.0:
+		return absf(offset.dot(normal_direction.normalized()))
 	return offset.length()
 
 func _update_player_push_position(delta: float) -> void:
@@ -369,8 +392,8 @@ func _sync_player_push_position_for_moved_distance(moved_distance: float) -> voi
 		var delayed_block_position := push_start_position + active_push_direction * moved_distance
 		player.sync_push_follow_position(_get_player_brace_position_at_block_position(delayed_block_position, active_push_direction, push_brace_distance_from_block_center))
 
-func _get_player_brace_position_at_block_position(block_position: Vector3, direction: Vector3, distance_from_block_center: float) -> Vector3:
-	var brace_position: Vector3 = block_position - direction.normalized() * distance_from_block_center
+func _get_player_brace_position_at_block_position(block_position: Vector3, direction: Vector3, distance_from_block_center: float, lateral_offset := push_brace_lateral_offset) -> Vector3:
+	var brace_position: Vector3 = block_position - direction.normalized() * distance_from_block_center + lateral_offset
 	if player != null:
 		brace_position.y = player.global_position.y
 	return brace_position
@@ -411,6 +434,7 @@ func push(direction: Vector3) -> void:
 	player_push_moved_distance = 0.0
 
 	if player != null and player.has_method("play_push_animation"):
+		push_brace_lateral_offset = _get_closest_brace_lateral_offset(active_push_direction)
 		player.play_push_animation(active_push_direction, push_contact_delay, push_speed, push_distance, player_push_movement_delay, self)
 		push_brace_distance_from_block_center = _get_player_distance_from_block_center()
 		_sync_player_push_position_for_moved_distance(player_push_moved_distance)

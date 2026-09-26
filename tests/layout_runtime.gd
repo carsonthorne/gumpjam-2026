@@ -153,6 +153,26 @@ func _ready() -> void:
 	assert(not crate._is_push_path_blocked(Vector3.RIGHT), "Open destination must allow pushing")
 	assert(generated.get_node("Crates/Crate_4_3/RigidBody3D")._is_push_path_blocked(Vector3.BACK), "Adjacent crate must block pushing")
 	crate.player = main.get_node("Player")
+	var center_brace: Vector3 = crate.global_position - Vector3.RIGHT * crate.brace_distance_from_block_center
+	center_brace.y = crate.player.global_position.y
+	var brace_lateral_axis: Vector3 = crate._get_brace_lateral_axis(Vector3.RIGHT)
+	crate.player.global_position = center_brace + brace_lateral_axis * 0.45
+	assert(crate._get_player_brace_position_for_direction(Vector3.RIGHT).is_equal_approx(center_brace + brace_lateral_axis * 0.25), "Player near the right edge must use the right brace lane")
+	crate.player.global_position = center_brace
+	assert(crate._get_player_brace_position_for_direction(Vector3.RIGHT).is_equal_approx(center_brace), "Player near the middle must use the center brace lane")
+	crate.player.global_position = center_brace - brace_lateral_axis * 0.45
+	assert(crate._get_player_brace_position_for_direction(Vector3.RIGHT).is_equal_approx(center_brace - brace_lateral_axis * 0.25), "Player near the left edge must use the left brace lane")
+	var forward_center_brace: Vector3 = crate.global_position - Vector3.FORWARD * crate.brace_distance_from_block_center
+	forward_center_brace.y = crate.player.global_position.y
+	var forward_lateral_axis: Vector3 = crate._get_brace_lateral_axis(Vector3.FORWARD)
+	crate.player.global_position = forward_center_brace + forward_lateral_axis * 0.45
+	assert(crate._get_player_brace_position_for_direction(Vector3.FORWARD).is_equal_approx(forward_center_brace + forward_lateral_axis * 0.25), "Side brace lanes must work on every block face")
+	var advanced_block_position: Vector3 = crate.global_position + Vector3.RIGHT
+	var side_follow_position: Vector3 = crate._get_player_brace_position_at_block_position(advanced_block_position, Vector3.RIGHT, crate.brace_distance_from_block_center, brace_lateral_axis * 0.25)
+	var expected_side_follow_position: Vector3 = advanced_block_position - Vector3.RIGHT * crate.brace_distance_from_block_center + brace_lateral_axis * 0.25
+	expected_side_follow_position.y = crate.player.global_position.y
+	assert(side_follow_position.is_equal_approx(expected_side_follow_position), "Side brace lane must remain fixed while the block moves")
+	crate.player.global_position = center_brace
 	crate.push_direction = Vector3.RIGHT
 	crate.player.set_push_ready(true, Vector3.RIGHT, crate.player.global_position, true, crate)
 	Input.action_press("move_right")
